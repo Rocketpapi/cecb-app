@@ -92,6 +92,16 @@
           <input type="text" id="proj-localite" placeholder="Givisiez" data-field="projet.localite">
         </div>
       </div>
+      <div class="form-group form-group-split">
+        <div>
+          <label>Id. fédéral de bâtiment (EGID)</label>
+          <input type="text" id="proj-egid" placeholder="ex: 1523909" data-field="projet.egid" style="font-family:monospace">
+        </div>
+        <div>
+          <label>EGRID (identifiant parcelle)</label>
+          <input type="text" id="proj-egrid" placeholder="ex: CH729212109485" data-field="projet.egrid" style="font-family:monospace;font-size:0.8rem">
+        </div>
+      </div>
       <div class="form-group">
         <label>Canton</label>
         <select id="proj-canton" data-field="projet.canton">
@@ -214,7 +224,7 @@
   </section>
 
   <section id="section-mesures" class="section">
-    <div class="section-header"><h2>�' Mesures</h2></div>
+    <div class="section-header"><h2>�' Mesures</h2></div>
     <div class="section-actions">
       <button class="btn-secondary" id="btn-copier-etat-initial">Copier état initial</button>
       <button class="btn-secondary" id="btn-auto-mesures">Suggérer automatiquement</button>

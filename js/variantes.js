@@ -79,3 +79,5 @@ const VARIANTES = {
     else container.appendChild(newCard);
   },
 };
+
+window.VARIANTES = VARIANTES;

@@ -103,3 +103,5 @@ const SUBVENTIONS = {
     return{estimation:UI.chf(sub.total_retenu),total:sub.total_retenu,recommande:sub.recommande};
   },
 };
+
+window.SUBVENTIONS = SUBVENTIONS;

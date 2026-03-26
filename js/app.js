@@ -23,7 +23,8 @@ const GEOADMIN = {
     const a=regbl.feature?.attributes;
     if(!a) return null;
     return {
-      adresse:a.strname_deinr||'',npa,localite:a.ggdename||'',canton:a.gdekt||'',egid:a.egid||'',egrid:a.egrid||'',
+      adresse:a.strname_deinr||'',npa,localite:a.ggdename||'',canton:a.gdekt||'',
+      egid:a.egid||'',egrid:a.egrid||'',
       affectation:this.CAT_AFF[a.gkat]||'hab_coll',
       annee_construction:a.gbauj||this.PERIODES[a.gbaup]||'',
       nb_etages:a.gastw||'',nb_logements:a.ganzwhg||'',surface_sol_m2:a.garea||'',
@@ -46,11 +47,13 @@ const GEOADMIN = {
     UI.toast('Recherche sur map.geo.admin.ch...','info');
     try{
       const d=await this.rechercherAdresse(adresse);
-      if(!d){UI.toast('Adresse non trouvee — verifiez l adresse','error');return;}
+      if(!d){UI.toast('Adresse non trouvee','error');return;}
       this.set('proj-nom',(d.adresse||adresse.split(',')[0])+(d.localite?' - '+d.localite:''));
       this.set('proj-adresse',d.adresse||adresse.split(',')[0]);
       this.set('proj-npa',d.npa);
       this.set('proj-localite',d.localite);
+      if(d.egid){this.set('proj-egid',d.egid);STATE.set('projet.egid',d.egid);}
+      if(d.egrid){this.set('proj-egrid',d.egrid);STATE.set('projet.egrid',d.egrid);}
       const cantonEl=document.getElementById('proj-canton');
       if(cantonEl&&d.canton){const opt=[...cantonEl.options].find(o=>o.value===d.canton||o.text.includes(d.canton));if(opt){cantonEl.value=opt.value;cantonEl.dispatchEvent(new Event('change',{bubbles:true}));}}
       const affEl=document.getElementById('proj-affectation');
@@ -61,10 +64,8 @@ const GEOADMIN = {
       if(d.sre_estime) this.set('proj-sre',d.sre_estime);
       if(d.type_chauffage_code){const ch=document.getElementById('tech-type-chauffage');const m=this.CHAUF_MAP[d.type_chauffage_code];if(ch&&m){ch.value=m;ch.dispatchEvent(new Event('change',{bubbles:true}));}}
       if(d.agent_energetique){const ag=document.getElementById('tech-agent');if(ag){const opt=[...ag.options].find(o=>o.value.toLowerCase().includes(d.agent_energetique.toLowerCase())||d.agent_energetique.toLowerCase().includes(o.value.toLowerCase()));if(opt){ag.value=opt.value;ag.dispatchEvent(new Event('change',{bubbles:true}));}}}
-      if(d.egid) STATE.set('projet.egid',d.egid);
-      if(d.egrid) STATE.set('projet.egrid',d.egrid);
       UI.updateHeader();
-      const det=[d.affectation==='hab_ind'?'Hab. individuel':'Hab. collectif',d.nb_etages?d.nb_etages+' etages':'',d.nb_logements?d.nb_logements+' logements':'',d.annee_construction?'~'+d.annee_construction:'',d.type_chauffage?d.type_chauffage:''].filter(Boolean).join(' - ');
+      const det=[d.affectation==='hab_ind'?'Hab. individuel':'Hab. collectif',d.nb_etages?d.nb_etages+' etages':'',d.nb_logements?d.nb_logements+' logements':'',d.annee_construction?'~'+d.annee_construction:'',d.type_chauffage?d.type_chauffage:'',d.egid?'EGID: '+d.egid:''].filter(Boolean).join(' - ');
       UI.toast((d.adresse||adresse.split(',')[0])+' : '+det,'success');
     }catch(e){console.error('GeoAdmin:',e);UI.toast('Erreur: '+e.message,'error');}
   }

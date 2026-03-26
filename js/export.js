@@ -121,3 +121,5 @@ const EXPORT = {
     win.document.close();
   },
 };
+
+window.EXPORT = EXPORT;

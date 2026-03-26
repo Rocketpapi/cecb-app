@@ -20,7 +20,7 @@ DONNÉES DU BÂTIMENT :
 Année construction : ${d."projet"."annee_construction"}
 Chauffage : ${d.technique.type_chauffage} | ${d.technique.agent_energetique}
 Ventilation : ${d.technique.type_ventilation}
-Composition : ${elements.map(el => el.abrev + ' (' + el.composition + ') ' + 'U=' + (el.u_mesure||'�')).join(', ')}
+Composition : ${elements.map(el => el.abrev + ' (' + el.composition + ') ' + 'U=' + (el.u_mesure||'�')).join(', ')}
 
 Genère un objet JSON avec ces clés exactes, textes style officiel CECB (150-300 car.) :
 {"toits":"...","murs":"...","fenetres":"...","sols":"...","ponts_thermiques":"...","chauffage":"...","ecs":"...","ventilation":"...","appareils":"..."}
@@ -80,7 +80,7 @@ Répons JSON uniquement :
       const textes = JSON.parse(clean);
       STATE.updateVariante(lettre, { textes });
       VARIANTES.rafraichirVariante(lettre);
-      UI.toast(`Textes Variante ${lettre} générés ✓ �'success');
+      UI.toast(`Textes Variante ${lettre} générés ✓ �'success');
     } catch(e) {
       console.error('IA error:', e);
       UI.toast('Erreur API Claude: ' + e.message, 'error');
@@ -96,7 +96,7 @@ Répons JSON uniquement :
       await this.genererTextesVariante(v.id);
       await new Promise(r => setTimeout(r, 1000));
     }
-    UI.toast('Toutes les variantes générées ✓ �'success');
+    UI.toast('Toutes les variantes générées ✓ �'success');
   },
 
   async genererConseil() {
@@ -145,3 +145,5 @@ Répons JSON uniquement :
     }
   },
 };
+
+window.IA = IA;

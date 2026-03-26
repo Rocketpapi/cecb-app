@@ -162,314 +162,59 @@
       <button class="btn-primary btn-lg" id="btn-charger-subventions">🔍 Charger subventions depuis NPA</button>
       <button class="btn-secondary btn-lg" id="btn-goto-terrain">→ Aller au terrain</button>
     </div>
-  </section>t type="number" id="tech-vol-ecs" placeholder="1000" data-field="technique.volume_ecs_l">
-          </div>
-          <div>
-            <label>Année</label>
-            <input type="number" id="tech-annee-ecs" placeholder="2008" data-field="technique.annee_ecs">
-          </div>
-        </div>
-
-        <h3 class="form-section-title">Ventilation</h3>
-        <div class="form-group">
-          <label>Type de ventilation</label>
-          <select id="tech-ventilation" data-field="technique.type_ventilation">
-            <option value="naturelle">Ventilation naturelle (fenêtres)</option>
-            <option value="extraction">Extraction air vicié (WC/SDB)</option>
-            <option value="double_flux">Double flux avec récupération chaleur</option>
-            <option value="simple_flux">Simple flux</option>
-          </select>
-        </div>
-
-        <h3 class="form-section-title">Électricité / PV</h3>
-        <div class="form-group">
-          <label>Installation photovoltaïque</label>
-          <select id="tech-pv" data-field="technique.pv_existant">
-            <option value="non">Non</option>
-            <option value="oui">Oui</option>
-          </select>
-        </div>
-        <div class="form-group" id="tech-pv-details" style="display:none">
-          <label>Puissance installée [kWp]</label>
-          <input type="number" id="tech-pv-kwp" placeholder="55" data-field="technique.pv_kwp">
-        </div>
-        <div class="form-group">
-          <div class="photo-zone" id="photo-plaque" data-field="technique.photo_plaque">
-            <div class="photo-placeholder">📷 Photo plaque chaudière</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="t-notes" class="subsection">
-      <div class="form-grid">
-        <div class="form-group">
-          <textarea id="terrain-obs" rows="5" placeholder="Observations..." data-field="terrain.observations"></textarea>
-        </div>
-        <div class="form-group"><input type="date" id="terrain-date" data-field="terrain.date_visite"></div>
-        <div class="form-group"><input type="text" id="terrain-experts" placeholder="Daniel Gachoud" data-field="terrain.experts"></div>
-      </div>
-    </div>
   </section>
-  <section id="section-bureau" class="section">
-    <div class="sub-nav">
-      <button class="sub-tab active" data-subsection="b-enveloppe">Enveloppe</button>
-      <button class="sub-tab" data-subsection="b-technique">Technique</button>
-      <button class="sub-tab" data-subsection="b-conso">Consommation</button>
-      <button class="sub-tab" data-subsection="b-textes">Textes CECB</button>
+
+  <!-- TERRAIN -->
+  <section id="section-terrain" class="section">
+    <div class="section-header">
+      <h2>📸 Mode terrain</h2>
+      <p class="section-subtitle">Remplissez sur place lors de la visite</p>
     </div>
+
+    <div class="sub-nav" id="terrain-subnav">
+      <button class="sub-tab active" data-subsection="t-enveloppe">Enveloppe</button>
+      <button class="sub-tab" data-subsection="t-technique">Technique</button>
+      <button class="sub-tab" data-subsection="t-notes">Notes libres</button>
+    </div>
+    <div id="t-enveloppe" class="subsection active">
+      <div id="terrain-elements-list"></div>
+      <button class="btn-secondary btn-block" id="btn-add-element">+ Ajouter un élément</button>
+    </div>
+    <div id="t-technique" class="subsection"><div class="form-grid">
+        <h3 class="form-section-title">Chauffage</h3>
+        <div class="form-group"><label>Type producteur</label><select id="tech-type-chauffage" data-field="technique.type_chauffage"><option value="">-- Sélectionner --</option><option value="gaz_cond">Chaudière gaz condensation</option><option value="mazout">Chaudière mazout</option><option value="pac_air">PAC air/eau</option><option value="pac_saumure">PAC saumure/eau</option><option value="cad">CAD chaleur distance</option><option value="electrique">Electrique</option><option value="bois">Bois</option></select></div>
+        <div class="form-group"><label>Marque / Modèle</label><input type="text" id="tech-marque" placeholder="ex: Viessmann Vitodens 200" data-field="technique.marque_chauffage"></div>
+        <div class="form-group form-group-split"><div><label>Année installation</label><input type="number" id="tech-annee-ch" placeholder="2008" data-field="technique.annee_chauffage"></div><div><label>Puissance [kW]</label><input type="number" id="tech-puissance" placeholder="45" data-field="technique.puissance_kw"></div></div>
+        <div class="form-group"><label>Agent énergétique</label><select id="tech-agent" data-field="technique.agent_energetique"><option value="gaz">Gaz naturel</option><option value="mazout">Mazout</option><option value="electricite">Électricité</option><option value="bois_buche">Bûches de bois</option><option value="bois_granule">Granulés de bois</option><option value="cad">Chaleur à distance</option></select></div>
+        <h3 class="form-section-title">ECSet</h3>
+        <div class="form-group"><label>Type boiler</label><select id="tech-type-ecs" data-field="technique.type_ecs"><option value="ballon_lié">Ballon lié chauffage</option><option value="ballon_elec">Ballon électrique</option><option value="pac_ecs">PAC ECS</option><option value="solaire">Solaire thermique</option><option value="instantane">Instantané</option></select></div>
+        <div class="form-group form-group-split"><div><label>Volume [litres]</label><input type="number" id="tech-vol-ecs" placeholder="1000" data-field="technique.volume_ecs_l"></div><div><label>Année</label><input type="number" id="tech-annee-ecs" placeholder="2008" data-field="technique.annee_ecs"></div></div>
+        <h3 class="form-section-title">Ventilation</h3>
+        <div class="form-group"><select id="tech-ventilation" data-field="technique.type_ventilation"><option value="naturelle">Naturelle</option><option value="extraction">Extraction</option><option value="double_flux">Double flux</option><option value="simple_flux">Simple flux</option></select></div>
+        <h3 class="form-section-title">PV</h3>
+        <div class="form-group"><select id="tech-pv" data-field="technique.pv_existant"><option value="non">Non</option><option value="oui">Oui</option></select></div>
+        <div class="form-group" id="tech-pv-details" style="display:none"><input type="number" id="tech-pv-kwp" placeholder="55" data-field="technique.pv_kwp"></div>
+        <h3 class="form-section-title">Photo plaque</h3>
+        <div class="form-group"><div class="photo-zone" id="photo-plaque" data-field="technique.photo_plaque"><div class="photo-placeholder">📷 Photo plaque chaudière</div></div></div></div></div>
+    <div id="t-notes" class="subsection"><div class="form-grid"><div class="form-group"><label>Observations</label><textarea id="terrain-obs" rows="5" placeholder="État général..." data-field="terrain.observations"></textarea></div><div class="form-group"><label>Date</label><input type="date" id="terrain-date" data-field="terrain.date_visite"></div><div class="form-group"><label>Experts</label><input type="text" id="terrain-experts" placeholder="Daniel Gachoud" data-field="terrain.experts"></div></div></div>
+  </section>
+
+  <!-- BUREAU -->
+  <section id="section-bureau" class="section">
+    <div class="sub-nav"><button class="sub-tab active" data-subsection="b-enveloppe">Enveloppe</button><button class="sub-tab" data-subsection="b-technique">Technique</button><button class="sub-tab" data-subsection="b-conso">Consommation</button><button class="sub-tab" data-subsection="b-textes">Textes CECB</button></div>
     <div id="b-enveloppe" class="subsection active"><div id="bureau-elements-list"></div></div>
     <div id="b-technique" class="subsection"><div id="bureau-technique-display"></div></div>
     <div id="b-conso" class="subsection"><div class="form-grid"><div class="form-group"><label>Gaz</label><input type="number" id="conso-gaz" data-field="conso.gaz_kwh"></div><div class="form-group"><label>Mazout</label><input type="number" id="conso-mazout" data-field="conso.mazout_l"></div><div class="form-group"><label>Elec</label><input type="number" id="conso-elec" data-field="conso.elec_kwh"></div><div class="form-group"><label>Bois</label><input type="number" id="conso-bois" data-field="conso.bois_kwh"></div><div class="form-group"><label>CAD</label><input type="number" id="conso-cad" data-field="conso.cad_kwh"></div></div></div>
     <div id="b-textes" class="subsection"><div id="textes-cecb-list"></div><button class="btn-primary btn-block" id="btn-generer-textes">✨ Générer textes via IA</button></div>
   </section>
 
-  <section id="section-mesures" class="section">
-    <div class="section-header"><h2>�' Mesures</h2></div>
-    <div class="section-actions">
-      <button class="btn-secondary" id="btn-copier-etat-initial">Copier état initial</button>
-      <button class="btn-secondary" id="btn-auto-mesures">Suggérer automatiquement</button>
-    </div>
-    <div id="mesures-list"></div>
-  </section>
-
-  <section id="section-variantes" class="section">
-    <div class="section-header"><h2>📊 Variantes</h2></div>
-    <div class="section-actions">
-      <button class="btn-primary" id="btn-generer-variantes">✨ Générer toutes variantes (IA)</button>
-    </div>
-    <div id="variantes-container"></div>
-  </section>
-
-  <section id="section-subventions" class="section">
-    <div class="section-header"><h2>💰 Subventions</h2></div>
-    <div class="section-actions">
-      <button class="btn-primary" id="btn-calc-subventions">Calculer subventions</button>
-      <button class="btn-secondary" id="btn-conseil-ia">✨ Conseil IA</button>
-    </div>
-    <div id="subventions-tableau"></div>
-    <div id="ia-conseil-resultat"></div>
-  </section>
-
-  <section id="section-export" class="section">
-    <div class="section-header"><h2>📤 Export</h2></div>
-    <div class="section-actions">
-      <button class="btn-primary" id="btn-export-p1">Export Phase 1</button>
-      <button class="btn-primary" id="btn-export-p2">Export Phase 2</button>
-      <button class="btn-secondary" id="btn-export-resume">Résumé comparatif</button>
-      <button class="btn-ghost" id="btn-export-imprimer">Imprimer</button>
-    </div>
-  </section>
-
+  <section id="section-mesures" class="section"><div class="section-header"><h2>�' Mesures</h2></div><div class="section-actions"><button class="btn-secondary" id="btn-copier-etat-initial">Copier état initial</button><button class="btn-primary" id="btn-auto-mesures">Suggérer mesures</button></div><div id="mesures-list"></div></section>
+  <section id="section-variantes" class="section"><div class="section-header"><h2>📊 Variantes</h2></div><div id="variantes-container"></div><div class="section-actions"><button class="btn-primary" id="btn-generer-variantes">✨ Générer variantes via IA</button></div></section>
+  <section id="section-subventions" class="section"><div class="section-header"><h2>💰 Subventions</h2></div><div id="subventions-tableau"></div><div id="ia-conseil-resultat"></div><div class="section-actions"><button class="btn-primary" id="btn-calc-subventions">Calculer</button><button class="btn-secondary" id="btn-conseil-ia">✨ Conseil IA</button></div></section>
+  <section id="section-export" class="section"><div class="section-header"><h2>📤 Export</h2></div><div class="section-actions"><button class="btn-primary" id="btn-export-p1">Export Phase 1</button><button class="btn-primary" id="btn-export-p2">Export Phase 2</button><button class="btn-secondary" id="btn-export-resume">Résumé</button></div></section>
 </main>
-
-        </div>
-
-        <h3 class="form-section-title">Électricité / PV</h3>
-        <div class="form-group">
-          <label>Installation photovoltaïque</label>
-          <select id="tech-pv" data-field="technique.pv_existant">
-            <option value="non">Non</option>
-            <option value="oui">Oui</option>
-          </select>
-        </div>
-        <div class="form-group" id="tech-pv-details" style="display:none">
-          <label>Puissance installée [kWp]</label>
-          <input type="number" id="tech-pv-kwp" placeholder="55" data-field="technique.pv_kwp">
-        </div>
-
-        <h3 class="form-section-title">Photo plaque signalétique</h3>
-        <div class="form-group">
-          <div class="photo-zone" id="photo-plaque" data-field="technique.photo_plaque">
-            <div class="photo-placeholder">📷 Photo plaque chaudière</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Notes libres terrain -->
-    <div id="t-notes" class="subsection">
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Observations générales du bâtiment</label>
-          <textarea id="terrain-obs" rows="5" placeholder="État général, problèmes visibles, particularités..." data-field="terrain.observations"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Date de la visite</label>
-          <input type="date" id="terrain-date" data-field="terrain.date_visite">
-        </div>
-        <div class="form-group">
-          <label>Expert(s) présent(s)</label>
-          <input type="text" id="terrain-experts" placeholder="ex: Daniel Gachoud, Anthony Guerry" data-field="terrain.experts">
-        </div>
-        <div class="form-group">
-          <label>Documents mis à disposition</label>
-          <div class="checkbox-group">
-            <label><input type="checkbox" data-field="terrain.docs.plans"> Plans</label>
-            <label><input type="checkbox" data-field="terrain.docs.facades"> Vues façades</label>
-            <label><input type="checkbox" data-field="terrain.docs.coupes"> Coupes</label>
-            <label><input type="checkbox" data-field="terrain.docs.conso_elec"> Consommation électricité</label>
-            <label><input type="checkbox" data-field="terrain.docs.conso_ch"> Consommation chauffage</label>
-            <label><input type="checkbox" data-field="terrain.docs.offre_pac"> Offre PAC</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BUREAU PHASE 1 -->
-  <section id="section-bureau" class="section">
-    <div class="section-header">
-      <h2>🏢 Bureau — Phase 1 CECB</h2>
-    </div>
-
-    <div class="sub-nav">
-      <button class="sub-tab active" data-subsection="b-enveloppe">Enveloppe</button>
-      <button class="sub-tab" data-subsection="b-technique">Technique</button>
-      <button class="sub-tab" data-subsection="b-conso">Consommation</button>
-      <button class="sub-tab" data-subsection="b-textes">Textes CECB</button>
-    </div>
-
-    <div id="b-enveloppe" class="subsection active">
-      <div id="bureau-elements-list"></div>
-    </div>
-
-    <div id="b-technique" class="subsection">
-      <p class="info-box">ℹ️ Les données techniques sont reprises depuis la visite terrain. Vérifiez et complétez si nécessaire.</p>
-      <div id="bureau-technique-display"></div>
-    </div>
-
-    <div id="b-conso" class="subsection">
-      <div class="form-grid">
-        <h3 class="form-section-title">Consommation mesurée</h3>
-        <div class="form-group">
-          <label>Gaz naturel [kWh/a]</label>
-          <input type="number" id="conso-gaz" placeholder="124900" data-field="conso.gaz_kwh">
-        </div>
-        <div class="form-group">
-          <label>Mazout [litres/a]</label>
-          <input type="number" id="conso-mazout" placeholder="0" data-field="conso.mazout_l">
-        </div>
-        <div class="form-group">
-          <label>Électricité [kWh/a]</label>
-          <input type="number" id="conso-elec" placeholder="66320" data-field="conso.elec_kwh">
-        </div>
-        <div class="form-group">
-          <label>Bois [kWh/a]</label>
-          <input type="number" id="conso-bois" placeholder="0" data-field="conso.bois_kwh">
-        </div>
-        <div class="form-group">
-          <label>Chaleur à distance [kWh/a]</label>
-          <input type="number" id="conso-cad" placeholder="0" data-field="conso.cad_kwh">
-        </div>
-      </div>
-    </div>
-
-    <div id="b-textes" class="subsection">
-      <div class="info-box">
-        <strong>💡 Génération automatique des textes CECB</strong><br>
-        Les textes sont générés selon le style officiel CECB sur la base des données saisies.
-      </div>
-      <div id="textes-cecb-list"></div>
-      <button class="btn-primary btn-block" id="btn-generer-textes">✨ Générer tous les textes via IA</button>
-    </div>
-  </section>
-
-  <!-- MESURES CECB+ -->
-  <section id="section-mesures" class="section">
-    <div class="section-header">
-      <h2>🔧 Mesures — Phase 2 CECB+</h2>
-      <p class="section-subtitle">Définissez les améliorations par élément</p>
-    </div>
-    <div class="info-box">
-      <strong>Normes SIA 380/1 de référence :</strong><br>
-      Opaques rénovation : U ≤ 0.25 W/m²K (limite) | U = 0.10 (cible)<br>
-      Fenêtres rénovation : U ≤ 1.0 W/m²K (limite) | U = 0.80 (cible)
-    </div>
-    <div id="mesures-list"></div>
-    <div class="section-actions">
-      <button class="btn-secondary" id="btn-copier-etat-initial">📋 Copier depuis état initial</button>
-      <button class="btn-primary" id="btn-auto-mesures">✨ Suggérer mesures automatiquement</button>
-    </div>
-  </section>
-
-  <section id="section-variantes" class="section">
-    <div class="section-header"><h2>📊 Variantes</h2></div>
-    <div id="variantes-container"></div>
-    <div class="section-actions">
-      <button class="btn-primary" id="btn-generer-variantes">✨ Générer variantes via IA</button>
-    </div>
-  </section>
-
-  <section id="section-subventions" class="section">
-    <div class="section-header"><h2>💰 Subventions</h2></div>
-    <div id="subventions-tableau"></div>
-    <div id="ia-conseil-resultat"></div>
-    <div class="section-actions">
-      <button class="btn-primary" id="btn-calc-subventions">Calculer subventions</button>
-      <button class="btn-secondary" id="btn-conseil-ia">✨ Conseil IA</button>
-    </div>
-  </section>
-
-  <section id="section-export" class="section">
-    <div class="section-header"><h2>📤 Export</h2></div>
-    <div class="section-actions">
-      <button class="btn-primary" id="btn-export-p1">Export Phase 1</button>
-      <button class="btn-primary" id="btn-export-p2">Export Phase 2</button>
-      <button class="btn-secondary" id="btn-export-resume">Résum comparatif</button>
-    </div>
-  </section>
-</main>
-
-<div id="modal-element" class="modal" style="display:none">
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <div class="modal-header"><h3 id="modal-element-title">Élément</h3><button class="modal-close">✕</button></div>
-    <div class="modal-body" id="modal-element-body"></div>
-    <div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div>
-  </div>
-</div>
-<div id="modal-ia" class="modal" style="display:none">
-  <div class="modal-overlay"></div>
-  <div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">Génération en cours...</p></div></div>
-</div>
-<div id="toast-container"></div>
-="js/bureau.js"></script>
-<script src="js/mesures.js"></script>
-<script src="js/variantes.js"></script>
-<script src="js/subventions.js"></script>
-<script src="js/ia.js"></script>
-<script src="js/export.js"></script>
-<script src="js/app.js"></script>
-
-</body>
-</html>
-class="export-card phase2-card">
-        <div class="export-card-icon">📈</div>
-        <h3>Phase 2 — CECB+</h3>
-        <p>Export Excel mesures + variantes<br>Prêt pour import sur le portail</p>
-        <button class="btn-primary btn-block" id="btn-export-p2">⬇️ Exporter Phase 2</button>
-      </div>
-    </div>
-    <div class="export-card rapport-card">
-      <div class="export-card-icon">📝</div>
-      <h3>Résumé dossier</h3>
-      <p>Vue d'ensemble du dossier avec subventions et recommandation</p>
-      <button class="btn-secondary btn-block" id="btn-export-resume">📋 Voir résumé</button>
-    </div>
-  </section>
-</main>
-<div id="modal-element" class="modal" style="display:none">
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <div class="modal-header"><h3 id="modal-element-title">Élément</h3><button class="modal-close">✕</button></div>
-    <div class="modal-body" id="modal-element-body"></div>
-    <div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div>
-  </div>
-</div>
-     <div id="modal-ia" class="modal" style="display:none">
-        <div class="modal-overlay"></div>
-        <div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">Génération en cours...</p></div></div>
-    </div>
+<div id="modal-element" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content"><div class="modal-header"><h3 id="modal-element-title">Élément</h3><button class="modal-close">✕</button></div><div class="modal-body" id="modal-element-body"></div><div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div></div></div>
+<div id="modal-ia" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">Génération en cours...</p></div></div></div>
 <div id="toast-container"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="js/config.js"></script>
@@ -485,23 +230,6 @@ class="export-card phase2-card">
 <script src="js/app.js"></script>
 
 </body></html>
-iv>
 
-<!-- ═══════════════════════════════════════════════════════
-     SCRIPTS (ordre important)
-═══════════════════════════════════════════════════════ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/state.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/terrain.js"></script>
-<script src="js/bureau.js"></script>
-<script src="js/mesures.js"></script>
-<script src="js/variantes.js"></script>
-<script src="js/subventions.js"></script>
-<script src="js/ia.js"></script>
-<script src="js/export.js"></script>
-<script src="js/app.js"></script>
-
-</body>
-</html>
+    <div id="b-conso" class="subsection">
+      <div class="form-grid"><div class="form-group"><label>Gaz</label><input type="number" id="conso-gaz" data-field="conso.gaz_kwh"></div><div class="form-group"><label>Mazout</label><input type="number" id="conso-mazout" data-field="conso.mazout_l"></div><div class="form-group"><label>Elec</label><input type="number" id="conso-elec" data-field="conso.elec_kwh"></div><div class="form-group"><label>Bois</label><input type="number" id="conso-bois" data-field="conso.bois_kwh"></div><div class="form-group"><label>CAD</label><input type="number" id="conso-cad" data-field="conso.cad_kwh"></div></div></div><div id="b-textes" class="subsection"><div id="textes-cecb-list"></div><button class="btn-primary btn-block" id="btn-generer-textes">✨ Générer textes via IA</button></div></section><section id="section-mesures" class="section"><div class="section-header"><h2>�' Mesures</h2></div><div class="section-actions"><button class="btn-secondary" id="btn-copier-etat-initial">Copier état initial</button><button class="btn-primary" id="btn-auto-mesures">Suggérer mesures</button></div><div id="mesures-list"></div></section><section id="section-variantes" class="section"><div class="section-header"><h2>📊 Variantes</h2></div><div id="variantes-container"></div><div class="section-actions"><button class="btn-primary" id="btn-generer-variantes">✨ Générer variantes via IA</button></div></section><section id="section-subventions" class="section"><div class="section-header"><h2>💰 Subventions</h2></div><div id="subventions-tableau"></div><div id="ia-conseil-resultat"></div><div class="section-actions"><button class="btn-primary" id="btn-calc-subventions">Calculer</button><button class="btn-secondary" id="btn-conseil-ia">✨ Conseil IA</button></div></section><section id="section-export" class="section"><div class="section-header"><h2>📤 Export</h2></div><div class="section-actions"><button class="btn-primary" id="btn-export-p1">Export Phase 1</button><button class="btn-primary" id="btn-export-p2">Export Phase 2</button><button class="btn-secondary" id="btn-export-resume">Résumé</button></div></section></main><div id="modal-element" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content"><div class="modal-header"><h3 id="modal-element-title">Élément</h3><button class="modal-close">✥</button></div><div class="modal-body" id="modal-element-body"></div><div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div></div></div><div id="modal-ia" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">Génération en cours...</p></div></div></div><div id="toast-container"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script><script src="js/config.js"></script><script src="js/state.js"></script><script src="js/ui.js"></script><script src="js/terrain.js"></script><script src="js/bureau.js"></script><script src="js/mesures.js"></script><script src="js/variantes.js"></script><script src="js/subventions.js"></script><script src="js/ia.js"></script><script src="js/export.js"></script><script src="js/app.js"></script></body></html>

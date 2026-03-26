@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>CECB App — Frilow</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header id="app-header">
+  <div class="header-left">
+    <span id="header-title">🏠 CECB App Frilow</span>
+  </div>
+  <div class="header-right">
+    <span id="header-projet" style="color:rgba(255,255,255,0.8);font-size:0.8rem"></span>
+    <button id="btn-save" class="btn-primary btn-sm">💾 Sauver</button>
+    <button id="btn-open" class="btn-ghost btn-sm">📂 Ouvrir</button>
+    <input type="file" id="file-input" accept=".cecb" style="display:none">
+  </div>
+</header>
+<nav id="main-nav">
+  <button class="nav-tab active" data-section="projet">📋 Projet</button>
+  <button class="nav-tab" data-section="terrain">📸 Terrain</button>
+  <button class="nav-tab" data-section="bureau">🏢 Bureau P1</button>
+  <button class="nav-tab phase2" data-section="mesures">🔧 Mesures</button>
+  <button class="nav-tab phase2" data-section="variantes">📊 Variantes</button>
+  <button class="nav-tab phase2" data-section="subventions">💰 Subventions</button>
+  <button class="nav-tab" data-section="export">📤 Export</button>
+</nav>
+<main id="app-main">
+  <section id="section-projet" class="section active">
+    <div class="section-header"><h2>Nouveau dossier CECB</h2></div>
+    <div class="form-grid">
+      <div class="form-group"><label>Nom du projet *</label><input type="text" id="proj-nom" data-field="projet.nom" placeholder="ex: Rénovation Alcantara 6-8"></div>
+      <div class="form-group"><label>Mandant</label><input type="text" id="proj-mandant" data-field="projet.mandant" placeholder="Propriétaire"></div>
+      <div class="form-group"><label>Adresse</label><input type="text" id="proj-adresse" data-field="projet.adresse" placeholder="Rue et numéro"></div>
+      <div class="form-group form-group-split">
+        <div><label>NPA *</label><input type="text" id="proj-npa" data-field="projet.npa" placeholder="1762" maxlength="4"></div>
+        <div><label>Localité *</label><input type="text" id="proj-localite" data-field="projet.localite" placeholder="Givisiez"></div>
+      </div>
+      <div class="form-group"><label>Canton</label>
+        <select id="proj-canton" data-field="projet.canton">
+          <option value="FR">Fribourg (FR)</option><option value="VD">Vaud (VD)</option>
+          <option value="GE">Genève (GE)</option><option value="NE">Neuchâtel (NE)</option>
+          <option value="VS">Valais (VS)</option><option value="BE">Berne (BE)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Affectation</label>
+        <select id="proj-affectation" data-field="projet.affectation">
+          <option value="hab_coll">Habitat collectif (Cat. I)</option>
+          <option value="hab_ind">Habitat individuel (Cat. I)</option>
+          <option value="bureaux">Bureaux (Cat. II)</option>
+        </select>
+      </div>
+      <div class="form-group form-group-split">
+        <div><label>Année construction</label><input type="number" id="proj-annee" data-field="projet.annee_construction" placeholder="2007"></div>
+        <div><label>Nb étages</label><input type="number" id="proj-etages" data-field="projet.nb_etages" placeholder="3"></div>
+      </div>
+      <div class="form-group form-group-split">
+        <div><label>SRE [m²]</label><input type="number" id="proj-sre" data-field="projet.sre" placeholder="1761"></div>
+        <div><label>Nb apparts</label><input type="number" id="proj-apparts" data-field="projet.nb_apparts" placeholder="18"></div>
+      </div>
+      <div class="form-group"><label>Type de mandat</label>
+        <div class="toggle-group">
+          <button class="toggle-btn" data-mandat="cecb">CECB simple</button>
+          <button class="toggle-btn active" data-mandat="cecb_plus">CECB+</button>
+        </div>
+      </div>
+    </div>
+    <div class="section-actions">
+      <button class="btn-primary btn-lg" id="btn-charger-subventions">🔍 Subventions par NPA</button>
+      <button class="btn-secondary btn-lg" id="btn-goto-terrain">→ Terrain</button>
+    </div>
+  </section>
+
+  <section id="section-terrain" class="section">
+    <div class="section-header"><h2>📸 Visite terrain</h2></div>
+    <div class="sub-nav">
+      <button class="sub-tab active" data-subsection="t-enveloppe">Enveloppe</button>
+      <button class="sub-tab" data-subsection="t-technique">Technique</button>
+      <button class="sub-tab" data-subsection="t-notes">Notes</button>
+    </div>
+    <div id="t-enveloppe" class="subsection active">
+      <div id="terrain-elements-list"></div>
+      <button class="btn-secondary btn-block" id="btn-add-element">+ Ajouter un élément</button>
+    </div>
+    <div id="t-technique" class="subsection">
+      <div class="form-grid">
+        <h3 class="form-section-title">Chauffage</h3>
+        <div class="form-group"><label>Type</label>
+          <select id="tech-type-chauffage" data-field="technique.type_chauffage">
+            <option value="">-- Sélectionner --</option>
+            <option value="gaz_cond">Chaudière gaz condensation</option>
+            <option value="mazout">Chaudière mazout</option>
+            <option value="pac_air">PAC air/eau</option>
+            <option value="pac_saumure">PAC saumure/eau</option>
+            <option value="bois_auto">Chauffage bois automatique</option>
+            <option value="cad">Chauffage à distance (CAD)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Marque / Modèle</label><input type="text" id="tech-marque" data-field="technique.marque_chauffage" placeholder="ex: Viessmann Vitodens 200"></div>
+        <div class="form-group form-group-split">
+          <div><label>Année</label><input type="number" id="tech-annee-ch" data-field="technique.annee_chauffage" placeholder="2008"></div>
+          <div><label>Puissance [kW]</label><input type="number" id="tech-puissance" data-field="technique.puissance_kw" placeholder="45"></div>
+        </div>
+        <div class="form-group"><label>Agent énergétique</label>
+          <select id="tech-agent" data-field="technique.agent_energetique">
+            <option value="gaz">Gaz naturel</option><option value="mazout">Mazout</option>
+            <option value="electricite">Électricité</option><option value="bois_granule">Granulés bois</option>
+            <option value="cad">Chaleur à distance</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Distribution</label>
+          <select id="tech-distrib" data-field="technique.distribution_chauffage">
+            <option value="plancher">Plancher chauffant</option>
+            <option value="radiateurs">Radiateurs</option>
+            <option value="air">Air chaud</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Retour circulation ECS [°C]</label><input type="number" id="tech-retour-ecs" data-field="technique.retour_ecs" placeholder="55"></div>
+        <h3 class="form-section-title">ECS</h3>
+        <div class="form-group"><label>Type ECS</label>
+          <select id="tech-type-ecs" data-field="technique.type_ecs">
+            <option value="ballon_lié">Ballon lié chauffage</option>
+            <option value="ballon_elec">Ballon électrique</option>
+            <option value="pac_ecs">PAC ECS</option>
+            <option value="solaire">Solaire thermique</option>
+          </select>
+        </div>
+        <div class="form-group form-group-split">
+          <div><label>Volume [L]</label><input type="number" id="tech-vol-ecs" data-field="technique.volume_ecs_l" placeholder="1000"></div>
+          <div><label>Année</label><input type="number" id="tech-annee-ecs" data-field="technique.annee_ecs" placeholder="2008"></div>
+        </div>
+        <h3 class="form-section-title">Ventilation</h3>
+        <div class="form-group"><label>Type ventilation</label>
+          <select id="tech-ventilation" data-field="technique.type_ventilation">
+            <option value="naturelle">Naturelle (fenêtres)</option>
+            <option value="extraction">Extraction air vicié</option>
+            <option value="double_flux">Double flux RC</option>
+          </select>
+        </div>
+        <h3 class="form-section-title">PV</h3>
+        <div class="form-group"><label>PV existant</label>
+          <select id="tech-pv" data-field="technique.pv_existant">
+            <option value="non">Non</option><option value="oui">Oui</option>
+          </select>
+        </div>
+        <div class="form-group" id="tech-pv-details" style="display:none">
+          <label>Puissance [kWp]</label><input type="number" id="tech-pv-kwp" data-field="technique.pv_kwp" placeholder="55">
+        </div>
+      </div>
+    </div>
+    <div id="t-notes" class="subsection">
+      <div class="form-grid">
+        <div class="form-group"><label>Date visite</label><input type="date" id="terrain-date" data-field="terrain.date_visite"></div>
+        <div class="form-group"><label>Expert(s)</label><input type="text" id="terrain-experts" data-field="terrain.experts" placeholder="Daniel Gachoud"></div>
+        <div class="form-group full"><label>Observations générales</label>
+          <textarea id="terrain-obs" rows="4" data-field="terrain.observations" placeholder="État général, problèmes visibles..."></textarea>
+        </div>
+        <div class="form-group"><label>Documents disponibles</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" data-field="terrain.docs.plans"> Plans</label>
+            <label><input type="checkbox" data-field="terrain.docs.facades"> Façades</label>
+            <label><input type="checkbox" data-field="terrain.docs.coupes"> Coupes</label>
+            <label><input type="checkbox" data-field="terrain.docs.conso_elec"> Conso électricité</label>
+            <label><input type="checkbox" data-field="terrain.docs.conso_ch"> Conso chauffage</label>
+            <label><input type="checkbox" data-field="terrain.docs.offre_pac"> Offre PAC</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section-bureau" class="section">
+    <div class="section-header"><h2>🏢 Bureau — Phase 1 CECB</h2></div>
+    <div class="sub-nav">
+      <button class="sub-tab active" data-subsection="b-enveloppe">Enveloppe</button>
+      <button class="sub-tab" data-subsection="b-technique">Technique</button>
+      <button class="sub-tab" data-subsection="b-conso">Consommation</button>
+      <button class="sub-tab" data-subsection="b-textes">Textes CECB</button>
+    </div>
+    <div id="b-enveloppe" class="subsection active"><div id="bureau-elements-list"></div></div>
+    <div id="b-technique" class="subsection"><div id="bureau-technique-display"></div></div>
+    <div id="b-conso" class="subsection">
+      <div class="form-grid">
+        <h3 class="form-section-title">Consommation mesurée</h3>
+        <div class="form-group"><label>Gaz naturel [kWh/a]</label><input type="number" id="conso-gaz" data-field="conso.gaz_kwh" placeholder="124900"></div>
+        <div class="form-group"><label>Mazout [litres/a]</label><input type="number" id="conso-mazout" data-field="conso.mazout_l" placeholder="0"></div>
+        <div class="form-group"><label>Électricité [kWh/a]</label><input type="number" id="conso-elec" data-field="conso.elec_kwh" placeholder="66320"></div>
+        <div class="form-group"><label>Bois [kWh/a]</label><input type="number" id="conso-bois" data-field="conso.bois_kwh" placeholder="0"></div>
+        <div class="form-group"><label>CAD [kWh/a]</label><input type="number" id="conso-cad" data-field="conso.cad_kwh" placeholder="0"></div>
+      </div>
+    </div>
+    <div id="b-textes" class="subsection">
+      <div class="info-box">💡 Les textes sont générés automatiquement via l'IA selon le style officiel CECB.</div>
+      <div id="textes-cecb-list"></div>
+      <button class="btn-primary btn-block" id="btn-generer-textes">✨ Générer textes via IA</button>
+    </div>
+  </section>
+
+  <section id="section-mesures" class="section">
+    <div class="section-header"><h2>🔧 Mesures — Phase 2 CECB+</h2></div>
+    <div class="info-box"><strong>SIA 380/1 :</strong> U limite rénovation opaques ≤ 0.25 | fenêtres ≤ 1.0 W/m²K | Cible opaques 0.10 | fenêtres 0.80</div>
+    <div id="mesures-list"></div>
+    <div class="section-actions">
+      <button class="btn-secondary" id="btn-copier-etat-initial">📋 Copier état initial</button>
+      <button class="btn-primary" id="btn-auto-mesures">✨ Suggérer automatiquement</button>
+    </div>
+  </section>
+
+  <section id="section-variantes" class="section">
+    <div class="section-header"><h2>📊 Variantes — Phase 2 CECB+</h2></div>
+    <div id="variantes-container"></div>
+    <div class="section-actions">
+      <button class="btn-primary" id="btn-generer-variantes">✨ Générer tous les textes via IA</button>
+    </div>
+  </section>
+
+  <section id="section-subventions" class="section">
+    <div class="section-header"><h2>💰 Subventions</h2></div>
+    <div class="sub-nav">
+      <button class="sub-tab active" data-subsection="sub-calcul">Calcul</button>
+      <button class="sub-tab" data-subsection="sub-conseil">Conseil IA</button>
+    </div>
+    <div id="sub-calcul" class="subsection active">
+      <div class="info-box"><strong>Programme Bâtiments FR 2025</strong> — PAS de cumul V1 (mesures ponctuelles) + V2 (classe CECB).</div>
+      <div id="subventions-tableau"></div>
+      <button class="btn-primary btn-block" id="btn-calc-subventions">🔢 Calculer subventions</button>
+    </div>
+    <div id="sub-conseil" class="subsection">
+      <div id="conseil-variante-container"><p class="placeholder-text">Calculez d'abord les subventions.</p></div>
+      <button class="btn-primary btn-block" id="btn-conseil-ia">🤖 Générer conseil IA</button>
+    </div>
+  </section>
+
+  <section id="section-export" class="section">
+    <div class="section-header"><h2>📤 Export</h2></div>
+    <div class="export-cards">
+      <div class="export-card">
+        <div class="export-card-icon">📊</div>
+        <h3>Phase 1 — CECB simple</h3>
+        <p>Export Excel → cecb-tool.ch</p>
+        <button class="btn-primary btn-block" id="btn-export-p1">⬇️ Exporter Phase 1</button>
+      </div>
+      <div class="export-card phase2-card">
+        <div class="export-card-icon">📈</div>
+        <h3>Phase 2 — CECB+</h3>
+        <p>Export Excel mesures + variantes</p>
+        <button class="btn-primary btn-block" id="btn-export-p2">⬇️ Exporter Phase 2</button>
+      </div>
+    </div>
+    <div class="export-card rapport-card" style="margin-top:14px">
+      <div class="export-card-icon">📝</div>
+      <h3>Résumé dossier</h3>
+      <button class="btn-secondary btn-block" id="btn-export-resume">📋 Voir résumé</button>
+    </div>
+  </section>
+</main>
+
+<div id="modal-element" class="modal" style="display:none">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-element-title">Élément</h3>
+      <button class="modal-close">✕</button>
+    </div>
+    <div class="modal-body" id="modal-element-body"></div>
+    <div class="modal-footer">
+      <button class="btn-ghost" id="modal-cancel">Annuler</button>
+      <button class="btn-primary" id="modal-save">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-ia" class="modal" style="display:none">
+  <div class="modal-overlay"></div>
+  <div class="modal-content modal-small">
+    <div class="modal-body text-center">
+      <div class="spinner"></div>
+      <p id="modal-ia-text">Génération en cours...</p>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/state.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/terrain.js"></script>
+<script src="js/bureau.js"></script>
+<script src="js/mesures.js"></script>
+<script src="js/variantes.js"></script>
+<script src="js/subventions.js"></script>
+<script src="js/ia.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

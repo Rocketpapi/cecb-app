@@ -1,6 +1,6 @@
 /**
- * ia.js — Intégration API Claude (Anthropic)
- * Génération des textes officiels CECB / CECB+
+ * ia.js â IntÃ©gration API Claude (Anthropic)
+ * GÃ©nÃ©ration des textes officiels CECB / CECB+
  */
 
 const IA = {
@@ -11,21 +11,21 @@ const IA = {
     const d = STATE.dossier;
     if (!d) { UI.toast('Aucun dossier ouvert', 'error'); return; }
 
-    UI.showIAModal('Génération des textes CECB en cours...');
+    UI.showIAModal('GÃ©nÃ©ration des textes CECB en cours...');
 
     const elements = d.elements || [];
-    const prompt = `Tu es un expert CECB certifié suisse. Genère les textes officiels pour le portail CECB www.cecb-tool.ch.
+    const prompt = `Tu es un expert CECB certifiÃ© suisse. GenÃ¨re les textes officiels pour le portail CECB www.cecb-tool.ch.
 
-DONNÉES DU BÂTIMENT :
-Année construction : ${d."projet"."annee_construction"}
+DONNÃES DU BÃTIMENT :
+AnnÃ©e construction : ${d."projet"."annee_construction"}
 Chauffage : ${d.technique.type_chauffage} | ${d.technique.agent_energetique}
 Ventilation : ${d.technique.type_ventilation}
-Composition : ${elements.map(el => el.abrev + ' (' + el.composition + ') ' + 'U=' + (el.u_mesure||'�')).join(', ')}
+Composition : ${elements.map(el => el.abrev + ' (' + el.composition + ') ' + 'U=' + (el.u_mesure||'ï¿½')).join(', ')}
 
-Genère un objet JSON avec ces clés exactes, textes style officiel CECB (150-300 car.) :
+GenÃ¨re un objet JSON avec ces clÃ©s exactes, textes style officiel CECB (150-300 car.) :
 {"toits":"...","murs":"...","fenetres":"...","sols":"...","ponts_thermiques":"...","chauffage":"...","ecs":"...","ventilation":"...","appareils":"..."}
 
-Répons uniquement avec le JSON, sans texte avant ou après.`;
+RÃ©pons uniquement avec le JSON, sans texte avant ou aprÃ¨s.`;
 
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -39,7 +39,7 @@ Répons uniquement avec le JSON, sans texte avant ou après.`;
       const textes = JSON.parse(clean);
       STATE.dossier.textes_cecb = textes;
       BUREAU.afficherTextes();
-      UI.toast('Textes CECB générés ✓', 'success');
+      UI.toast('Textes CECB gÃ©nÃ©rÃ©s â', 'success');
     } catch(e) {
       console.error('IA error:', e);
       UI.toast('Erreur API Claude: ' + e.message, 'error');
@@ -53,19 +53,19 @@ Répons uniquement avec le JSON, sans texte avant ou après.`;
     const variante = STATE.getVariante(lettre);
     if (!variante) return;
 
-    UI.showIAModal(`Génération textes Variante ${lettre}...`);
+    UI.showIAModal(`GÃ©nÃ©ration textes Variante ${lettre}...`);
 
     const mesures = STATE.getMesuresParVariante(lettre);
     const d = STATE.dossier;
-    const prompt = `Tu es un expert CECB+ certifiié suisse (Daniel Gachoud, Frilow Sàrl).
-Génère les 15 textes officiels pour le portail cecb-tool.ch, style officiel CECB (MAX 4000 car. par texte).
+    const prompt = `Tu es un expert CECB+ certifiiÃ© suisse (Daniel Gachoud, Frilow SÃ rl).
+GÃ©nÃ¨re les 15 textes officiels pour le portail cecb-tool.ch, style officiel CECB (MAX 4000 car. par texte).
 
 VARIANTE ${lettre} : ${variante.denomination}
 MESUREQ : ${mesures.map(m => m.abrev + ' ' + m.denomination + ' U:' + (m.u_cible||'')).join(', ')}
 CHAUFFAGE ACTUEL : ${d.technique.type_chauffage}
-ANNÉE CONSTRUCTION : ${d.projet.annee_construction}
+ANNÃE CONSTRUCTION : ${d.projet.annee_construction}
 
-Répons JSON uniquement :
+RÃ©pons JSON uniquement :
 {"enveloppe_general":"...","toits":"...","autres_plafonds":"...","fenetres":"...","murs_ext":"...","autres_murs":"...","sols_ext":"...","autres_sols":"...","ponts_thermiques":"...","technique_general":"...","chauffage":"...","distribution_ecs":"...","electricite":"...","ventilation":"..."}`;
 
     try {
@@ -80,7 +80,7 @@ Répons JSON uniquement :
       const textes = JSON.parse(clean);
       STATE.updateVariante(lettre, { textes });
       VARIANTES.rafraichirVariante(lettre);
-      UI.toast(`Textes Variante ${lettre} générés ✓ �'success');
+      UI.toast(`Textes Variante ${lettre} gÃ©nÃ©rÃ©s â ï¿½'success');
     } catch(e) {
       console.error('IA error:', e);
       UI.toast('Erreur API Claude: ' + e.message, 'error');
@@ -96,7 +96,7 @@ Répons JSON uniquement :
       await this.genererTextesVariante(v.id);
       await new Promise(r => setTimeout(r, 1000));
     }
-    UI.toast('Toutes les variantes générées ✓ �'success');
+    UI.toast('Toutes les variantes gÃ©nÃ©rÃ©es â ï¿½'success');
   },
 
   async genererConseil() {
@@ -104,18 +104,18 @@ Répons JSON uniquement :
     const d = STATE.dossier;
     if (!d) return;
 
-    UI.showIAModal('Génération du conseil IA...');
+    UI.showIAModal('GÃ©nÃ©ration du conseil IA...');
 
     const sub = d.subventions?.par_variante || {};
     const summary = Object.entries(sub).map(([lettre, r]) =>
-      `Variante ${lettre} : subventions estimées ${r.total_retenu CHF (${r.recommande})`
+      `Variante ${lettre} : subventions estimÃ©es ${r.total_retenu CHF (${r.recommande})`
     ).join('\n');
 
     const prompt = `POUR LE PROPRI%TTAIE :
     SRE = ${d.projet.sre} m2, Affectation = ${d.projet.affectation}
     Chauffage actuel : ${d.technique.type_chauffage} - ${d.technique.agent_energetique}
     Subventions :\n${summary}
-    En quelques phrases, quelle variante recommandes-tu et pourquoi ? Style expert indépendant, Familiari, langue française.`;
+    En quelques phrases, quelle variante recommandes-tu et pourquoi ? Style expert indÃ©pendant, Familiari, langue franÃ§aise.`;
 
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -128,7 +128,7 @@ Répons JSON uniquement :
       STATE.dossier.conseil_ia = { texte, genere_le: new Date().toISOString() };
       const container = document.getElementById('ia-conseil-resultat');
       if (container) container.innerText = texte;
-      UI.toast('Conseil IA généré ✓', 'success');
+      UI.toast('Conseil IA gÃ©nÃ©rÃ© â', 'success');
     } catch(e) {
       UI.toast('Erreur API: ' + e.message, 'error');
     } finally {
@@ -137,11 +137,11 @@ Répons JSON uniquement :
   },
 
   showCleAPIModal() {
-    const cle = window.prompt('Entrez la clé API Anthropic :');
+    const cle = window.prompt('Entrez la clÃ© API Anthropic :');
     if (cle) {
       this.apiKey = cle;
       CONFIG.anthropic_key = cle;
-      UI.toast('Clé API sauvegardée ✓', 'success');
+      UI.toast('ClÃ© API sauvegardÃ©e â', 'success');
     }
   },
 };

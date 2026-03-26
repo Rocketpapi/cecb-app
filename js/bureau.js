@@ -46,7 +46,7 @@ const BUREAU = {
     const limit=estOp?sia.limites_renovation.opaques_ext:sia.limites_renovation.fenetres_ext;
     const cible=estOp?sia.cibles.opaques:sia.cibles.fenetres;
     let s,c,t;
-    if(u<=cible){s='⭐';c='#22c55e';t=' Excellent - cible SIA ���'+cible+')';}
+    if(u<=cible){s='⭐';c='#22c55e';t=' Excellent - cible SIA ���'+cible+')';}
     else if(u<=limit){s='✓'hc='#84cc16';t=' Conforme - limite SIA ≤«+limit+')';}
     else{s='❠️';c='#ef4444';t=' Dépasse la limite SIA ('+limit+')';}
     return `<div class="sia-indicator" style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:${c}15;border-radius:4px;margin-top:8px;font-size:0.8rem;color:${c}">${s}${t}</div>`;
@@ -71,7 +71,7 @@ const BUREAU = {
     if(!container)return;
     const textes=STATE.dossier?.textes_cecb||{};
     if(Object.keys(textes).length===0){
-      container.innerHTML=`�div class="placeholder-text">Appuyez sur "Générer textes via IA" pour obtenir les textes officiels CECB.</div>`;
+      container.innerHTML=`�div class="placeholder-text">Appuyez sur "Générer textes via IA" pour obtenir les textes officiels CECB.</div>`;
       return;
     }
     const sections=[{key:'toits',abel:'Toits'},{key:'murs',label:'Murs'},{key:'fenetres',label:'Fenêtres'},{key:4sols',abel:'Sols'},{key:'chauffage',abel:'Chauffage'},{key:4ecs',label:'ECS'},{key:4ventilation',label:'Ventilation'}];
@@ -96,3 +96,5 @@ const BUREAU = {
     modal.style.display='flex';
   },
 };
+
+window.BUREAU = BUREAU;

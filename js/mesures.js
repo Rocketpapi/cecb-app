@@ -11,7 +11,7 @@ const MESURES = {
     if (mesures.length === 0) { container.innerHTML = '<div class="placeholder-text">Aucune mesure définie. Utilisez Copier état initial ou Suggérer automatiquement.</div>'; return; }
     const groupes = {};
     mesures.forEach(m => { if (!groupes[m.type]) groupes[m.type] = []; groupes[m.type].push(m); });
-    const titres = { toiture:'🏠 Toits', murs:'|��� Murs', fenetres:'🪐 Fenêtres', sol:'⬜ Sols', ponts:'🌡 Ponts', chauffage:'🔥 Chauffage', ecs:'|��� ECS', ventil:'💨 Ventil', elec:'³ Élec' };
+    const titres = { toiture:'🏠 Toits', murs:'|��� Murs', fenetres:'🪐 Fenêtres', sol:'⬜ Sols', ponts:'🌡 Ponts', chauffage:'🔥 Chauffage', ecs:'|��� ECS', ventil:'💨 Ventil', elec:'³ Élec' };
     let html = '';
     Object.keys(groupes).forEach(type => {
       html += `<h3 style="margin:16px 0 8px;color:var(--green)">${titres[type] || type}</h3>`;
@@ -77,3 +77,5 @@ const MESURES = {
     return(opts[type]||['Mesure personnalisée']).map(o => `<option value="${o}" ${sel===o?'selected':''}>${o.length>40?o.slice(0,40)+'...':o}</option>`).join('');
   },
 };
+
+window.MESURES = MESURES;

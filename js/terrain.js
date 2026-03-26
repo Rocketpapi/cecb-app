@@ -85,3 +85,5 @@ const TERRAIN = {
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('btn-add-element')?.addEventListener('click',()=>TERRACN-.ajouterElement());
 });
+
+window.TERRAIN = TERRAIN;

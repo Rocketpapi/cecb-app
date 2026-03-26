@@ -20,6 +20,7 @@ const STATE = {
         docs:{plans:false,facades:false,coupes:false,conso_elec:false,conso_ch:false,offre_pac:false}
       },
       elements: [],
+      terrain_enveloppe: {},
       technique: {
         type_chauffage:'', marque_chauffage:'', annee_chauffage:'',
         puissance_kw:'', agent_energetique:'gaz',

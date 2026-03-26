@@ -14,7 +14,7 @@ const STATE = {
       version: CONFIG.version,
       cree_le: new Date().toISOString(),
       modifie_le: new Date().toISOString(),
-      projet: { nom:'', mandant:'', adresse:'', npa:'', localite:'', canton:'FR', affectation:'hab_coll', annee_construction:'', nb_etages:', sre:'', nb_apparts:'', type_mandat:'cecb_plus', notes:'' },
+      projet: { nom:'', mandant:'', adresse:'', npa:'', localite:'', canton:'FR', affectation:'hab_coll', annee_construction:'', nb_etages:'', sre:'', nb_apparts:'', type_mandat:'cecb_plus', notes:'' },
       terrain: { date_visite:'', experts:'Daniel Gachoud', observations:'', docs:{plans:false,facades:false,coupes:false,conso_elec:false,conso_ch:false,offre_pac:false} },
       elements: [],
       technique: { type_chauffage:'', marque_chauffage:'', annee_chauffage:'', puissance_kw:'', agent_energetique:'gaz', distribution_chauffage:'plancher', retour_ecs:'', type_ecs:'ballon_lié', volume_ecs_l:'', annee_ecs:'', type_ventilation:'naturelle', pv_existant:'non', pv_kwp:'', photo_plaque:null },

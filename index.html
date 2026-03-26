@@ -5,43 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>CECB App — Frilow</title>
+  <title>CECB App â Frilow</title>
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
      HEADER
-═══════════════════════════════════════════════════════ -->
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <header id="app-header">
   <div class="header-left">
-    <button id="btn-menu" class="icon-btn" title="Menu">☰</button>
+    <button id="btn-menu" class="icon-btn" title="Menu">â°</button>
     <span id="header-title">CECB App</span>
   </div>
   <div class="header-right">
     <span id="header-projet"></span>
-    <button id="btn-save" class="btn-primary btn-sm" title="Sauvegarder">💾</button>
-    <button id="btn-open" class="btn-ghost btn-sm" title="Ouvrir">📂</button>
+    <button id="btn-save" class="btn-primary btn-sm" title="Sauvegarder">ð¾</button>
+    <button id="btn-open" class="btn-ghost btn-sm" title="Ouvrir">ð</button>
     <input type="file" id="file-input" accept=".cecb" style="display:none">
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
      NAVIGATION TABS
-═══════════════════════════════════════════════════════ -->
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <nav id="main-nav">
-  <button class="nav-tab active" data-section="projet">📋 Projet</button>
-  <button class="nav-tab" data-section="terrain">📸 Terrain</button>
-  <button class="nav-tab" data-section="bureau">🏢 Bureau</button>
-  <button class="nav-tab phase2" data-section="mesures">🔧 Mesures</button>
-  <button class="nav-tab phase2" data-section="variantes">📊 Variantes</button>
-  <button class="nav-tab phase2" data-section="subventions">💰 Subventions</button>
-  <button class="nav-tab" data-section="export">📤 Export</button>
+  <button class="nav-tab active" data-section="projet">ð Projet</button>
+  <button class="nav-tab" data-section="terrain">ð¸ Terrain</button>
+  <button class="nav-tab" data-section="bureau">ð¢ Bureau</button>
+  <button class="nav-tab phase2" data-section="mesures">ð§ Mesures</button>
+  <button class="nav-tab phase2" data-section="variantes">ð Variantes</button>
+  <button class="nav-tab phase2" data-section="subventions">ð° Subventions</button>
+  <button class="nav-tab" data-section="export">ð¤ Export</button>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
      SECTIONS
-═══════════════════════════════════════════════════════ -->
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
 <main id="app-main">
 
   <!-- PROJET -->
@@ -50,10 +50,10 @@
       <h2>Nouveau dossier</h2>
     </div>
 
-    <!-- ── Recherche adresse GeoAdmin ─────────────────── -->
+    <!-- ââ Recherche adresse GeoAdmin âââââââââââââââââââ -->
     <div style="background:var(--green-50,#f0fdf4);border:2px solid var(--green);border-radius:10px;padding:14px 16px;margin-bottom:18px">
       <div style="font-weight:700;font-size:0.9rem;color:var(--green);margin-bottom:8px">
-        🔍 Remplissage automatique depuis l'adresse
+        ð Remplissage automatique depuis l'adresse
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <input type="text" id="input-recherche-adresse"
@@ -65,22 +65,22 @@
         </button>
       </div>
       <div style="font-size:0.78rem;color:#666;margin-top:6px">
-        Données automatiques depuis map.geo.admin.ch (registre fédéral des bâtiments)
+        DonnÃ©es automatiques depuis map.geo.admin.ch (registre fÃ©dÃ©ral des bÃ¢timents)
       </div>
     </div>
 
     <div class="form-grid">
       <div class="form-group">
         <label>Nom du projet *</label>
-        <input type="text" id="proj-nom" placeholder="ex: Rénovation Alcantara 6-8" data-field="projet.nom">
+        <input type="text" id="proj-nom" placeholder="ex: RÃ©novation Alcantara 6-8" data-field="projet.nom">
       </div>
       <div class="form-group">
         <label>Mandant</label>
-        <input type="text" id="proj-mandant" placeholder="Nom du propriétaire" data-field="projet.mandant">
+        <input type="text" id="proj-mandant" placeholder="Nom du propriÃ©taire" data-field="projet.mandant">
       </div>
       <div class="form-group">
         <label>Adresse</label>
-        <input type="text" id="proj-adresse" placeholder="Rue et numéro" data-field="projet.adresse">
+        <input type="text" id="proj-adresse" placeholder="Rue et numÃ©ro" data-field="projet.adresse">
       </div>
       <div class="form-group form-group-split">
         <div>
@@ -88,13 +88,13 @@
           <input type="text" id="proj-npa" placeholder="1762" maxlength="4" data-field="projet.npa">
         </div>
         <div>
-          <label>Localité *</label>
+          <label>LocalitÃ© *</label>
           <input type="text" id="proj-localite" placeholder="Givisiez" data-field="projet.localite">
         </div>
       </div>
       <div class="form-group form-group-split">
         <div>
-          <label>Id. fédéral de bâtiment (EGID)</label>
+          <label>Id. fÃ©dÃ©ral de bÃ¢timent (EGID)</label>
           <input type="text" id="proj-egid" placeholder="ex: 1523909" data-field="projet.egid" style="font-family:monospace">
         </div>
         <div>
@@ -107,8 +107,8 @@
         <select id="proj-canton" data-field="projet.canton">
           <option value="FR">Fribourg (FR)</option>
           <option value="VD">Vaud (VD)</option>
-          <option value="GE">Genève (GE)</option>
-          <option value="NE">Neuchâtel (NE)</option>
+          <option value="GE">GenÃ¨ve (GE)</option>
+          <option value="NE">NeuchÃ¢tel (NE)</option>
           <option value="VS">Valais (VS)</option>
           <option value="BE">Berne (BE)</option>
           <option value="JU">Jura (JU)</option>
@@ -120,26 +120,26 @@
           <option value="hab_coll">Habitat collectif (Cat. I)</option>
           <option value="hab_ind">Habitat individuel (Cat. I)</option>
           <option value="bureaux">Bureaux (Cat. II)</option>
-          <option value="ecole">Écoles (Cat. III)</option>
+          <option value="ecole">Ãcoles (Cat. III)</option>
           <option value="commerce">Commerce (Cat. IV)</option>
           <option value="restaurant">Restaurant (Cat. V)</option>
-          <option value="hopital">Hôpital (Cat. VI)</option>
+          <option value="hopital">HÃ´pital (Cat. VI)</option>
           <option value="industrie">Industrie (Cat. VII)</option>
-          <option value="depot">Dépôt (Cat. VIII)</option>
+          <option value="depot">DÃ©pÃ´t (Cat. VIII)</option>
         </select>
       </div>
       <div class="form-group form-group-split">
         <div>
-          <label>Année de construction</label>
+          <label>AnnÃ©e de construction</label>
           <input type="number" id="proj-annee" placeholder="2007" min="1800" max="2025" data-field="projet.annee_construction">
         </div>
         <div>
-          <label>Nb d'étages</label>
+          <label>Nb d'Ã©tages</label>
           <input type="number" id="proj-etages" placeholder="3" min="1" max="50" data-field="projet.nb_etages">
         </div>
       </div>
       <div class="form-group">
-        <label>SRE totale [m²]</label>
+        <label>SRE totale [mÂ²]</label>
         <input type="number" id="proj-sre" placeholder="1761" data-field="projet.sre">
       </div>
       <div class="form-group">
@@ -154,20 +154,20 @@
         </div>
       </div>
       <div class="form-group">
-        <label>Notes générales</label>
+        <label>Notes gÃ©nÃ©rales</label>
         <textarea id="proj-notes" rows="3" placeholder="Remarques sur le mandat..." data-field="projet.notes"></textarea>
       </div>
     </div>
     <div class="section-actions">
-      <button class="btn-primary btn-lg" id="btn-charger-subventions">🔍 Charger subventions depuis NPA</button>
-      <button class="btn-secondary btn-lg" id="btn-goto-terrain">→ Aller au terrain</button>
+      <button class="btn-primary btn-lg" id="btn-charger-subventions">ð Charger subventions depuis NPA</button>
+      <button class="btn-secondary btn-lg" id="btn-goto-terrain">â Aller au terrain</button>
     </div>
   </section>
 
   <!-- TERRAIN -->
   <section id="section-terrain" class="section">
     <div class="section-header">
-      <h2>📸 Mode terrain</h2>
+      <h2>ð¸ Mode terrain</h2>
       <p class="section-subtitle">Remplissez sur place lors de la visite</p>
     </div>
 
@@ -181,21 +181,21 @@
     </div>
     <div id="t-technique" class="subsection"><div class="form-grid">
         <h3 class="form-section-title">Chauffage</h3>
-        <div class="form-group"><label>Type producteur</label><select id="tech-type-chauffage" data-field="technique.type_chauffage"><option value="">-- Sélectionner --</option><option value="gaz_cond">Chaudière gaz condensation</option><option value="mazout">Chaudière mazout</option><option value="pac_air">PAC air/eau</option><option value="pac_saumure">PAC saumure/eau</option><option value="cad">CAD chaleur distance</option><option value="electrique">Electrique</option><option value="bois">Bois</option></select></div>
-        <div class="form-group"><label>Marque / Modèle</label><input type="text" id="tech-marque" placeholder="ex: Viessmann Vitodens 200" data-field="technique.marque_chauffage"></div>
-        <div class="form-group form-group-split"><div><label>Année installation</label><input type="number" id="tech-annee-ch" placeholder="2008" data-field="technique.annee_chauffage"></div><div><label>Puissance [kW]</label><input type="number" id="tech-puissance" placeholder="45" data-field="technique.puissance_kw"></div></div>
-        <div class="form-group"><label>Agent énergétique</label><select id="tech-agent" data-field="technique.agent_energetique"><option value="gaz">Gaz naturel</option><option value="mazout">Mazout</option><option value="electricite">Électricité</option><option value="bois_buche">Bûches de bois</option><option value="bois_granule">Granulés de bois</option><option value="cad">Chaleur à distance</option></select></div>
+        <div class="form-group"><label>Type producteur</label><select id="tech-type-chauffage" data-field="technique.type_chauffage"><option value="">-- SÃ©lectionner --</option><option value="gaz_cond">ChaudiÃ¨re gaz condensation</option><option value="mazout">ChaudiÃ¨re mazout</option><option value="pac_air">PAC air/eau</option><option value="pac_saumure">PAC saumure/eau</option><option value="cad">CAD chaleur distance</option><option value="electrique">Electrique</option><option value="bois">Bois</option></select></div>
+        <div class="form-group"><label>Marque / ModÃ¨le</label><input type="text" id="tech-marque" placeholder="ex: Viessmann Vitodens 200" data-field="technique.marque_chauffage"></div>
+        <div class="form-group form-group-split"><div><label>AnnÃ©e installation</label><input type="number" id="tech-annee-ch" placeholder="2008" data-field="technique.annee_chauffage"></div><div><label>Puissance [kW]</label><input type="number" id="tech-puissance" placeholder="45" data-field="technique.puissance_kw"></div></div>
+        <div class="form-group"><label>Agent Ã©nergÃ©tique</label><select id="tech-agent" data-field="technique.agent_energetique"><option value="gaz">Gaz naturel</option><option value="mazout">Mazout</option><option value="electricite">ÃlectricitÃ©</option><option value="bois_buche">BÃ»ches de bois</option><option value="bois_granule">GranulÃ©s de bois</option><option value="cad">Chaleur Ã  distance</option></select></div>
         <h3 class="form-section-title">ECSet</h3>
-        <div class="form-group"><label>Type boiler</label><select id="tech-type-ecs" data-field="technique.type_ecs"><option value="ballon_lié">Ballon lié chauffage</option><option value="ballon_elec">Ballon électrique</option><option value="pac_ecs">PAC ECS</option><option value="solaire">Solaire thermique</option><option value="instantane">Instantané</option></select></div>
-        <div class="form-group form-group-split"><div><label>Volume [litres]</label><input type="number" id="tech-vol-ecs" placeholder="1000" data-field="technique.volume_ecs_l"></div><div><label>Année</label><input type="number" id="tech-annee-ecs" placeholder="2008" data-field="technique.annee_ecs"></div></div>
+        <div class="form-group"><label>Type boiler</label><select id="tech-type-ecs" data-field="technique.type_ecs"><option value="ballon_liÃ©">Ballon liÃ© chauffage</option><option value="ballon_elec">Ballon Ã©lectrique</option><option value="pac_ecs">PAC ECS</option><option value="solaire">Solaire thermique</option><option value="instantane">InstantanÃ©</option></select></div>
+        <div class="form-group form-group-split"><div><label>Volume [litres]</label><input type="number" id="tech-vol-ecs" placeholder="1000" data-field="technique.volume_ecs_l"></div><div><label>AnnÃ©e</label><input type="number" id="tech-annee-ecs" placeholder="2008" data-field="technique.annee_ecs"></div></div>
         <h3 class="form-section-title">Ventilation</h3>
         <div class="form-group"><select id="tech-ventilation" data-field="technique.type_ventilation"><option value="naturelle">Naturelle</option><option value="extraction">Extraction</option><option value="double_flux">Double flux</option><option value="simple_flux">Simple flux</option></select></div>
         <h3 class="form-section-title">PV</h3>
         <div class="form-group"><select id="tech-pv" data-field="technique.pv_existant"><option value="non">Non</option><option value="oui">Oui</option></select></div>
         <div class="form-group" id="tech-pv-details" style="display:none"><input type="number" id="tech-pv-kwp" placeholder="55" data-field="technique.pv_kwp"></div>
         <h3 class="form-section-title">Photo plaque</h3>
-        <div class="form-group"><div class="photo-zone" id="photo-plaque" data-field="technique.photo_plaque"><div class="photo-placeholder">📷 Photo plaque chaudière</div></div></div></div></div>
-    <div id="t-notes" class="subsection"><div class="form-grid"><div class="form-group"><label>Observations</label><textarea id="terrain-obs" rows="5" placeholder="État général..." data-field="terrain.observations"></textarea></div><div class="form-group"><label>Date</label><input type="date" id="terrain-date" data-field="terrain.date_visite"></div><div class="form-group"><label>Experts</label><input type="text" id="terrain-experts" placeholder="Daniel Gachoud" data-field="terrain.experts"></div></div></div>
+        <div class="form-group"><div class="photo-zone" id="photo-plaque" data-field="technique.photo_plaque"><div class="photo-placeholder">ð· Photo plaque chaudiÃ¨re</div></div></div></div></div>
+    <div id="t-notes" class="subsection"><div class="form-grid"><div class="form-group"><label>Observations</label><textarea id="terrain-obs" rows="5" placeholder="Ãtat gÃ©nÃ©ral..." data-field="terrain.observations"></textarea></div><div class="form-group"><label>Date</label><input type="date" id="terrain-date" data-field="terrain.date_visite"></div><div class="form-group"><label>Experts</label><input type="text" id="terrain-experts" placeholder="Daniel Gachoud" data-field="terrain.experts"></div></div></div>
   </section>
 
   <!-- BUREAU -->
@@ -204,16 +204,16 @@
     <div id="b-enveloppe" class="subsection active"><div id="bureau-elements-list"></div></div>
     <div id="b-technique" class="subsection"><div id="bureau-technique-display"></div></div>
     <div id="b-conso" class="subsection"><div class="form-grid"><div class="form-group"><label>Gaz</label><input type="number" id="conso-gaz" data-field="conso.gaz_kwh"></div><div class="form-group"><label>Mazout</label><input type="number" id="conso-mazout" data-field="conso.mazout_l"></div><div class="form-group"><label>Elec</label><input type="number" id="conso-elec" data-field="conso.elec_kwh"></div><div class="form-group"><label>Bois</label><input type="number" id="conso-bois" data-field="conso.bois_kwh"></div><div class="form-group"><label>CAD</label><input type="number" id="conso-cad" data-field="conso.cad_kwh"></div></div></div>
-    <div id="b-textes" class="subsection"><div id="textes-cecb-list"></div><button class="btn-primary btn-block" id="btn-generer-textes">✨ Générer textes via IA</button></div>
+    <div id="b-textes" class="subsection"><div id="textes-cecb-list"></div><button class="btn-primary btn-block" id="btn-generer-textes">â¨ GÃ©nÃ©rer textes via IA</button></div>
   </section>
 
-  <section id="section-mesures" class="section"><div class="section-header"><h2>�' Mesures</h2></div><div class="section-actions"><button class="btn-secondary" id="btn-copier-etat-initial">Copier état initial</button><button class="btn-primary" id="btn-auto-mesures">Suggérer mesures</button></div><div id="mesures-list"></div></section>
-  <section id="section-variantes" class="section"><div class="section-header"><h2>📊 Variantes</h2></div><div id="variantes-container"></div><div class="section-actions"><button class="btn-primary" id="btn-generer-variantes">✨ Générer variantes via IA</button></div></section>
-  <section id="section-subventions" class="section"><div class="section-header"><h2>💰 Subventions</h2></div><div id="subventions-tableau"></div><div id="ia-conseil-resultat"></div><div class="section-actions"><button class="btn-primary" id="btn-calc-subventions">Calculer</button><button class="btn-secondary" id="btn-conseil-ia">✨ Conseil IA</button></div></section>
-  <section id="section-export" class="section"><div class="section-header"><h2>📤 Export</h2></div><div class="section-actions"><button class="btn-primary" id="btn-export-p1">Export Phase 1</button><button class="btn-primary" id="btn-export-p2">Export Phase 2</button><button class="btn-secondary" id="btn-export-resume">Résumé</button></div></section>
+  <section id="section-mesures" class="section"><div class="section-header"><h2>ï¿½' Mesures</h2></div><div class="section-actions"><button class="btn-secondary" id="btn-copier-etat-initial">Copier Ã©tat initial</button><button class="btn-primary" id="btn-auto-mesures">SuggÃ©rer mesures</button></div><div id="mesures-list"></div></section>
+  <section id="section-variantes" class="section"><div class="section-header"><h2>ð Variantes</h2></div><div id="variantes-container"></div><div class="section-actions"><button class="btn-primary" id="btn-generer-variantes">â¨ GÃ©nÃ©rer variantes via IA</button></div></section>
+  <section id="section-subventions" class="section"><div class="section-header"><h2>ð° Subventions</h2></div><div id="subventions-tableau"></div><div id="ia-conseil-resultat"></div><div class="section-actions"><button class="btn-primary" id="btn-calc-subventions">Calculer</button><button class="btn-secondary" id="btn-conseil-ia">â¨ Conseil IA</button></div></section>
+  <section id="section-export" class="section"><div class="section-header"><h2>ð¤ Export</h2></div><div class="section-actions"><button class="btn-primary" id="btn-export-p1">Export Phase 1</button><button class="btn-primary" id="btn-export-p2">Export Phase 2</button><button class="btn-secondary" id="btn-export-resume">RÃ©sumÃ©</button></div></section>
 </main>
-<div id="modal-element" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content"><div class="modal-header"><h3 id="modal-element-title">Élément</h3><button class="modal-close">✕</button></div><div class="modal-body" id="modal-element-body"></div><div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div></div></div>
-<div id="modal-ia" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">Génération en cours...</p></div></div></div>
+<div id="modal-element" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content"><div class="modal-header"><h3 id="modal-element-title">ÃlÃ©ment</h3><button class="modal-close">â</button></div><div class="modal-body" id="modal-element-body"></div><div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div></div></div>
+<div id="modal-ia" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">GÃ©nÃ©ration en cours...</p></div></div></div>
 <div id="toast-container"></div>
 <script>
 /* CONFIG inline - garantit le chargement meme si config.js echoue */
@@ -285,4 +285,82 @@ window.CONFIG = window.CONFIG || {
 <script src="js/export.js"></script>
 <script src="js/app.js"></script>
 
+
+<script>
+/* TERRAIN inline - bypass cache GitHub Pages */
+window.TERRAIN={
+  SECTIONS:{
+    toits:{label:'Toits et plafonds',icon:'🎠',
+      generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit incliné','Toit en terrasse','Toit mixte']}],
+      sousections:[
+        {key:'contre_ext',label:'Toits / plafonds contre extérieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
+         types:['Toit plat / terrasse','Toit incliné N','Toit incliné S','Toit incliné E','Toit incliné O','Plafond contre extérieur'],
+         orientations:['Horiz','N','S','E','O'],colonnes:['surface','u_value','nbre','annee','orientation']},
+        {key:'autres',label:'Autres plafonds',denom_defaut:'M1_PLAFOND_EXIST_C.N.C.',abrev_prefix:'Pl',
+         types:['Plafond contre non chauffé','Plafond sur terre-plein','Autre'],
+         orientations:['Horiz'],colonnes:['surface','u_value','b','nbre','annee']}
+      ]},
+    murs:{label:'Murs',icon:'🧱',
+      generalites:[
+        {key:'structure_facades',label:'Structure des façades',type:'select',options:['façades lisses et pleines','façades avec décrochements','façades complexes']},
+        {key:'soustraction_auto',label:'Soustraire automatiquement surface de fenêtres',type:'checkbox'}
+      ],
+      sousections:[
+        {key:'contre_ext',label:'Murs contre extérieur',denom_defaut:'M2_FACADE_EXIST_C.E.',abrev_prefix:'Mu',
+         types:['Mur extérieur'],orientations:['N','S','E','O','NE','NO','SE','SO'],
+         colonnes:['surface','u_value','b','nbre','annee','orientation']},
+        {key:'autres',label:'Autres murs',denom_defaut:'M2_MUR_EXIST_C.N.C.',abrev_prefix:'Mu',
+         types:['Mur contre non chauffé','Mur contre sol','Autre'],
+         orientations:['N','S','E','O'],colonnes:['surface','u_value','b','nbre','annee','orientation']}
+      ]},
+    fenetres:{label:'Fenêtres et portes',icon:'🪪',
+      generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fenêtres',type:'checkbox'}],
+      sousections:[
+        {key:'fenetres',label:'Fenêtres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
+         types:['Fenêtre','Porte-fenêtre','Porte extérieure','Fenêtre de toit','Porte de garage'],
+         orientations:['N','S','E','O','NE','NO','SE','SO'],
+         colonnes:['surface','u_value','g','fs','b','nbre','annee','orientation','dans']}
+      ]},
+    sols:{label:'Sols',icon:'⬛',
+      generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauffée',type:'select',options:['','0%','25%','50%','75%','100%']}],
+      sousections:[
+        {key:'contre_ext',label:'Sols contre extérieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
+         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur extérieur'],
+         colonnes:['surface','u_value','b','nbre','annee']},
+        {key:'autres',label:'Autres sols',denom_defaut:'M3_SOL_EXIST_C.N.C.',abrev_prefix:'So',
+         types:['Sol contre non chauffé','Sol sur cave non chauffée','Autre'],
+         colonnes:['surface','u_value','b','nbre','annee']}
+      ]},
+    ponts:{label:'Ponts thermiques',icon:'⚠️',
+      generalites:[],
+      sousections:[
+        {key:'ponts',label:'Ponts thermiques',denom_defaut:'PT_EXIST',abrev_prefix:'Pt',
+         types:['Linéique','Ponctuel'],colonnes:['longueur','psi','nbre','annee']}
+      ]}
+  },
+  ETATS:[
+    {value:'',label:'-- Sélectionner --'},{value:'neuf',label:"(à l') état neuf"},
+    {value:'bon',label:'en bon état'},{value:'use',label:'usé'},
+    {value:'mauvais',label:'en mauvais état'},{value:'tres_mauvais',label:'en très mauvais état'}
+  ],
+  refresh(){if(!STATE.dossier)STATE.nouveau();this.afficherSections();if(typeof UI!=='undefined')UI.syncFields();},
+  getEnvData(){if(!STATE.dossier)STATE.nouveau();if(!STATE.dossier.terrain_enveloppe)STATE.dossier.terrain_enveloppe={};return STATE.dossier.terrain_enveloppe;},
+  afficherSections(){const c=document.getElementById('terrain-enveloppe-container');if(!c)return;if(!STATE.dossier)STATE.nouveau();const data=STATE.dossier.terrain_enveloppe||{};c.innerHTML=Object.entries(this.SECTIONS).map(([k,s])=>this.renderSection(k,s,data[k]||{})).join('');this.attachListeners(c);},
+  renderSection(k,s,data){const gH=s.generalites.map(g=>this.renderGen(k,g,data)).join('');const ssH=s.sousections.map(ss=>this.renderSS(k,ss,data[ss.key]||{etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]})).join('');return '<div class="cecb-section" id="terrain-section-'+k+'"><div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')"><span>'+s.icon+'</span> <span class="cecb-section-title">'+s.label+'</span><span class="cecb-section-chevron">▼</span></div><div class="cecb-section-body">'+(gH?'<div class="cecb-generalites">'+gH+'</div>':'')+ssH+'</div></div>';},
+  renderGen(k,g,data){if(g.type==='select'){const o=g.options.map(v=>'<option value="'+v+'"'+(data[g.key]===v?' selected':'')+'>'+v+'</option>').join('');return '<div class="form-group"><label>'+g.label+'</label><select class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'">'+o+'</select></div>';}if(g.type==='checkbox'){return '<div class="form-group"><label><input type="checkbox" class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'"'+(data[g.key]?' checked':'')+'>'+g.label+'</label></div>';}return '';},
+  renderSS(k,ss,data){const eO=this.ETATS.map(e=>'<option value="'+e.value+'"'+(data.etat===e.value?' selected':'')+'>'+e.label+'</option>').join('');const tH=this.renderTableau(k,ss,data.elements||[]);const pZ=this.renderPhoto(k,ss.key,data.photo);return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>État général</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>Priorité</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - Planifié</option></select></div><div class="form-group"><label>État</label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>Améliorations</label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';},
+  renderPhoto(k,sk,photo){if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'" style="position:relative"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">✕</button></div>';return '<div class="cecb-photo-zone cecb-photo-empty" data-section="'+k+'" data-ss="'+sk+'" style="min-height:150px;display:flex;align-items:center;justify-content:center;border:2px dashed #cbd5e0;border-radius:8px;cursor:pointer;background:#f8fafc"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">📷</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto(''+k+'',''+sk+'')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="'+k+'" data-ss="'+sk+'"></div>';},
+  renderTableau(k,ss,elements){const hS=ss.colonnes.includes('surface'),hU=ss.colonnes.includes('u_value'),hG=ss.colonnes.includes('g'),hFs=ss.colonnes.includes('fs'),hB=ss.colonnes.includes('b'),hD=ss.colonnes.includes('dans'),hO=ss.colonnes.includes('orientation'),hL=ss.colonnes.includes('longueur'),hPsi=ss.colonnes.includes('psi');const head='<tr><th>Abrév.</th><th>Dénomination</th><th>Type</th><th>Année</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [m²]</th>':'')+(hU?'<th>Valeur U [W/m²K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>Ψ [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donnée présente</td></tr>':elements.map((el,i)=>{const yr=STATE.get?STATE.get('projet.annee_construction')||'':'';return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="font-size:.78rem">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+(ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">📋</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">✕</button></td></tr>';}).join('');return '<div class="cecb-tableau-wrapper"><table class="cecb-tableau"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table><button class="btn-primary btn-sm cecb-add-el" data-section="'+k+'" data-ss="'+ss.key+'" style="margin-top:8px">+ Nouveau</button></div>';},
+  attachListeners(c){c.querySelectorAll('.terrain-gen-field').forEach(el=>el.addEventListener('change',()=>this.saveGenField(el)));c.querySelectorAll('.terrain-ss-field').forEach(el=>{const ev=el.tagName==='TEXTAREA'?'input':'change';el.addEventListener(ev,()=>this.saveSsField(el));});c.querySelectorAll('[data-idx]').forEach(el=>{const ev=el.tagName==='SELECT'?'change':'input';el.addEventListener(ev,()=>this.saveElement(el));});c.querySelectorAll('.cecb-add-el').forEach(btn=>btn.addEventListener('click',()=>this.ajouterElement(btn.dataset.section,btn.dataset.ss)));c.querySelectorAll('.el-copy').forEach(btn=>btn.addEventListener('click',()=>this.dupliquerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));c.querySelectorAll('.el-del').forEach(btn=>btn.addEventListener('click',()=>this.supprimerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));c.querySelectorAll('.cecb-photo-zone').forEach(z=>{z.addEventListener('click',e=>{if(e.target.classList.contains('cecb-photo-del'))this.supprimerPhoto(z.dataset.section,z.dataset.ss);else if(!e.target.classList.contains('img'))this.ouvrirPhoto(z.dataset.section,z.dataset.ss);});z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag-over');});z.addEventListener('dragleave',()=>z.classList.remove('drag-over'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag-over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))this.chargerPhoto(z.dataset.section,z.dataset.ss,f);});});c.querySelectorAll('.photo-input').forEach(inp=>inp.addEventListener('change',e=>{const f=e.target.files[0];if(f)this.chargerPhoto(inp.dataset.section,inp.dataset.ss,f);}));},
+  saveGenField(el){const d=this.getEnvData();if(!d[el.dataset.section])d[el.dataset.section]={};d[el.dataset.section][el.dataset.key]=el.type==='checkbox'?el.checked:el.value;STATE._dirty=true;},
+  saveSsField(el){const d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss;if(!d[k])d[k]={};if(!d[k][ss])d[k][ss]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][ss][el.dataset.key]=el.value;STATE._dirty=true;},
+  saveElement(el){const d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss,i=parseInt(el.dataset.idx);if(!d[k]?.[ss]?.elements)return;const elem=d[k][ss].elements[i];if(!elem)return;const cls=[...el.classList].find(c=>c.startsWith('el-'));const fm={'el-abrev':'abrev','el-denom':'denom','el-type':'type','el-annee':'annee','el-orient':'orientation','el-surface':'surface','el-u':'u_value','el-g':'g','el-fs':'fs','el-b':'b','el-longueur':'longueur','el-psi':'psi','el-nbre':'nbre','el-dans':'dans'};if(fm[cls]){elem[fm[cls]]=el.type==='number'?parseFloat(el.value)||'':el.value;STATE._dirty=true;}},
+  ajouterElement(k,sk){const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};const els=d[k][sk].elements;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const num=els.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1;els.push({abrev:ss.abrev_prefix+'-'+num,denom:ss.denom_defaut,type:ss.types[0],annee:STATE.get?STATE.get('projet.annee_construction')||'':'',surface:'',u_value:'',g:'',fs:'',b:'1.0',longueur:'',psi:'',nbre:1,orientation:ss.orientations?.[0]||'',dans:''});STATE._dirty=true;this.afficherSections();setTimeout(()=>document.getElementById('terrain-ss-'+k+'-'+sk)?.scrollIntoView({behavior:'smooth',block:'end'}),100);},
+  dupliquerElement(k,sk,idx){const d=this.getEnvData();const els=d[k]?.[sk]?.elements;if(!els||!els[idx])return;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const c={...els[idx]};c.abrev=ss.abrev_prefix+'-'+(els.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1);els.splice(idx+1,0,c);STATE._dirty=true;this.afficherSections();},
+  supprimerElement(k,sk,idx){const d=this.getEnvData();const els=d[k]?.[sk]?.elements;if(!els)return;els.splice(idx,1);STATE._dirty=true;this.afficherSections();},
+  ouvrirPhoto(k,sk){document.querySelector('.photo-input[data-section="'+k+'"][data-ss="'+sk+'"]')?.click();},
+  chargerPhoto(k,sk,file){const reader=new FileReader();reader.onload=e=>{const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][sk].photo=e.target.result;STATE._dirty=true;this.afficherSections();};reader.readAsDataURL(file);},
+  supprimerPhoto(k,sk){const d=this.getEnvData();if(d[k]?.[sk]){d[k][sk].photo=null;STATE._dirty=true;this.afficherSections();}}
+};
+</script>
 </body></html>

@@ -134,3 +134,32 @@ input:focus, select:focus, textarea:focus {
 }
 input::placeholder, textarea::placeholder { color: var(--gray-400); }
 select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236c757d' fill='none' stroke-width='1.5'%2F%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+
+/* CECB sections */
+.cecb-section{border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;overflow:hidden}
+.cecb-section-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#f8fafc;cursor:pointer;font-weight:600;user-select:none}
+.cecb-section-header:hover{background:#f0f4f8}
+.cecb-section-chevron{transition:transform .2s}
+.cecb-section.collapsed .cecb-section-chevron{transform:rotate(-90deg)}
+.cecb-section.collapsed .cecb-section-body{display:none}
+.cecb-section-title{flex:1}
+.cecb-generalites{padding:10px 16px;background:#fffbf0;border-bottom:1px solid #e2e8f0;font-size:.85rem}
+.cecb-sousection{border-bottom:1px solid #e2e8f0}
+.cecb-sousection:last-child{border-bottom:none}
+.cecb-sousection-header{padding:8px 16px;background:#fff}
+.cecb-sousection-header h4{margin:0;font-size:.92rem;color:var(--green);font-weight:600}
+.cecb-sousection-body{padding:10px 16px}
+.cecb-row-3col{display:grid;grid-template-columns:1fr 200px;gap:14px;margin-bottom:10px}
+@media(max-width:600px){.cecb-row-3col{grid-template-columns:1fr}}
+.cecb-photo-zone{border:2px dashed #cbd5e0;border-radius:8px;min-height:150px;position:relative;overflow:hidden;cursor:pointer;background:#f8fafc;transition:border-color .2s;display:flex;align-items:center;justify-content:center}
+.cecb-photo-zone:hover,.cecb-photo-zone.drag-over{border-color:var(--green)}
+.cecb-photo-img{width:100%;display:block;border-radius:6px}
+.cecb-tableau-wrapper{overflow-x:auto;margin-top:8px}
+.cecb-tableau{width:100%;border-collapse:collapse;font-size:.78rem}
+.cecb-tableau th{background:#f1f5f9;padding:5px 6px;text-align:left;font-weight:600;color:#475569;white-space:nowrap;border-bottom:2px solid #e2e8f0}
+.cecb-tableau td{padding:3px 4px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.cecb-tableau tr:hover td{background:#f8fafc}
+.cecb-tableau input,.cecb-tableau select{padding:2px 4px;border:1px solid #e2e8f0;border-radius:4px;font-size:.78rem;width:100%}
+.cecb-tableau input:focus,.cecb-tableau select:focus{outline:none;border-color:var(--green)}
+.btn-icon{background:none;border:none;cursor:pointer;padding:2px 4px;font-size:.85rem;border-radius:4px}
+.btn-icon:hover{background:#f1f5f9}

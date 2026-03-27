@@ -743,7 +743,9 @@ window.UI = UI;
   chargerPhoto(k,sk,file){const r=new FileReader();r.onload=e=>{const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][sk].photo=e.target.result;STATE._dirty=true;this.afficherSections();};r.readAsDataURL(file);},
   supprimerPhoto(k,sk){const d=this.getEnvData();if(d[k]?.[sk]){d[k][sk].photo=null;STATE._dirty=true;this.afficherSections();}}
 };
-window.TERRAIN=TERRAIN;</script>
+window.TERRAIN=TERRAIN;
+window.TERRAIN = TERRAIN;
+</script>
 <script>/**
  * bureau.js &#xE2;&#x80;&#x94; Mode bureau Phase 1 CECB
  */

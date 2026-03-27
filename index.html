@@ -621,6 +621,8 @@ const UI = {
   eetatBadge(etat){const e=CONFIG.etats.find(x=>x.value===etat)||CONFIG.etats[1];return `<span style="background:${e.color}20;color:${e.color};padding:2px 8px;border-radius:99px;font-size:0.75rem;font-weight:600">${e.label}</span>`;},
   confirm(msg){return window.confirm(msg);},
 };
+
+window.UI = UI;
 </script>
 <script>const TERRAIN = {
   SECTIONS: {
@@ -1498,5 +1500,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   UI.showSection('projet');
   UI.updateHeader();
   console.log('CECB App Frilow v'+CONFIG.version);
-});</script>
+});
+window.GEOADMIN = GEOADMIN;
+</script>
 </body></html>

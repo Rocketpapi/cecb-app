@@ -667,57 +667,57 @@ window.UI = UI;
 <script>const TERRAIN = {
   SECTIONS: {
     toits: { label:'Toits et plafonds', icon:''[icon]'',
-      generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit inclin'é'','Toit en terrasse','Toit mixte']}],
+      generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit inclin'\u00E9'','Toit en terrasse','Toit mixte']}],
       sousections:[
-        {key:'contre_ext',label:'Toits / plafonds contre ext'é'rieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
-         types:['Toit plat / terrasse','Toit inclin'é' N','Toit inclin'é' S','Toit inclin'é' E','Toit inclin'é' O','Plafond contre ext'é'rieur'],
+        {key:'contre_ext',label:'Toits / plafonds contre ext'\u00E9'rieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
+         types:['Toit plat / terrasse','Toit inclin'\u00E9' N','Toit inclin'\u00E9' S','Toit inclin'\u00E9' E','Toit inclin'\u00E9' O','Plafond contre ext'\u00E9'rieur'],
          orientations:['Horiz','N','S','E','O'],colonnes:['surface','u_value','nbre','annee','orientation']},
         {key:'autres',label:'Autres plafonds',denom_defaut:'M1_PLAFOND_EXIST_C.N.C.',abrev_prefix:'Pl',
-         types:['Plafond contre non chauff'é'','Plafond sur terre-plein','Autre'],
+         types:['Plafond contre non chauff'\u00E9'','Plafond sur terre-plein','Autre'],
          orientations:['Horiz'],colonnes:['surface','u_value','b','nbre','annee']}
       ]},
     murs: { label:'Murs', icon:'\u00F0\u009F\u00A7\u00B1',
       generalites:[
-        {key:'structure_facades',label:'Structure des fa'ç'ades',type:'select',options:['fa'ç'ades lisses et pleines','fa'ç'ades avec d'é'crochements','fa'ç'ades complexes']},
-        {key:'soustraction_auto',label:'Soustraire automatiquement surface de fen'ê'tres',type:'checkbox'}
+        {key:'structure_facades',label:'Structure des fa'\u00E7'ades',type:'select',options:['fa'\u00E7'ades lisses et pleines','fa'\u00E7'ades avec d'\u00E9'crochements','fa'\u00E7'ades complexes']},
+        {key:'soustraction_auto',label:'Soustraire automatiquement surface de fen'\u00EA'tres',type:'checkbox'}
       ],
       sousections:[
-        {key:'contre_ext',label:'Murs contre ext'é'rieur',denom_defaut:'M2_FACADE_EXIST_C.E.',abrev_prefix:'Mu',
-         types:['Mur ext'é'rieur'],orientations:['N','S','E','O','NE','NO','SE','SO'],
+        {key:'contre_ext',label:'Murs contre ext'\u00E9'rieur',denom_defaut:'M2_FACADE_EXIST_C.E.',abrev_prefix:'Mu',
+         types:['Mur ext'\u00E9'rieur'],orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','b','nbre','annee','orientation']},
         {key:'autres',label:'Autres murs',denom_defaut:'M2_MUR_EXIST_C.N.C.',abrev_prefix:'Mu',
-         types:['Mur contre non chauff'é'','Mur contre sol','Autre'],
+         types:['Mur contre non chauff'\u00E9'','Mur contre sol','Autre'],
          orientations:['N','S','E','O'],colonnes:['surface','u_value','b','nbre','annee','orientation']}
       ]},
-    fenetres: { label:'Fen'ê'tres et portes', icon:'\u00F0\u009F\u00AA\u009F',
-      generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fen'ê'tres',type:'checkbox'}],
+    fenetres: { label:'Fen'\u00EA'tres et portes', icon:'\u00F0\u009F\u00AA\u009F',
+      generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fen'\u00EA'tres',type:'checkbox'}],
       sousections:[
-        {key:'fenetres',label:'Fen'ê'tres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
-         types:['Fen'ê'tre','Porte-fen'ê'tre','Porte ext'é'rieure','Fen'ê'tre de toit','Porte de garage'],
+        {key:'fenetres',label:'Fen'\u00EA'tres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
+         types:['Fen'\u00EA'tre','Porte-fen'\u00EA'tre','Porte ext'\u00E9'rieure','Fen'\u00EA'tre de toit','Porte de garage'],
          orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','g','fs','b','nbre','annee','orientation','dans']}
       ]},
     sols: { label:'Sols', icon:'\u00E2\u00AC\u009B',
-      generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauff'é'e',type:'select',options:['','0%','25%','50%','75%','100%']}],
+      generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauff'\u00E9'e',type:'select',options:['','0%','25%','50%','75%','100%']}],
       sousections:[
-        {key:'contre_ext',label:'Sols contre ext'é'rieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
-         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur ext'é'rieur'],
+        {key:'contre_ext',label:'Sols contre ext'\u00E9'rieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
+         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur ext'\u00E9'rieur'],
          colonnes:['surface','u_value','b','nbre','annee']},
         {key:'autres',label:'Autres sols',denom_defaut:'M3_SOL_EXIST_C.N.C.',abrev_prefix:'So',
-         types:['Sol contre non chauff'é'','Sol sur cave non chauff'é'e','Autre'],
+         types:['Sol contre non chauff'\u00E9'','Sol sur cave non chauff'\u00E9'e','Autre'],
          colonnes:['surface','u_value','b','nbre','annee']}
       ]},
     ponts: { label:'Ponts thermiques', icon:'\u00E2\u009A\u00A0\u00EF\u00B8\u008F',
       generalites:[],
       sousections:[
         {key:'ponts',label:'Ponts thermiques',denom_defaut:'PT_EXIST',abrev_prefix:'Pt',
-         types:['Lin'é'ique','Ponctuel'],colonnes:['longueur','psi','nbre','annee']}
+         types:['Lin'\u00E9'ique','Ponctuel'],colonnes:['longueur','psi','nbre','annee']}
       ]}
   },
   ETATS:[
-    {value:'',label:'-- S'é'lectionner --'},{value:'neuf',label:"('à' l') 'é'tat neuf"},
-    {value:'bon',label:'en bon 'é'tat'},{value:'use',label:'us'é''},
-    {value:'mauvais',label:'en mauvais 'é'tat'},{value:'tres_mauvais',label:'en tr'è's mauvais 'é'tat'}
+    {value:'',label:'-- S'\u00E9'lectionner --'},{value:'neuf',label:"('\u00E0' l') '\u00E9'tat neuf"},
+    {value:'bon',label:'en bon '\u00E9'tat'},{value:'use',label:'us'\u00E9''},
+    {value:'mauvais',label:'en mauvais '\u00E9'tat'},{value:'tres_mauvais',label:'en tr'\u00E8's mauvais '\u00E9'tat'}
   ],
   refresh(){ if(!STATE.dossier) STATE.nouveau(); this.afficherSections(); if(typeof UI!=='undefined')UI.syncFields(); },
   getEnvData(){ if(!STATE.dossier)STATE.nouveau(); if(!STATE.dossier.terrain_enveloppe)STATE.dossier.terrain_enveloppe={}; return STATE.dossier.terrain_enveloppe; },
@@ -741,7 +741,7 @@ window.UI = UI;
     const eO=this.ETATS.map(e=>'<option value="'+e.value+'"'+(data.etat===e.value?' selected':'')+'>'+e.label+'</option>').join('');
     const tH=this.renderTableau(k,ss,data.elements||[]);
     const pZ=this.renderPhoto(k,ss.key,data.photo);
-    return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>'É'tat g'é'n'é'ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>Priorit'é'</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - Planifi'é'</option></select></div><div class="form-group"><label>'É'tat <span style="color:#888;font-size:0.8em">'+((data.texte||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>Am'é'liorations possibles <span style="color:#888;font-size:0.8em">'+((data.ameliorations||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';
+    return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>'\u00C9'tat g'\u00E9'n'\u00E9'ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>Priorit'\u00E9'</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - Planifi'\u00E9'</option></select></div><div class="form-group"><label>'\u00C9'tat <span style="color:#888;font-size:0.8em">'+((data.texte||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>Am'\u00E9'liorations possibles <span style="color:#888;font-size:0.8em">'+((data.ameliorations||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';
   },
   renderPhoto(k,sk,photo){
     if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">\u00E2\u009C\u0095</button></div>';
@@ -751,8 +751,8 @@ window.UI = UI;
     const hS=ss.colonnes.includes('surface'),hU=ss.colonnes.includes('u_value'),hG=ss.colonnes.includes('g');
     const hFs=ss.colonnes.includes('fs'),hB=ss.colonnes.includes('b'),hD=ss.colonnes.includes('dans');
     const hO=ss.colonnes.includes('orientation'),hL=ss.colonnes.includes('longueur'),hPsi=ss.colonnes.includes('psi');
-    const head='<tr><th>Abr'é'v.</th><th>D'é'nomination</th><th>Type</th><th>Ann'é'e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [m'²']</th>':'')+(hU?'<th>Valeur U [W/m'²'K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>'Ψ' [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
-    const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donn'é'e pr'é'sente</td></tr>':elements.map((el,i)=>{
+    const head='<tr><th>Abr'\u00E9'v.</th><th>D'\u00E9'nomination</th><th>Type</th><th>Ann'\u00E9'e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [m'\u00B2']</th>':'')+(hU?'<th>Valeur U [W/m'\u00B2'K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>'\u03A8' [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
+    const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donn'\u00E9'e pr'\u00E9'sente</td></tr>':elements.map((el,i)=>{
       const yr=STATE.get('projet.annee_construction')||'';
       return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+( ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">\u00F0\u009F\u0093\u008B</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">\u00E2\u009C\u0095</button></td></tr>';
     }).join('');
@@ -1160,8 +1160,8 @@ const SUBVENTIONS = {
 window.SUBVENTIONS = SUBVENTIONS;
 </script>
 <script>/**
- * ia.js \u00E2\u0080\u0094 Int'é'gration API Claude (Anthropic)
- * G'é'n'é'ration des textes officiels CECB / CECB+
+ * ia.js \u00E2\u0080\u0094 Int'\u00E9'gration API Claude (Anthropic)
+ * G'\u00E9'n'\u00E9'ration des textes officiels CECB / CECB+
  */
 
 const IA = {
@@ -1172,21 +1172,21 @@ const IA = {
     const d = STATE.dossier;
     if (!d) { UI.toast('Aucun dossier ouvert', 'error'); return; }
 
-    UI.showIAModal('G'é'n'é'ration des textes CECB en cours...');
+    UI.showIAModal('G'\u00E9'n'\u00E9'ration des textes CECB en cours...');
 
     const elements = d.elements || [];
-    const prompt = `Tu es un expert CECB certifi'é' suisse. Gen'è're les textes officiels pour le portail CECB www.cecb-tool.ch.
+    const prompt = `Tu es un expert CECB certifi'\u00E9' suisse. Gen'\u00E8're les textes officiels pour le portail CECB www.cecb-tool.ch.
 
-DONN'É'ES DU B'Â'TIMENT :
-Ann'é'e construction : ${d."projet"."annee_construction"}
+DONN'\u00C9'ES DU B'\u00C2'TIMENT :
+Ann'\u00E9'e construction : ${d."projet"."annee_construction"}
 Chauffage : ${d.technique.type_chauffage} | ${d.technique.agent_energetique}
 Ventilation : ${d.technique.type_ventilation}
 Composition : ${elements.map(el => el.abrev + ' (' + el.composition + ') ' + 'U=' + (el.u_mesure||'\u00EF\u00BF\u00BD')).join(', ')}
 
-Gen'è're un objet JSON avec ces cl'é's exactes, textes style officiel CECB (150-300 car.) :
+Gen'\u00E8're un objet JSON avec ces cl'\u00E9's exactes, textes style officiel CECB (150-300 car.) :
 {"toits":"...","murs":"...","fenetres":"...","sols":"...","ponts_thermiques":"...","chauffage":"...","ecs":"...","ventilation":"...","appareils":"..."}
 
-R'é'pons uniquement avec le JSON, sans texte avant ou apr'è's.`;
+R'\u00E9'pons uniquement avec le JSON, sans texte avant ou apr'\u00E8's.`;
 
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1200,7 +1200,7 @@ R'é'pons uniquement avec le JSON, sans texte avant ou apr'è's.`;
       const textes = JSON.parse(clean);
       STATE.dossier.textes_cecb = textes;
       BUREAU.afficherTextes();
-      UI.toast('Textes CECB g'é'n'é'r'é's \u00E2\u009C\u0093', 'success');
+      UI.toast('Textes CECB g'\u00E9'n'\u00E9'r'\u00E9's \u00E2\u009C\u0093', 'success');
     } catch(e) {
       console.error('IA error:', e);
       UI.toast('Erreur API Claude: ' + e.message, 'error');
@@ -1214,19 +1214,19 @@ R'é'pons uniquement avec le JSON, sans texte avant ou apr'è's.`;
     const variante = STATE.getVariante(lettre);
     if (!variante) return;
 
-    UI.showIAModal(`G'é'n'é'ration textes Variante ${lettre}...`);
+    UI.showIAModal(`G'\u00E9'n'\u00E9'ration textes Variante ${lettre}...`);
 
     const mesures = STATE.getMesuresParVariante(lettre);
     const d = STATE.dossier;
-    const prompt = `Tu es un expert CECB+ certifii'é' suisse (Daniel Gachoud, Frilow S'à'rl).
-G'é'n'è're les 15 textes officiels pour le portail cecb-tool.ch, style officiel CECB (MAX 4000 car. par texte).
+    const prompt = `Tu es un expert CECB+ certifii'\u00E9' suisse (Daniel Gachoud, Frilow S'\u00E0'rl).
+G'\u00E9'n'\u00E8're les 15 textes officiels pour le portail cecb-tool.ch, style officiel CECB (MAX 4000 car. par texte).
 
 VARIANTE ${lettre} : ${variante.denomination}
 MESUREQ : ${mesures.map(m => m.abrev + ' ' + m.denomination + ' U:' + (m.u_cible||'')).join(', ')}
 CHAUFFAGE ACTUEL : ${d.technique.type_chauffage}
-ANN'É'E CONSTRUCTION : ${d.projet.annee_construction}
+ANN'\u00C9'E CONSTRUCTION : ${d.projet.annee_construction}
 
-R'é'pons JSON uniquement :
+R'\u00E9'pons JSON uniquement :
 {"enveloppe_general":"...","toits":"...","autres_plafonds":"...","fenetres":"...","murs_ext":"...","autres_murs":"...","sols_ext":"...","autres_sols":"...","ponts_thermiques":"...","technique_general":"...","chauffage":"...","distribution_ecs":"...","electricite":"...","ventilation":"..."}`;
 
     try {
@@ -1241,7 +1241,7 @@ R'é'pons JSON uniquement :
       const textes = JSON.parse(clean);
       STATE.updateVariante(lettre, { textes });
       VARIANTES.rafraichirVariante(lettre);
-      UI.toast(`Textes Variante ${lettre} g'é'n'é'r'é's \u00E2\u009C\u0093 \u00EF\u00BF\u00BD'success');
+      UI.toast(`Textes Variante ${lettre} g'\u00E9'n'\u00E9'r'\u00E9's \u00E2\u009C\u0093 \u00EF\u00BF\u00BD'success');
     } catch(e) {
       console.error('IA error:', e);
       UI.toast('Erreur API Claude: ' + e.message, 'error');
@@ -1257,7 +1257,7 @@ R'é'pons JSON uniquement :
       await this.genererTextesVariante(v.id);
       await new Promise(r => setTimeout(r, 1000));
     }
-    UI.toast('Toutes les variantes g'é'n'é'r'é'es \u00E2\u009C\u0093 \u00EF\u00BF\u00BD'success');
+    UI.toast('Toutes les variantes g'\u00E9'n'\u00E9'r'\u00E9'es \u00E2\u009C\u0093 \u00EF\u00BF\u00BD'success');
   },
 
   async genererConseil() {
@@ -1265,18 +1265,18 @@ R'é'pons JSON uniquement :
     const d = STATE.dossier;
     if (!d) return;
 
-    UI.showIAModal('G'é'n'é'ration du conseil IA...');
+    UI.showIAModal('G'\u00E9'n'\u00E9'ration du conseil IA...');
 
     const sub = d.subventions?.par_variante || {};
     const summary = Object.entries(sub).map(([lettre, r]) =>
-      `Variante ${lettre} : subventions estim'é'es ${r.total_retenu CHF (${r.recommande})`
+      `Variante ${lettre} : subventions estim'\u00E9'es ${r.total_retenu CHF (${r.recommande})`
     ).join('\n');
 
     const prompt = `POUR LE PROPRI%TTAIE :
     SRE = ${d.projet.sre} m2, Affectation = ${d.projet.affectation}
     Chauffage actuel : ${d.technique.type_chauffage} - ${d.technique.agent_energetique}
     Subventions :\n${summary}
-    En quelques phrases, quelle variante recommandes-tu et pourquoi ? Style expert ind'é'pendant, Familiari, langue fran'ç'aise.`;
+    En quelques phrases, quelle variante recommandes-tu et pourquoi ? Style expert ind'\u00E9'pendant, Familiari, langue fran'\u00E7'aise.`;
 
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1289,7 +1289,7 @@ R'é'pons JSON uniquement :
       STATE.dossier.conseil_ia = { texte, genere_le: new Date().toISOString() };
       const container = document.getElementById('ia-conseil-resultat');
       if (container) container.innerText = texte;
-      UI.toast('Conseil IA g'é'n'é'r'é' \u00E2\u009C\u0093', 'success');
+      UI.toast('Conseil IA g'\u00E9'n'\u00E9'r'\u00E9' \u00E2\u009C\u0093', 'success');
     } catch(e) {
       UI.toast('Erreur API: ' + e.message, 'error');
     } finally {
@@ -1298,11 +1298,11 @@ R'é'pons JSON uniquement :
   },
 
   showCleAPIModal() {
-    const cle = window.prompt('Entrez la cl'é' API Anthropic :');
+    const cle = window.prompt('Entrez la cl'\u00E9' API Anthropic :');
     if (cle) {
       this.apiKey = cle;
       CONFIG.anthropic_key = cle;
-      UI.toast('Cl'é' API sauvegard'é'e \u00E2\u009C\u0093', 'success');
+      UI.toast('Cl'\u00E9' API sauvegard'\u00E9'e \u00E2\u009C\u0093', 'success');
     }
   },
 };

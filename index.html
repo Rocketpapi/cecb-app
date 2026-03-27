@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>CECB App Ã¢ÂÂ Frilow</title>
-  <link rel="stylesheet" href="css/app.css">
+  
 </head>
 <body>
 
@@ -215,11 +215,208 @@
 <div id="modal-element" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content"><div class="modal-header"><h3 id="modal-element-title">ÃÂlÃÂ©ment</h3><button class="modal-close">Ã¢ÂÂ</button></div><div class="modal-body" id="modal-element-body"></div><div class="modal-footer"><button class="btn-ghost" id="modal-cancel">Annuler</button><button class="btn-primary" id="modal-save">Enregistrer</button></div></div></div>
 <div id="modal-ia" class="modal" style="display:none"><div class="modal-overlay"></div><div class="modal-content modal-small"><div class="modal-body text-center"><div class="spinner"></div><p id="modal-ia-text">GÃÂ©nÃÂ©ration en cours...</p></div></div></div>
 <div id="toast-container"></div>
-<script>
-/* CONFIG inline - garantit le chargement meme si config.js echoue */
-window.CONFIG = window.CONFIG || {
+
+
+
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   CECB App — Frilow
+   CSS Mobile-First
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Variables ── */
+:root {
+  --green: #2d7a3a;
+  --green-light: #e8f5ea;
+  --green-dark: #1d5225;
+  --orange: #e07b2a;
+  --orange-light: #fef3e8;
+  --blue: #1a5fa8;
+  --blue-light: #e8f0fb;
+  --red: #c0392b;
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --header-h: 56px;
+  --nav-h: 48px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font); color: var(--gray-800); background: var(--gray-50); min-height: 100vh; }
+input, select, textarea, button { font-family: inherit; font-size: inherit; }
+textarea { resize: vertical; }
+
+/* ── Header ── */
+#app-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--header-h);
+  background: var(--green);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px;
+  box-shadow: var(--shadow-md);
+}
+.header-left { display: flex; align-items: center; gap: 10px; }
+.header-right { display: flex; align-items: center; gap: 8px; }
+#header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+#header-projet { color: rgba(255,255,255,0.8); font-size: 0.8rem; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Nav ── */
+#main-nav {
+  position: fixed; top: var(--header-h); left: 0; right: 0; z-index: 99;
+  height: var(--nav-h);
+  background: var(--white);
+  border-bottom: 2px solid var(--gray-200);
+  display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+#main-nav::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex-shrink: 0;
+  padding: 0 14px;
+  height: 100%;
+  border: none; background: none;
+  color: var(--gray-600); font-size: 0.82rem; font-weight: 500;
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.nav-tab:hover { color: var(--green); background: var(--green-light); }
+.nav-tab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 700; }
+.nav-tab.phase2 { color: var(--orange); }
+.nav-tab.phase2.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+/* ── Main ── */
+#app-main {
+  margin-top: calc(var(--header-h) + var(--nav-h));
+  padding: 16px;
+  max-width: 900px;
+  margin-left: auto; margin-right: auto;
+  padding-bottom: 40px;
+}
+
+/* ── Sections ── */
+.section { display: none; }
+.section.active { display: block; }
+.section-header { margin-bottom: 16px; }
+.section-header h2 { font-size: 1.25rem; color: var(--gray-900); }
+.section-subtitle { color: var(--gray-600); font-size: 0.875rem; margin-top: 4px; }
+
+/* ── Sub-nav ── */
+.sub-nav {
+  display: flex; gap: 4px; margin-bottom: 16px;
+  background: var(--gray-100); border-radius: var(--radius);
+  padding: 4px; overflow-x: auto;
+}
+.sub-tab {
+  flex-shrink: 0; padding: 8px 16px; border: none;
+  background: none; border-radius: 6px;
+  color: var(--gray-600); font-size: 0.875rem; cursor: pointer;
+  transition: all 0.2s;
+}
+.sub-tab.active { background: var(--white); color: var(--green); font-weight: 600; box-shadow: var(--shadow-sm); }
+.subsection { display: none; }
+.subsection.active { display: block; }
+
+/* ── Forms ── */
+.form-grid { display: flex; flex-direction: column; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 0.85rem; font-weight: 600; color: var(--gray-700); }
+.form-group-split { flex-direction: row !important; gap: 12px; }
+.form-group-split > div { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.form-group-split > div label { font-size: 0.85rem; font-weight: 600; color: var(--gray-700); }
+.form-section-title { font-size: 0.95rem; font-weight: 700; color: var(--green); padding: 8px 0 4px; border-bottom: 1px solid var(--gray-200); }
+
+input[type="text"], input[type="number"], input[type="date"],
+input[type="email"], input[type="tel"], select, textarea {
+  width: 100%; padding: 10px 12px;
+  border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm);
+  background: var(--white); color: var(--gray-800);
+  font-size: 0.95rem; transition: border-color 0.15s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(45,122,58,0.12);
+}
+input::placeholder, textarea::placeholder { color: var(--gray-400); }
+select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236c757d' fill='none' stroke-width='1.5'%2F%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+
+/* CECB sections */
+.cecb-section{border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;overflow:hidden}
+.cecb-section-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#f8fafc;cursor:pointer;font-weight:600;user-select:none}
+.cecb-section-header:hover{background:#f0f4f8}
+.cecb-section-chevron{transition:transform .2s}
+.cecb-section.collapsed .cecb-section-chevron{transform:rotate(-90deg)}
+.cecb-section.collapsed .cecb-section-body{display:none}
+.cecb-section-title{flex:1}
+.cecb-generalites{padding:10px 16px;background:#fffbf0;border-bottom:1px solid #e2e8f0;font-size:.85rem}
+.cecb-sousection{border-bottom:1px solid #e2e8f0}
+.cecb-sousection:last-child{border-bottom:none}
+.cecb-sousection-header{padding:8px 16px;background:#fff}
+.cecb-sousection-header h4{margin:0;font-size:.92rem;color:var(--green);font-weight:600}
+.cecb-sousection-body{padding:10px 16px}
+.cecb-row-3col{display:grid;grid-template-columns:1fr 200px;gap:14px;margin-bottom:10px}
+@media(max-width:600px){.cecb-row-3col{grid-template-columns:1fr}}
+.cecb-photo-zone{border:2px dashed #cbd5e0;border-radius:8px;min-height:150px;position:relative;overflow:hidden;cursor:pointer;background:#f8fafc;transition:border-color .2s;display:flex;align-items:center;justify-content:center}
+.cecb-photo-zone:hover,.cecb-photo-zone.drag-over{border-color:var(--green)}
+.cecb-photo-img{width:100%;display:block;border-radius:6px}
+.cecb-tableau-wrapper{overflow-x:auto;margin-top:8px}
+.cecb-tableau{width:100%;border-collapse:collapse;font-size:.78rem}
+.cecb-tableau th{background:#f1f5f9;padding:5px 6px;text-align:left;font-weight:600;color:#475569;white-space:nowrap;border-bottom:2px solid #e2e8f0}
+.cecb-tableau td{padding:3px 4px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.cecb-tableau tr:hover td{background:#f8fafc}
+.cecb-tableau input,.cecb-tableau select{padding:2px 4px;border:1px solid #e2e8f0;border-radius:4px;font-size:.78rem;width:100%}
+.cecb-tableau input:focus,.cecb-tableau select:focus{outline:none;border-color:var(--green)}
+.btn-icon{background:none;border:none;cursor:pointer;padding:2px 4px;font-size:.85rem;border-radius:4px}
+.btn-icon:hover{background:#f1f5f9}
+
+/* === CECB sections === */
+.cecb-section{border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;overflow:hidden}
+.cecb-section-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#f8fafc;cursor:pointer;font-weight:600;user-select:none}
+.cecb-section-header:hover{background:#f0f4f8}
+.cecb-section-chevron{transition:transform .2s}
+.cecb-section.collapsed .cecb-section-chevron{transform:rotate(-90deg)}
+.cecb-section.collapsed .cecb-section-body{display:none}
+.cecb-section-title{flex:1}
+.cecb-generalites{padding:10px 16px;background:#fffbf0;border-bottom:1px solid #e2e8f0;font-size:.85rem}
+.cecb-sousection{border-bottom:1px solid #e2e8f0}
+.cecb-sousection:last-child{border-bottom:none}
+.cecb-sousection-header{padding:8px 16px}
+.cecb-sousection-header h4{margin:0;font-size:.92rem;color:var(--green);font-weight:600}
+.cecb-sousection-body{padding:10px 16px}
+.cecb-row-3col{display:grid;grid-template-columns:1fr 200px;gap:14px;margin-bottom:10px}
+@media(max-width:600px){.cecb-row-3col{grid-template-columns:1fr}}
+.cecb-photo-zone{border:2px dashed #cbd5e0;border-radius:8px;min-height:140px;position:relative;overflow:hidden;cursor:pointer;background:#f8fafc;display:flex;align-items:center;justify-content:center}
+.cecb-photo-zone:hover{border-color:var(--green)}
+.cecb-tableau-wrapper{overflow-x:auto;margin-top:8px}
+.cecb-tableau{width:100%;border-collapse:collapse;font-size:.78rem}
+.cecb-tableau th{background:#f1f5f9;padding:5px 6px;text-align:left;font-weight:600;white-space:nowrap;border-bottom:2px solid #e2e8f0}
+.cecb-tableau td{padding:3px 4px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.cecb-tableau input,.cecb-tableau select{padding:2px 4px;border:1px solid #e2e8f0;border-radius:4px;font-size:.78rem}
+.btn-icon{background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:4px;font-size:.85rem}
+.btn-icon:hover{background:#f1f5f9}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>const CONFIG = {
   version: "1.0.0",
-  apiKey: "VOTRE_CLE_API_ANTHROPIC",
+  apiKey: "VOTRE_CLE_API",
   sia380: {
     limites_renovation: { opaquesExt: 0.25, fenetresExt: 1.00 },
     cibles: { opaquesReno: 0.10, fenetresReno: 0.80 }
@@ -234,22 +431,22 @@ window.CONFIG = window.CONFIG || {
     apres_2010:   { toiture: 0.17, murs: 0.22, fenetres: 1.1, sol: 0.28 }
   },
   types_elements: [
-    { id: "toiture",   label: "Toits et plafonds",     icon: "\uD83C\uDFA0", categorie: "enveloppe" },
-    { id: "murs",      label: "Murs exterieurs",        icon: "\uD83E\uDDF1", categorie: "enveloppe" },
-    { id: "fenetres",  label: "Fenetres et portes",     icon: "\uD83E\uDEAA", categorie: "enveloppe" },
-    { id: "sol",       label: "Sols / planchers",       icon: "\u2B1C",        categorie: "enveloppe" },
-    { id: "ponts",     label: "Ponts thermiques",       icon: "\u26A0",        categorie: "enveloppe" },
-    { id: "chauffage", label: "Chauffage",              icon: "\uD83D\uDD25", categorie: "technique" },
-    { id: "ecs",       label: "Eau chaude sanitaire",   icon: "\uD83D\uDCA7", categorie: "technique" },
-    { id: "ventil",    label: "Ventilation",            icon: "\uD83D\uDCA8", categorie: "technique" },
-    { id: "elec",      label: "Electricite / PV",       icon: "\u26A1",        categorie: "technique" }
+    { id: "toiture",   label: "Toits et plafonds",      icon: "🏠", categorie: "enveloppe" },
+    { id: "murs",      label: "Murs exterieurs",         icon: "🧱", categorie: "enveloppe" },
+    { id: "fenetres",  label: "Fenetres et portes",      icon: "🪟", categorie: "enveloppe" },
+    { id: "sol",       label: "Sols / planchers",        icon: "⬛", categorie: "enveloppe" },
+    { id: "ponts",     label: "Ponts thermiques",        icon: "⚠️", categorie: "enveloppe" },
+    { id: "chauffage", label: "Chauffage",               icon: "🔥", categorie: "technique" },
+    { id: "ecs",       label: "Eau chaude sanitaire",    icon: "💧", categorie: "technique" },
+    { id: "ventil",    label: "Ventilation",             icon: "💨", categorie: "technique" },
+    { id: "elec",      label: "Electricite / PV",        icon: "⚡", categorie: "technique" }
   ],
   etats: [
-    { value: "neuf",    label: "Neuf",       color: "#22c55e" },
-    { value: "bon",     label: "Bon etat",   color: "#84cc16" },
-    { value: "use",     label: "Use",        color: "#f59e0b" },
-    { value: "abime",   label: "Abime",      color: "#f97316" },
-    { value: "fin_vie", label: "Fin de vie", color: "#ef4444" }
+    { value: "neuf",    label: "Neuf",           color: "#22c55e" },
+    { value: "bon",     label: "Bon etat",       color: "#84cc16" },
+    { value: "use",     label: "Use",            color: "#f59e0b" },
+    { value: "abime",   label: "Abime",          color: "#f97316" },
+    { value: "fin_vie", label: "Fin de vie",     color: "#ef4444" }
   ],
   subventions_FR: {
     canton: "FR", annee: 2025,
@@ -262,26 +459,172 @@ window.CONFIG = window.CONFIG || {
     },
     variante2: {
       M10: {
-        hab_ind:  { 2:30, 3:45, 4:60, 5:80,  6:100, 7:120, 8:140, 9:160, 10:180 },
-        hab_coll: { 2:30, 3:40, 4:55, 5:70,  6:90,  7:110, 8:130, 9:150, 10:170 },
-        autre:    { 2:20, 3:30, 4:40, 5:55,  6:70,  7:85,  8:100, 9:115, 10:130 }
+        hab_ind:  { 2:30, 3:45, 4:60, 5:80, 6:100, 7:120, 8:140, 9:160, 10:180 },
+        hab_coll: { 2:30, 3:40, 4:55, 5:70, 6:90,  7:110, 8:130, 9:150, 10:170 },
+        autre:    { 2:20, 3:30, 4:40, 5:55, 6:70,  7:85,  8:100, 9:115, 10:130 }
       },
       bonus_ip14: 30
     }
   },
   versions: { api: "claude-sonnet-4-20250514", max_tokens: 4096, temperature: 0.2 }
 };
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/state.js"></script>
-<script src="js/ui.js"></script>
+window.CONFIG = CONFIG;</script>
+<script>const STATE = {
+  dossier: null,
+  _dirty: false,
+  _listeners: [],
 
-<script>
-/* TERRAIN inline - bypass cache GitHub Pages */
-window.TERRAIN={
-  SECTIONS:{
-    toits:{label:'Toits et plafonds',icon:'ð ',
+  nouveau() {
+    this.dossier = {
+      version: CONFIG.version,
+      cree_le: new Date().toISOString(),
+      modifie_le: new Date().toISOString(),
+      projet: {
+        nom:'', mandant:'', adresse:'', npa:'', localite:'',
+        canton:'FR', affectation:'hab_coll',
+        annee_construction:'', nb_etages:'', sre:'', nb_apparts:'',
+        type_mandat:'cecb_plus', notes:'',
+        egid:'', egrid:''
+      },
+      terrain: {
+        date_visite:'', experts:'Daniel Gachoud', observations:'',
+        docs:{plans:false,facades:false,coupes:false,conso_elec:false,conso_ch:false,offre_pac:false}
+      },
+      elements: [],
+      terrain_enveloppe: {},
+      technique: {
+        type_chauffage:'', marque_chauffage:'', annee_chauffage:'',
+        puissance_kw:'', agent_energetique:'gaz',
+        distribution_chauffage:'plancher', retour_ecs:'',
+        type_ecs:'ballon_lie', volume_ecs_l:'', annee_ecs:'',
+        type_ventilation:'naturelle', pv_existant:'non', pv_kwp:'',
+        photo_plaque:null
+      },
+      conso: { gaz_kwh:'', mazout_l:'', elec_kwh:'', bois_kwh:'', cad_kwh:'' },
+      textes_cecb: {},
+      mesures: [],
+      variantes: [],
+    };
+    this._dirty = false;
+    this._notify('all');
+  },
+
+  get(path) {
+    if (!this.dossier) return null;
+    return path.split('.').reduce((o,k) => o && o[k] !== undefined ? o[k] : null, this.dossier);
+  },
+
+  set(path, value) {
+    if (!this.dossier) return;
+    const keys = path.split('.');
+    let obj = this.dossier;
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (obj[keys[i]] === undefined) obj[keys[i]] = {};
+      obj = obj[keys[i]];
+    }
+    obj[keys[keys.length-1]] = value;
+    this.dossier.modifie_le = new Date().toISOString();
+    this._dirty = true;
+    this._notify(path);
+  },
+
+  onChange(fn) { this._listeners.push(fn); },
+
+  _notify(path) { this._listeners.forEach(fn => { try { fn(path); } catch(e) {} }); },
+
+  isDirty() { return this._dirty; },
+
+  sauvegarder() {
+    if (!this.dossier) return;
+    const json = JSON.stringify(this.dossier, null, 2);
+    const blob = new Blob([json], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const nom = (this.get('projet.nom') || 'dossier-cecb').replace(/[^a-zA-Z0-9-_]/g,'-');
+    a.href = url; a.download = nom + '.cecb'; a.click();
+    URL.revokeObjectURL(url);
+    this._dirty = false;
+  },
+
+  async charger(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          this.dossier = JSON.parse(e.target.result);
+          this._dirty = false;
+          resolve(this.dossier);
+        } catch(err) { reject(err); }
+      };
+      reader.readAsText(file);
+    });
+  }
+};
+
+window.STATE = STATE;</script>
+<script>/**
+ * ui.js — Fonctions UI communes
+ */
+
+const UI = {
+  showSection(id) {
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('section-'+id)?.classList.add('active');
+    document.querySelector(`.nav-tab[data-section="${id}"]`)?.classList.add('active');
+    window.scrollTo(0,0);
+  },
+  toast(msg,type='info',d=3000) {
+    const c=document.getElementById('toast-container'); if(!c)return;
+    const t=document.createElement('div'); t.className=`toast ${type}`; t.textContent=msg; c.appendChild(t);
+    setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity 0.3s';setTimeout(()=>t.remove(),300);},d);
+  },
+  showIAModal(t='Génération...') { const m=document.getElementById('modal-ia'); const te=document.getElementById('modal-ia-text'); if(m)m.style.display='flex'; if(te)te.textContent=t; },
+  hideIAModal() { const m=document.getElementById('modal-ia'); if(m)m.style.display='none'; },
+  bindFields(container) {
+    const els=(container||document).querySelectorAll('[data-field]');
+    els.forEach(el=>{
+      const field=el.getAttribute('data-field'); const val=STATE.get(field);
+      if(val!==undefined&&val!==null){if(el.type==='checkbox')el.checked=!!val; else el.value=val||'';}
+      const ev=(el.tagName==='SELECT'?'change':(el.type==='checkbox'?'change':'input'));
+      el.addEventListener(ev,()=>STATE.set(field,el.type==='checkbox'?el.checked:el.value));
+    });
+  },
+  syncFields(container) {
+    const els=(container||document).querySelectorAll('[data-field]');
+    els.forEach(el=>{const val=STATE.get(el.getAttribute('data-field')); if(val!==undefined&&val!==null){if(el.type==='checkbox')el.checked=!!val; else el.value=val||'';}});
+  },
+  updateHeader() {
+    const nom=STATE.get('projet.nom')||'Nouveau dossier';
+    const loc=STATE.get('projet.localite');
+    const p=document.getElementById('header-projet');
+    if(p)p.textContent=loc?`${nom} — ${loc}`:nom;
+  },
+  chf(m){if(!m&&m!==0)return'—';return new Intl.NumberFormat('fr-CH',{style:'currency',currency:'CHF',maximumFractionDigits:0}).format(m);},
+  num(v,d=2){if(!v&&v!==0)return'—';return parseFloat(v).toFixed(d);},
+  setupPhotoZone(zone) {
+    const input=document.createElement('input');
+    input.type='file';input.accept='image/*';input.multiple=true;input.capture='environment';input.className='photo-input';zone.appendChild(input);
+    zone.addEventListener('click',()=>input.click());
+    input.addEventListener('change',(e)=>{
+      Array.from(e.target.files).forEach(file=>{
+        const reader=new FileReader();
+        reader.onload=(ev)=>{
+          const img=document.createElement('img');img.src=ev.target.result;img.className='photo-thumb';
+          zone.querySelector('.photo-placeholder')?.remove();zone.insertBefore(img,input);
+          const f=zone.getAttribute('data-field');
+          if(f){const cur=STATE.get(f)||[];const ph=Array.isArray(cur)?cur:[];pv.push(img.src);STATE.set(f,ph);}
+        };reader.readAsDataURL(file);
+      });
+    });
+  },
+  eetatBadge(etat){const e=CONFIG.etats.find(x=>x.value===etat)||CONFIG.etats[1];return `<span style="background:${e.color}20;color:${e.color};padding:2px 8px;border-radius:99px;font-size:0.75rem;font-weight:600">${e.label}</span>`;},
+  confirm(msg){return window.confirm(msg);},
+};
+</script>
+<script>const TERRAIN = {
+  SECTIONS: {
+    toits: { label:'Toits et plafonds', icon:'ð ',
       generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit inclinÃ©','Toit en terrasse','Toit mixte']}],
       sousections:[
         {key:'contre_ext',label:'Toits / plafonds contre extÃ©rieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
@@ -291,7 +634,7 @@ window.TERRAIN={
          types:['Plafond contre non chauffÃ©','Plafond sur terre-plein','Autre'],
          orientations:['Horiz'],colonnes:['surface','u_value','b','nbre','annee']}
       ]},
-    murs:{label:'Murs',icon:'ð§±',
+    murs: { label:'Murs', icon:'ð§±',
       generalites:[
         {key:'structure_facades',label:'Structure des faÃ§ades',type:'select',options:['faÃ§ades lisses et pleines','faÃ§ades avec dÃ©crochements','faÃ§ades complexes']},
         {key:'soustraction_auto',label:'Soustraire automatiquement surface de fenÃªtres',type:'checkbox'}
@@ -304,7 +647,7 @@ window.TERRAIN={
          types:['Mur contre non chauffÃ©','Mur contre sol','Autre'],
          orientations:['N','S','E','O'],colonnes:['surface','u_value','b','nbre','annee','orientation']}
       ]},
-    fenetres:{label:'FenÃªtres et portes',icon:'ðªª',
+    fenetres: { label:'FenÃªtres et portes', icon:'ðª',
       generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fenÃªtres',type:'checkbox'}],
       sousections:[
         {key:'fenetres',label:'FenÃªtres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
@@ -312,7 +655,7 @@ window.TERRAIN={
          orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','g','fs','b','nbre','annee','orientation','dans']}
       ]},
-    sols:{label:'Sols',icon:'â¬',
+    sols: { label:'Sols', icon:'â¬',
       generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauffÃ©e',type:'select',options:['','0%','25%','50%','75%','100%']}],
       sousections:[
         {key:'contre_ext',label:'Sols contre extÃ©rieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
@@ -322,7 +665,7 @@ window.TERRAIN={
          types:['Sol contre non chauffÃ©','Sol sur cave non chauffÃ©e','Autre'],
          colonnes:['surface','u_value','b','nbre','annee']}
       ]},
-    ponts:{label:'Ponts thermiques',icon:'â ï¸',
+    ponts: { label:'Ponts thermiques', icon:'â ï¸',
       generalites:[],
       sousections:[
         {key:'ponts',label:'Ponts thermiques',denom_defaut:'PT_EXIST',abrev_prefix:'Pt',
@@ -334,34 +677,826 @@ window.TERRAIN={
     {value:'bon',label:'en bon Ã©tat'},{value:'use',label:'usÃ©'},
     {value:'mauvais',label:'en mauvais Ã©tat'},{value:'tres_mauvais',label:'en trÃ¨s mauvais Ã©tat'}
   ],
-  refresh(){if(!STATE.dossier)STATE.nouveau();this.afficherSections();if(typeof UI!=='undefined')UI.syncFields();},
-  getEnvData(){if(!STATE.dossier)STATE.nouveau();if(!STATE.dossier.terrain_enveloppe)STATE.dossier.terrain_enveloppe={};return STATE.dossier.terrain_enveloppe;},
-  afficherSections(){const c=document.getElementById('terrain-enveloppe-container');if(!c)return;if(!STATE.dossier)STATE.nouveau();const data=STATE.dossier.terrain_enveloppe||{};c.innerHTML=Object.entries(this.SECTIONS).map(([k,s])=>this.renderSection(k,s,data[k]||{})).join('');this.attachListeners(c);},
-  renderSection(k,s,data){const gH=s.generalites.map(g=>this.renderGen(k,g,data)).join('');const ssH=s.sousections.map(ss=>this.renderSS(k,ss,data[ss.key]||{etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]})).join('');return '<div class="cecb-section" id="terrain-section-'+k+'"><div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')"><span>'+s.icon+'</span> <span class="cecb-section-title">'+s.label+'</span><span class="cecb-section-chevron">â¼</span></div><div class="cecb-section-body">'+(gH?'<div class="cecb-generalites">'+gH+'</div>':'')+ssH+'</div></div>';},
-  renderGen(k,g,data){if(g.type==='select'){const o=g.options.map(v=>'<option value="'+v+'"'+(data[g.key]===v?' selected':'')+'>'+v+'</option>').join('');return '<div class="form-group"><label>'+g.label+'</label><select class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'">'+o+'</select></div>';}if(g.type==='checkbox'){return '<div class="form-group"><label><input type="checkbox" class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'"'+(data[g.key]?' checked':'')+'>'+g.label+'</label></div>';}return '';},
-  renderSS(k,ss,data){const eO=this.ETATS.map(e=>'<option value="'+e.value+'"'+(data.etat===e.value?' selected':'')+'>'+e.label+'</option>').join('');const tH=this.renderTableau(k,ss,data.elements||[]);const pZ=this.renderPhoto(k,ss.key,data.photo);return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>Ãtat gÃ©nÃ©ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>PrioritÃ©</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - PlanifiÃ©</option></select></div><div class="form-group"><label>Ãtat</label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>AmÃ©liorations</label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';},
-  renderPhoto(k,sk,photo){if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'" style="position:relative"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">â</button></div>';return '<div class="cecb-photo-zone cecb-photo-empty" data-section="'+k+'" data-ss="'+sk+'" style="min-height:150px;display:flex;align-items:center;justify-content:center;border:2px dashed #cbd5e0;border-radius:8px;cursor:pointer;background:#f8fafc"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">ð·</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto(''+k+'',''+sk+'')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="'+k+'" data-ss="'+sk+'"></div>';},
-  renderTableau(k,ss,elements){const hS=ss.colonnes.includes('surface'),hU=ss.colonnes.includes('u_value'),hG=ss.colonnes.includes('g'),hFs=ss.colonnes.includes('fs'),hB=ss.colonnes.includes('b'),hD=ss.colonnes.includes('dans'),hO=ss.colonnes.includes('orientation'),hL=ss.colonnes.includes('longueur'),hPsi=ss.colonnes.includes('psi');const head='<tr><th>AbrÃ©v.</th><th>DÃ©nomination</th><th>Type</th><th>AnnÃ©e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [mÂ²]</th>':'')+(hU?'<th>Valeur U [W/mÂ²K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>Î¨ [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donnÃ©e prÃ©sente</td></tr>':elements.map((el,i)=>{const yr=STATE.get?STATE.get('projet.annee_construction')||'':'';return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="font-size:.78rem">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+(ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">ð</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">â</button></td></tr>';}).join('');return '<div class="cecb-tableau-wrapper"><table class="cecb-tableau"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table><button class="btn-primary btn-sm cecb-add-el" data-section="'+k+'" data-ss="'+ss.key+'" style="margin-top:8px">+ Nouveau</button></div>';},
-  attachListeners(c){c.querySelectorAll('.terrain-gen-field').forEach(el=>el.addEventListener('change',()=>this.saveGenField(el)));c.querySelectorAll('.terrain-ss-field').forEach(el=>{const ev=el.tagName==='TEXTAREA'?'input':'change';el.addEventListener(ev,()=>this.saveSsField(el));});c.querySelectorAll('[data-idx]').forEach(el=>{const ev=el.tagName==='SELECT'?'change':'input';el.addEventListener(ev,()=>this.saveElement(el));});c.querySelectorAll('.cecb-add-el').forEach(btn=>btn.addEventListener('click',()=>this.ajouterElement(btn.dataset.section,btn.dataset.ss)));c.querySelectorAll('.el-copy').forEach(btn=>btn.addEventListener('click',()=>this.dupliquerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));c.querySelectorAll('.el-del').forEach(btn=>btn.addEventListener('click',()=>this.supprimerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));c.querySelectorAll('.cecb-photo-zone').forEach(z=>{z.addEventListener('click',e=>{if(e.target.classList.contains('cecb-photo-del'))this.supprimerPhoto(z.dataset.section,z.dataset.ss);else if(!e.target.classList.contains('img'))this.ouvrirPhoto(z.dataset.section,z.dataset.ss);});z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag-over');});z.addEventListener('dragleave',()=>z.classList.remove('drag-over'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag-over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))this.chargerPhoto(z.dataset.section,z.dataset.ss,f);});});c.querySelectorAll('.photo-input').forEach(inp=>inp.addEventListener('change',e=>{const f=e.target.files[0];if(f)this.chargerPhoto(inp.dataset.section,inp.dataset.ss,f);}));},
+  refresh(){ if(!STATE.dossier) STATE.nouveau(); this.afficherSections(); if(typeof UI!=='undefined')UI.syncFields(); },
+  getEnvData(){ if(!STATE.dossier)STATE.nouveau(); if(!STATE.dossier.terrain_enveloppe)STATE.dossier.terrain_enveloppe={}; return STATE.dossier.terrain_enveloppe; },
+  afficherSections(){
+    const c=document.getElementById('terrain-enveloppe-container'); if(!c)return;
+    const data=STATE.dossier?.terrain_enveloppe||{};
+    c.innerHTML=Object.entries(this.SECTIONS).map(([k,s])=>this.renderSection(k,s,data[k]||{})).join('');
+    this.attachListeners(c);
+  },
+  renderSection(k,s,data){
+    const gH=s.generalites.map(g=>this.renderGen(k,g,data)).join('');
+    const ssH=s.sousections.map(ss=>this.renderSS(k,ss,data[ss.key]||{etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]})).join('');
+    return '<div class="cecb-section" id="terrain-section-'+k+'"><div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')"><span>'+s.icon+'</span><span class="cecb-section-title">'+s.label+'</span><span class="cecb-section-chevron">â¼</span></div><div class="cecb-section-body">'+(gH?'<div class="cecb-generalites">'+gH+'</div>':'')+ssH+'</div></div>';
+  },
+  renderGen(k,g,data){
+    if(g.type==='select'){const o=g.options.map(v=>'<option value="'+v+'"'+(data[g.key]===v?' selected':'')+'>'+v+'</option>').join('');return '<div class="form-group"><label>'+g.label+'</label><select class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'">'+o+'</select></div>';}
+    if(g.type==='checkbox'){return '<div class="form-group"><label><input type="checkbox" class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'"'+(data[g.key]?' checked':'')+'>'+g.label+'</label></div>';}
+    return '';
+  },
+  renderSS(k,ss,data){
+    const eO=this.ETATS.map(e=>'<option value="'+e.value+'"'+(data.etat===e.value?' selected':'')+'>'+e.label+'</option>').join('');
+    const tH=this.renderTableau(k,ss,data.elements||[]);
+    const pZ=this.renderPhoto(k,ss.key,data.photo);
+    return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>Ãtat gÃ©nÃ©ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>PrioritÃ©</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - PlanifiÃ©</option></select></div><div class="form-group"><label>Ãtat <span style="color:#888;font-size:0.8em">'+((data.texte||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>AmÃ©liorations possibles <span style="color:#888;font-size:0.8em">'+((data.ameliorations||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';
+  },
+  renderPhoto(k,sk,photo){
+    if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">â</button></div>';
+    return '<div class="cecb-photo-zone cecb-photo-empty" data-section="'+k+'" data-ss="'+sk+'"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">ð·</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto(''+k+'',''+sk+'')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="'+k+'" data-ss="'+sk+'"></div>';
+  },
+  renderTableau(k,ss,elements){
+    const hS=ss.colonnes.includes('surface'),hU=ss.colonnes.includes('u_value'),hG=ss.colonnes.includes('g');
+    const hFs=ss.colonnes.includes('fs'),hB=ss.colonnes.includes('b'),hD=ss.colonnes.includes('dans');
+    const hO=ss.colonnes.includes('orientation'),hL=ss.colonnes.includes('longueur'),hPsi=ss.colonnes.includes('psi');
+    const head='<tr><th>AbrÃ©v.</th><th>DÃ©nomination</th><th>Type</th><th>AnnÃ©e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [mÂ²]</th>':'')+(hU?'<th>Valeur U [W/mÂ²K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>Î¨ [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
+    const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donnÃ©e prÃ©sente</td></tr>':elements.map((el,i)=>{
+      const yr=STATE.get('projet.annee_construction')||'';
+      return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+( ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">ð</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">â</button></td></tr>';
+    }).join('');
+    return '<div class="cecb-tableau-wrapper"><table class="cecb-tableau"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table><button class="btn-primary btn-sm cecb-add-el" data-section="'+k+'" data-ss="'+ss.key+'" style="margin-top:8px">+ Nouveau</button></div>';
+  },
+  attachListeners(c){
+    c.querySelectorAll('.terrain-gen-field').forEach(el=>el.addEventListener('change',()=>this.saveGenField(el)));
+    c.querySelectorAll('.terrain-ss-field').forEach(el=>{const ev=el.tagName==='TEXTAREA'?'input':'change';el.addEventListener(ev,()=>this.saveSsField(el));});
+    c.querySelectorAll('[data-idx]').forEach(el=>{const ev=el.tagName==='SELECT'?'change':'input';el.addEventListener(ev,()=>this.saveElement(el));});
+    c.querySelectorAll('.cecb-add-el').forEach(btn=>btn.addEventListener('click',()=>this.ajouterElement(btn.dataset.section,btn.dataset.ss)));
+    c.querySelectorAll('.el-copy').forEach(btn=>btn.addEventListener('click',()=>this.dupliquerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));
+    c.querySelectorAll('.el-del').forEach(btn=>btn.addEventListener('click',()=>this.supprimerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));
+    c.querySelectorAll('.cecb-photo-zone').forEach(z=>{
+      z.addEventListener('click',e=>{if(e.target.classList.contains('cecb-photo-del'))this.supprimerPhoto(z.dataset.section,z.dataset.ss);else if(!e.target.classList.contains('cecb-photo-img'))this.ouvrirPhoto(z.dataset.section,z.dataset.ss);});
+      z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag-over');});
+      z.addEventListener('dragleave',()=>z.classList.remove('drag-over'));
+      z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag-over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))this.chargerPhoto(z.dataset.section,z.dataset.ss,f);});
+    });
+    c.querySelectorAll('.photo-input').forEach(inp=>inp.addEventListener('change',e=>{const f=e.target.files[0];if(f)this.chargerPhoto(inp.dataset.section,inp.dataset.ss,f);}));
+  },
   saveGenField(el){const d=this.getEnvData();if(!d[el.dataset.section])d[el.dataset.section]={};d[el.dataset.section][el.dataset.key]=el.type==='checkbox'?el.checked:el.value;STATE._dirty=true;},
   saveSsField(el){const d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss;if(!d[k])d[k]={};if(!d[k][ss])d[k][ss]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][ss][el.dataset.key]=el.value;STATE._dirty=true;},
   saveElement(el){const d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss,i=parseInt(el.dataset.idx);if(!d[k]?.[ss]?.elements)return;const elem=d[k][ss].elements[i];if(!elem)return;const cls=[...el.classList].find(c=>c.startsWith('el-'));const fm={'el-abrev':'abrev','el-denom':'denom','el-type':'type','el-annee':'annee','el-orient':'orientation','el-surface':'surface','el-u':'u_value','el-g':'g','el-fs':'fs','el-b':'b','el-longueur':'longueur','el-psi':'psi','el-nbre':'nbre','el-dans':'dans'};if(fm[cls]){elem[fm[cls]]=el.type==='number'?parseFloat(el.value)||'':el.value;STATE._dirty=true;}},
-  ajouterElement(k,sk){const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};const els=d[k][sk].elements;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const num=els.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1;els.push({abrev:ss.abrev_prefix+'-'+num,denom:ss.denom_defaut,type:ss.types[0],annee:STATE.get?STATE.get('projet.annee_construction')||'':'',surface:'',u_value:'',g:'',fs:'',b:'1.0',longueur:'',psi:'',nbre:1,orientation:ss.orientations?.[0]||'',dans:''});STATE._dirty=true;this.afficherSections();setTimeout(()=>document.getElementById('terrain-ss-'+k+'-'+sk)?.scrollIntoView({behavior:'smooth',block:'end'}),100);},
+  ajouterElement(k,sk){const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};const elements=d[k][sk].elements;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const num=elements.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1;elements.push({abrev:ss.abrev_prefix+'-'+num,denom:ss.denom_defaut,type:ss.types[0],annee:STATE.get('projet.annee_construction')||'',surface:'',u_value:'',g:'',fs:'',b:'1.0',longueur:'',psi:'',nbre:1,orientation:ss.orientations?.[0]||'',dans:''});STATE._dirty=true;this.afficherSections();setTimeout(()=>document.getElementById('terrain-ss-'+k+'-'+sk)?.scrollIntoView({behavior:'smooth',block:'end'}),100);},
   dupliquerElement(k,sk,idx){const d=this.getEnvData();const els=d[k]?.[sk]?.elements;if(!els||!els[idx])return;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const c={...els[idx]};c.abrev=ss.abrev_prefix+'-'+(els.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1);els.splice(idx+1,0,c);STATE._dirty=true;this.afficherSections();},
   supprimerElement(k,sk,idx){const d=this.getEnvData();const els=d[k]?.[sk]?.elements;if(!els)return;els.splice(idx,1);STATE._dirty=true;this.afficherSections();},
   ouvrirPhoto(k,sk){document.querySelector('.photo-input[data-section="'+k+'"][data-ss="'+sk+'"]')?.click();},
-  chargerPhoto(k,sk,file){const reader=new FileReader();reader.onload=e=>{const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][sk].photo=e.target.result;STATE._dirty=true;this.afficherSections();};reader.readAsDataURL(file);},
+  chargerPhoto(k,sk,file){const r=new FileReader();r.onload=e=>{const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][sk].photo=e.target.result;STATE._dirty=true;this.afficherSections();};r.readAsDataURL(file);},
   supprimerPhoto(k,sk){const d=this.getEnvData();if(d[k]?.[sk]){d[k][sk].photo=null;STATE._dirty=true;this.afficherSections();}}
 };
+window.TERRAIN=TERRAIN;</script>
+<script>/**
+ * bureau.js — Mode bureau Phase 1 CECB
+ */
+
+const BUREAU = {
+
+  refresh() {
+    this.afficherElements();
+    this.afficherTechnique();
+    this.afficherTextes();
+  },
+
+  afficherElements() {
+    const liste=document.getElementById('bureau-elements-list');
+    if(!liste)return;
+    const elements=STATE.dossier?.elements||[];
+    if(elements.length===0){liste.innerHTML='<div class="placeholder-text">Ajouter d\'abord des éléments en mode Terrain.</div>';return;}
+    const groupes={};
+    elements.forEach(el=>{ if(!groues[el.type])groupes[el.type]=[]; groupes[el.type].push(el); });
+    const titres={toiture:'🏠Toits et plafonds',murs:'🧱Murs extérieurs',fenetres:'🪐Fenêtres',sol:'⬜ Sols',ponts:'🌡Ponts thermiques'};
+    let html='';
+    Object.entries(groupes).forEach(([type,els])=>{
+      if(!titres[type])return;
+      html+=`<h3 style="margin:16px 0 8px;font-size:0.95rem;color:var(--green)">${titres[type]}</h3>`;
+      els.forEach(el=>{
+        const uSug=this.getUSuggeree(el);
+        const eiInfo=CONFIG.etats.find(e=>e.value===el.etat)||CONFIG.etats[1];
+        html+=`<div class="card" style="margin-bottom:10px" data-el-id="${el.id}"><div class="card-header"><span class="card-title">${el.abrev} — ${el.composition||'non définie'}</span><span style="color:${eiInfo.color};font-size:0.8rem;font-weight:600">${eiInfo.label}</span></div><div class="form-grid" style="grid-template-columns:repeat(3,1fr);gap:10px"><div class="form-group"><label>Surface [m²]</label><input type="number" class="bureau-field" data-el="${el.id}" data-key="surface" value="${el.surface||''}" placeholder="587"></div><div class="form-group"><label>U [W/m²K]</label><input type="number" class="bureau-field" data-el="${el.id}" data-key="u_mesure" value="${el.u_mesure||''}" placeholder="${uSug}" step="0.01"></div><div class="form-group"><label>Nombre</label><input type="number" class="bureau-field" data-el="${el.id}" data-key="nombre" value="${el.nombre||1}" min="1"></div></div>${this.indicateurSIA(el)}<div class="form-group" style="margin-top:10px"><label>Notes bureau</label><input type="text" class="bureau-field" data-el="${el.id}" data-key="notes_bureau" value="${el.notes_bureau||''}" placeholder="Remarques..."></div></div>`;
+      });
+    });
+    liste.innerHTML=html;
+    liste.querySelectorAll('.bureau-field').forEach(field=>{
+      const elId=field.dataset.el;
+      const key=field.dataset.key;
+      field.addEventListener('input',()=>{
+        STATE.updateElement(elId,{[key]:field.value});
+      });
+    });
+  },
+
+  indicateurSIA(el) {
+    const u=parseFloat(el.u_mesure);
+    if(!u)return '';
+    const sia=CONFIG.sia380;
+    const estOp=!['fenetres'].includes(el.type);
+    const limit=estOp?sia.limites_renovation.opaques_ext:sia.limites_renovation.fenetres_ext;
+    const cible=estOp?sia.cibles.opaques:sia.cibles.fenetres;
+    let s,c,t;
+    if(u<=cible){s='⭐';c='#22c55e';t=' Excellent - cible SIA ���'+cible+')';}
+    else if(u<=limit){s='✓'hc='#84cc16';t=' Conforme - limite SIA ≤«+limit+')';}
+    else{s='❠️';c='#ef4444';t=' Dépasse la limite SIA ('+limit+')';}
+    return `<div class="sia-indicator" style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:${c}15;border-radius:4px;margin-top:8px;font-size:0.8rem;color:${c}">${s}${t}</div>`;
+  },
+
+  getUSuggeree(el) {
+    const annee=el.annee||STATE.get('projet.annee_construction');
+    const uInit=CONFIG.getUInitial(annee);
+    const map={toiture:'toiture',murs:'murs',fenetres:'fenetres',sol:'sol'};
+    return uInit[map[el.type]]||'';
+  },
+
+  afficherTechnique() {
+    const container=document.getElementById('bureau-technique-display');
+    if(!container)return;
+    const t=STATE.dossier?.technique||{};
+    container.innerHTML=`<div class="card"><div class="card-header"><span class="card-title">🔥Chauffage</span></div><div class="form-grid" style="grid-template-columns:1fr 1fr;gap:10px"><div><p><strong>Type:</strong> ${t.type_chauffage||'—'}</p><p><strong>Marque:</strong> ${t.marque_chauffage||'—'}</p></div><div><p><strong>Amnée:</strong> ${t.annee_chauffage||'—'}</p><p><strong>Puissance:</strong> ${t.puissance_kw?t.puissance_kw+' kW':'-—'}</p></div></div></div><div class="card" style="margin-top:10px"><div class="card-header"><span class="card-title">💧Eau chaude</span></div><div class="form-grid" style="grid-template-columns:1fr 1fr;gap:10px"><div><p><strong>Type:</strong> ${t.type_ecs||'—'}</p><p><strong>Volume:</strong> ${t.volume_ecs_l?t.volume_ecs_l+' L':'└'}</p></div></div></div>`;
+  },
+
+  afficherTextes() {
+    const container=document.getElementById('textes-cecb-list');
+    if(!container)return;
+    const textes=STATE.dossier?.textes_cecb||{};
+    if(Object.keys(textes).length===0){
+      container.innerHTML=`�div class="placeholder-text">Appuyez sur "Générer textes via IA" pour obtenir les textes officiels CECB.</div>`;
+      return;
+    }
+    const sections=[{key:'toits',abel:'Toits'},{key:'murs',label:'Murs'},{key:'fenetres',label:'Fenêtres'},{key:4sols',abel:'Sols'},{key:'chauffage',abel:'Chauffage'},{key:4ecs',label:'ECS'},{key:4ventilation',label:'Ventilation'}];
+    container.innerHTML=sections.map(s=>{
+      const t=textes[s.key]; if(!t)return '';
+      return `<div class="card" style="margin-bottom:10px"><div class="card-header"><span class="card-title">${s.label}</span><button class="btn-ghost btn-sm" onclick="BUREAU.editTexte('${s.key}')">✏️</button></div><p><strong>État:</strong> ${t.etat||'—'}</p><p><strong>Améliorations:</strong> ${t.amelio||'—'}</p></div>`;
+    }).join('');
+  },
+
+  editTexte(key) {
+    const t=STATE,`ussier?.textes_cecb?.[key]||{};
+    const modal=document.getElementById('modal-element');
+    const body=document.getElementById('modal-element-body');
+    if(!modal)return;
+    document.getElementById('modal-element-title').textContent='Modifier texte CECB';
+    body.innerHTML=`<div class="form-grid"><div class="form-group full"><label>État</label><textarea id="edit-etat" rows="3">${t.etat||''}</textarea></div><div class="form-group full"><label>Améliorations</label><textarea id="edit-amelio" rows="3">${t.amelio||''}</textarea></div></div>`;
+    document.getElementById('modal-save').onclick=()=>{
+      STATE.dossier.textes_cecb=STATE.dossier.textes_cecb||{};
+      STATE.dossier.textes_cecb[key]={etat:document.getElementById('edit-etat').value,amelio:document.getElementById('edit-amelio').value};
+      modal.style.display='none';this.afficherTextes();UI.toast('Texte mis à jour ✓''success');
+    };
+    modal.style.display='flex';
+  },
+};
+
+window.BUREAU = BUREAU;
 </script>
-<script src="js/terrain.js"></script>
-<script src="js/bureau.js"></script>
-<script src="js/mesures.js"></script>
-<script src="js/variantes.js"></script>
-<script src="js/subventions.js"></script>
-<script src="js/ia.js"></script>
-<script src="js/export.js"></script>
-<script src="js/app.js"></script>
+<script>/**
+ * mesures.js — Phase 2 CECB+ : Mesures
+ * Définition des améliorations par élément + attribution variantes
+ */
 
+const MESURES = {
+  afficher() {
+    const container = document.getElementById('mesures-list');
+    if (!container) return;
+    const mesures = STATE.dossier?.mesures || [];
+    if (mesures.length === 0) { container.innerHTML = '<div class="placeholder-text">Aucune mesure définie. Utilisez Copier état initial ou Suggérer automatiquement.</div>'; return; }
+    const groupes = {};
+    mesures.forEach(m => { if (!groupes[m.type]) groupes[m.type] = []; groupes[m.type].push(m); });
+    const titres = { toiture:'🏠 Toits', murs:'|��� Murs', fenetres:'🪐 Fenêtres', sol:'⬜ Sols', ponts:'🌡 Ponts', chauffage:'🔥 Chauffage', ecs:'|��� ECS', ventil:'💨 Ventil', elec:'³ Élec' };
+    let html = '';
+    Object.keys(groupes).forEach(type => {
+      html += `<h3 style="margin:16px 0 8px;color:var(--green)">${titres[type] || type}</h3>`;
+      html += `<div style="overflow-x:auto;margin-bottom:4px"><table style="width:100%;border-collapse:collapse;font-size:0.82rem"><thead><tr><th>Abrév.</th><th>Dénomination</th><th>Surface</th><th>U init</th><th>U cible</th><th>Invest.</th><th>Variantes</th><th></th></tr></thead><tbody>`;
+      groues[type].forEach(m => {
+        html += `<tr data-mesure-id="${m.id}"><td><input type="text" class="mes-field" data-id="${m.id}" data-key="abrev" value="${m.abrev||''}" style="width:60px;padding:4px;border:1px solid #dee2e6;border-radius:4px"></td><td><select class="mes-field" data-id="${m.id}" data-key="denomination" style="width:180px;padding:4px;border:1px solid #dee2e6;border-radius:4px">${this.optionsDenomination(type,m.denomination)}</select></td><td><input type="number" class="mes-field" data-id="${m.id}" data-key="surface" value="${m.surface||''}" style="width:70px;padding:4px;border:1px solid #dee2e6;text-align:right;border-radius:4px"></td><td><input type="number" class="mes-field" data-id="${m.id}" data-key="u_initial" value="${m.u_initial||''}" step="0.01" style="width:60px;padding:4px;border:1px solid #dee2e6;text-align:right;border-radius:4px"></td><td><input type="number" class="mes-field" data-id="${m.id}" data-key="u_cible" value="${m.u_cible||''}" step="0.01" placeholder="${this.getUCible(type)}" style="width:60px;padding:4px;border:1px solid #dee2e6;text-align:right;color:var(--green);font-weight:600;border-radius:4px"></td><td><input type="number" class="mes-field" data-id="${m.id}" data-key="inv_chf" value="${m.investissement||''}" placeholder="${this.getInvestDefault(type)}" style="width:70px;padding:4px;border:1px solid #dee2e6;text-align:right;border-radius:4px"></td><td><div style="display:flex;gap:3px">${['A','B','C','D'].map(v => `<div class="var-chip ${m.variantes?.[v]?'active-'+v:''}" onclick="MESURES.toggleVariante('${m.id}','${v}',this)">${v}</div>`).join('')}</div></td><td><button class="btn-ghost btn-sm" onclick="MESURES.supprimer('${m.id}')">✕</button></td></tr>`;
+      });
+      html += `</tbody></table></div><button class="btn-secondary btn-sm" style="margin-bottom:8px" onclick="MESURES.ajouterMesure('${type}')">+ Ajouter</button>`;
+    });
+    container.innerHTML = html;
+    container.querySelectorAll('.mes-field').forEach(field => {
+      const id = field.dataset.id;
+      const key = field.dataset.key;
+      const innvKey = key === 'inv_chf' ? 'investissement' : key;
+      const ev= field.tagName==='SELECT'?'change':'input';
+      field.addEventListener(ev,()=>{STATE.updateMesure(id,{[innvKey]:field.value});
+        if(key==='denomination'){const uc=this.getUCibleFromDenomination(field.value);if(uc){const r=field.closest('tr');const uf=r?.querySelector('[data-key="u_cible"]');if(uf&&!uf.value){uf.value=uc;STATE.updateMesure(id,{u_cible:uc});}}}
+      });
+    });
+  },
+  toggleVariante(mesureId,lettre,chip) {
+    const mesure=STATE.dossier?.mesures?.find(m=>m.id===mesureId);if(!mesure)return;
+    const variantes={...mesure.variantes};variantes[lettre]=!variantes[lettre];STATE.updateMesure(mesureId,{variantes});
+    if(variantes[lettre])chip.classList.add('active-'+lettre);else chip.classList.remove('active-'+lettre);
+  },
+  ajouterMesure(type) {
+    const exist=(STATE,`ussier?.mesures||[]).filter(m=>m.type===type);
+    const pref={toiture:'To', murs:'Mu', fenetres:'Fe', sol:'Sx', chauffage:'PC', ecs:'ACC', elec:'PE'};
+    const cfg=CONFIG.denominations_cecb;
+    const cfgt={toiture:cfg.toiture,murs:cfg.facade,fenetres:cfg.fenetres,sol:cfg.plancher}[type];
+    const uInit=CONFIG.getUInitial(STATE.get('projet.annee_construction'));
+    const els=STATE.dossier?.elements||[];
+    const elM=els.find(e=>e.type===type);
+    STATE.addMesure({type,element_id:elM?.id||null,abrev:`${pref[type]||type.slice(0,2).toUpperCase()}-${exist.length+1}`,denomination:cfgt?.label||'',surface:elM?.surface||'',u_initial:elM?.u_mesure||uInit[type==='murs'?'murs':type==='fenetres'?'fenetres':type==='sol'?'sol':'toiture']||'',u_cible:cfgt?.u_cible||'',nombre:elM?.nombre||1,type_modernisation:cfgt?.type_modernisation||'Isolation extérieure',investissement:this.getInvestDefault(type),base_calculs:'Par m²',durée_utilisation:cfgt?.durée_utilisation||40,variantes:{A:false,B:false,C:false,D:false}});
+    this.afficher();UI.toast('Mesure ajoutée','success');
+  },
+  copierEtatInitial() {
+    const els=STATE.dossier?.elements||[];if(els.length===0){UI.toast('Ajouter d\'abord des éléments en mode Terrain','error');return;}
+    let count=0;
+    els.filter(el => ['toiture','murs','fenetres','sol'].includes(el.type)).forEach(el => {
+      if(!(STATE.dossier?.mesures||[]).some(m=>m.element_id===el.id)){this.ajouterMesure(el.type);count++;}
+    });
+    this.afficher();UI.toast(count+' mesure(s) copiée(s)','success');
+  },
+  suggererAutomatiquement() {
+    const els=STATE.dossier?.elements||[];let count=0;
+    els.forEach(el => {
+      const u=parseFloat(el.u_mesure);if(!u)return;
+      const lim=el.type==='fenetres'?CONFIG.sia380.limites_renovation.fenetres_ext:CONFIG.sia380.limites_renovation.opaques_ext;
+      if(u>lim&&!(STATE.dossier?.mesures||[]).some(m=>m.element_id===el.id)&&['toiture','murs','fenetres','sol'].includes(el.type)){this.ajouterMesure(el.type);count++;}
+    });
+    if(['gaz','mazout'].includes(STATE.get('technique.agent_energetique'))&&!(STATE.dossier?.mesures||[]).some(m=>m.type==='chauffage')){
+      STATE.addMesure({type:'chauffage',abrev:'PC-1',denomination:'PAC air/eau',type_modernisation:'Nouveau système',investissement:0,durée_utilisation:20,variantes:{A:false,B:false,C:false,D:false}});count++;
+    }
+    this.afficher();UI.toast(count>0?count+' mesure(s) suggéree(s)':'Aucune mesure','info');
+  },
+  supprimer(id) { if(!UI.confirm('Supprimer cette mesure ?'))return;STATE.deleteMesure(id);this.afficher();UI.toast('Mesure supprimée','info'); },
+  getUCible(type) { return {toiture:CONFIG.denominations_cecb.toiture.u_cible,murs:CONFIG.denominations_cecb.facade.u_cible,fenetres:CONFIG.denominations_cecb.fenetres.u_cible,sol:CONFIG.denominations_cecb.plancher.u_cible}[type]||''; },
+  getUCibleFromDenomination(denom) { if(denom.includes('M1_TOITURE'))return CONFIG.denominations_cecb.toiture.u_cible;if(denom.includes('M2_FACADE'))return CONFIG.denominations_cecb.facade.u_cible;if(denom.includes('M3_PLANCHER'))return CONFIG.denominations_cecb.plancher.u_cible;if(denom.includes('Ug 0.7'))return CONFIG.denominations_cecb.fenetres.u_cible;return null; },
+  getInvestDefault(type) { return {toiture:390,murs:350,fenetres:1000,sol:170,chauffage:0,ecs:0,elec:0}[type]||0; },
+  optionsDenomination(type,sel) {
+    const opts={toiture:['M1_TOITURE_RENOV_C.E.','M1_TOITURE_RENOV_C.N.C.'],murs:['M2_FACADE_RENOV_C.E.','M2_FACADE_RENOV_C.N.C.'],fenetres:['Fe PVC neuve 3-IV Ug 0.7 (U=0.9)','Fe PVC neuve 2-IV Ug 1.0 (U=1.1)'],sol:['M3_PLANCHER_RENOV_C.N.C.','M3_PLANCHER_RENOV_C.E.'],chauffage:['Pompe à chaleur air/eau','PAC saumure/eau','CAD'],ecs:['ECS remplacement'],elec:['Photovoltaïque']};
+    return(opts[type]||['Mesure personnalisée']).map(o => `<option value="${o}" ${sel===o?'selected':''}>${o.length>40?o.slice(0,40)+'...':o}</option>`).join('');
+  },
+};
 
+window.MESURES = MESURES;
+</script>
+<script>/**
+ * variantes.js — Phase 2 CECB+ : Variantes
+ * Formulaire variantes + textes détaillés (15 champs × 4000 car.)
+ */
+
+const VARIANTES = {
+
+  couleurs: { A: '#2196F3', B: '#9C27B0', C: '#FF9800', D: '#F44336' },
+
+  afficher() {
+    STATE.initVariantes();
+    const container = document.getElementById('variantes-container');
+    if (!container) return;
+    const variantes = STATE.dossier?.variantes || [];
+    container.innerHTML = '';
+    variantes.forEach(v => container.appendChild(this.creerCarteVariante(v)));
+  },
+
+  creerCarteVariante(v) {
+    const color = this.couleurs[v.id] || '#6c757d';
+    const mesures = STATE.getMesuresParVariante(v.id);
+    const div = document.createElement('div');
+    div.className = `variante-card variante-${v.id}`;
+    div.dataset.variante = v.id;
+    div.innerHTML = `
+      <div class="variante-header">
+        <span class="variante-label" style="color:${color}">C ${v.id}</span>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:0.8rem;color:#6c757d">${mesures.length} mesure(s)</span>
+          <button class="btn-ghost btn-sm" onclick="IA.genererTextesVariante('${v.id}')">✨ Générer textes</button>
+          <button class="btn-ghost btn-sm" onclick="VARIANTES.toggleDetails('${v.id}')">▼ Détails</button>
+        </div>
+      </div>
+      <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div class="form-group"><label>Dénomination</label><input type="text" class="var-field" data-var="${v.id}" data-key="denomination" value="${v.denomination||''}" placeholder="RENOVATION PARTIELLE OPTION 1"></div>
+        <div class="form-group"><label>Durée travaux</label><input type="text" class="var-field" data-var="${v.id}" data-key="duree_travaux" value="${v.duree_travaux||'non défini'}" placeholder="6 mois"></div>
+      </div>
+      <div class="texte-field-group"><label>Description <small style="color:#9ca3af">max 1000 car.</small></label><textarea class="var-field" data-var="${v.id}" data-key="description" rows="3" maxlength="1000">${v.description||''}</textarea><div class="char-counter">${(v.description||'').length} / 1000</div></div>
+      ${mesures.length > 0 ? `<div style="margin-bottom:12px"><label style="font-size:0.8rem;font-weight:600;color:#6c757d;display:block;margin-bottom:6px">Mesures incluses</label><div style="display:flex;flex-wrap:wrap;gap:4px">${mesures.map(m => `<span style="background:${color}15;color:${color};padding:3px 10px;border-radius:99px;font-size:0.78rem;font-weight:600">${m.abrev||m.denomination?.slice(0,20)||m.type}</span>`).join('')}</div></div>` : `<div class="warn-box" style="margin-bottom:12px;font-size:0.8rem">⚠️ Aucune mesure attribuée.</div>`}
+      <div id="var-details-${v.id}" style="display:none"><textarea class="var-texte-field" data-var="${v.id}" data-key="enveloppe_general" rows="3" maxlength="4000" placeholder="Gen, non compris">${v.textes?.enveloppe_general||''}</textarea><textarea class="var-texte-field" data-var="${v.id}" data-key="toits" rows="3" maxlength="4000" placeholder="Toits, non compris">${v.textes?.toits||''}</textarea><textarea class="var-texte-field" data-var="${v.id}" data-key="chauffage" rows="3" maxlength="4000" placeholder="Chauffage, non compris">${v.textes?.chauffage||''}</textarea></div>
+    `;
+    this.binderVariante(div,v);
+    return div;
+  },
+
+  champTexte(v,key,label) {
+    const val=v.textes?.[key]||'';
+    return `<div class="texte-field-group" style="margin-bottom:10px"><label style="font-size:0.78rem;font-weight:600;color:#6c757d">${label}</label><textarea class="var-texte-field" data-var="${v.id}" data-key="${key}" rows="3" maxlength="4000" placeholder="Non compris.">${val}</textarea><div class="char-counter">${val.length} / 4000</div></div>`;
+  },
+
+  binderVariante(div,v) {
+    div.querySelectorAll('.var-field').forEach(field=>{
+      const key=field.dataset.key;
+      const ev=field.tagName==='SELECT'?'change':'input';
+      field.addEventListener(ev,()=>STATE.updateVariante(v.id,{[key]:field.value}));
+    });
+    div.querySelectorAll('.var-texte-field').forEach(field=>{
+      const key=field.dataset.key;
+      field.addEventListener('input',()=>{
+        const textes={...(STATE.getVariante(v.id)?.textes||{}),[key]:field.value};
+        STATE.updateVariante(v.id,{textes});
+      });
+    });
+  },
+
+  toggleDetails(id) {
+    const det=document.getElementById(`var-details-${id}`);
+    if(!det)return;
+    det.style.display=det.style.display==='none'?'block':'none';
+  },
+
+  rafraichirVariante(id) {
+    const container=document.getElementById('variantes-container');
+    if(!container)return;
+    const oldCard=container.querySelector(`[data-variante="${id}"]`);
+    const v=STATE.getVariante(id);if(!v)return;
+    const newCard=this.creerCarteVariante(v);
+    if(oldCard)container.replaceChild(newCard,oldCard);
+    else container.appendChild(newCard);
+  },
+};
+
+window.VARIANTES = VARIANTES;
+</script>
+<script>/**
+ * subventions.js — Calcul des subventions FR 2025
+ *
+ * Logique:
+ * 1. Pour chaque variante CECB+ → calculer montant V1 (mesures ponctuelles)
+ * 2. Pour chaque variante CECB+ → calculer montant V2 (amélioration classe)
+ * 3. Retenir le MEILLEUR entre V1 et V2 (pas de cumul)
+ * 4. Ajouter mesures complémentaires (toujours cumulables)
+ * 5. Afficher tableau comparatif + conseil
+ */
+
+const SUBVENTIONS = {
+
+  calculerTout() {
+    const d = STATE.dossier;
+    if (!d) { UI.toast('Aucun dossier', 'error'); return; }
+    const type_bat = CONFIG.getTypeBatiment(d.projet.affectation);
+    const sre = parseFloat(d.projet.sre) || 0;
+    const kw = parseFloat(d.technique.puissance_kw) || 45;
+    const resultats = {};
+    const lettres = d.variantes.map(v => v.id);
+    lettres.forEach(l => {
+      const mesures = STATE.getMesuresParVariante(l);
+      resultats[l] = this.calculerVariante(mesures, type_bat, sre, kw, d);
+    });
+    STATE.dossier.subventions = { par_variante: resultats, source: 'FR_2025', calcule_le: new Date().toISOString() };
+    this.afficherTableau(resultats, lettres, type_bat, sre);
+    UI.toast('Subventions calculées ✓', 'success');
+    return resultats;
+  },
+
+  calculerVariante(mesures,type_bat,sre,kw_total,dossier) {
+    const sub = CONFIG.subventions_FR;
+    const res = {v1_detail:[],v1_total:0.v2_detail:[],v2_total:0,complementaires:[],comp_total:0,recommande:'v1', total_retenu:0};
+    let surf_iso = 0;
+    mesures.forEach(m => { if(['murs','toiture','sol'].includes(m.type)) surf_iso += (parseFloat(m.surface)||0)*(parseInt(m.nombre)||1); });
+    if(surf_iso > 0) {
+      const mnt = sub.variante1.M01_isolation.calcul(surf_iso);
+      if(mnt >= sub.variante1.M01_isolation.min_demande) {
+        const capped = Math.min(mnt,sub.plafond_mesures_M);
+        res.v1_detail.push({label:'Isolation MM-01',base:surf_iso+'m2 ×50',montant:capped,badge:'V1'});
+        res.v1_total += capped;
+      }
+    }
+    const hasPAC = mesures.some(m => m.type==='chauffage'||m.denomination?.toLowerCase().includes('pac'));
+    if(hasPAC) {
+      const mnt = Math.min(sub.variante1.M05_pac_air.calcul(kw_total),sub.plafond_mesures_M);
+      res.v1_detail.push({label:'PAC air/eau M-05',base:'kwTotal+'kW',montant:mnt,badge:'V1'});
+      res.v1_total += mnt;
+    }
+    if(sre > 0) {
+      const delta = this.estimerDeltaClasses(mesures,dossier);
+      if(delta >= 2) {
+        const mnt = Math.min(sub.variante2.M10_amelioration.calcul(delta,type_bat,sre),sub.plafond_mesures_M);
+        res.v2_detail.push({label:'Amélioration CECB M-10 (+'+delta+'classes)',base:sre+'m2 SRE',montant:mnt,badge:'V2',delta_classes:delta});
+        res.v2_total += mnt;
+      }
+    }
+    const mntCECB = sub.complementaires.cecb_plus.calcul(type_bat);
+    res.complementaires.push({label:'CECB Plus IM-07',montant:mntCECB});
+    res.comp_total += mntCECB;
+    res.recommande = res.v2_total > res.v1_total ? 'v2' : 'v1';
+    res.total_retenu = (res.recommande==='v2'?res.v2_total:res.v1_total) + res.comp_total;
+    return res;
+  },
+
+  estimerDeltaClasses(mesures,dossier) {
+    let score=0;
+    if(mesures.some(m => m.type==='murs')) score+=1.5;
+    if(mesures.some(m => m.type==='toiture')) score+=1;
+    if(mesures.some(m => m.type==='fenetres')) score+=1;
+    if(mesures.some(m => m.type==='sol')) score+=0.5;
+    if(mesures.some(m => m.type==='chauffage')||dossier?.technique?.type_chauffage==='pac_air') score+=1.5;
+    if(mesures.some(m => m.type==='elec')) score+=0.5;
+    return Math.min(Math.round(score),6);
+  },
+
+  afficherTableau(resultats,lettres,type_bat,sre) {
+    const container=document.getElementById('subventions-tableau');
+    if(!container)return;
+    const couleurs={A:'#2196F3',B:'#9C27B0',C:'#FF9800',D:'#F44336'};
+    let html=`<table class="sub-tableau"><thead><tr><th>Mes. Programme</th>${lettres.map(l => `<th style="border-left:3px solid ${couleurs[l]}">Var. ${l}</th>`).join('')}</tr></thead><tbody>`;
+    html+=`<tr><td colspan="${1+lettres.length}" style="background:#dbeafe;color:#1d4ed8;font-weight:700;font-size:0.8rem;padding:6px 12px">VARIANTE 1 — Mesures ponctuelles</td></tr>`;
+    const lignesV1=new Set();
+    lettres.forEach(l => (resultats[l].v1_detail||[]).forEach(d => lignesV1.add(d.label)));
+    lignesV1.forEach(lab => {
+      html+=`<tr><td>${lab}</td>`;
+      lettres.forEach(l => { const d=(resultats[l].v1_detail||[]).find(d=>d.label===lab); html+=`<td>${d?UI.chf(d.montant):'—'}</td>`; });
+      html+='</tr>';
+    });
+    html+=`<tr class="sub-total"><td><strong>Total V1</strong></td>${lettres.map(l => `<td><strong>${UI.chf(resultats[l].v1_total)}</strong></td>`).join('')}</tr>`;
+    html+=`<tr><td colspan="${1+lettres.length}" style="background:#fce7f3;color:#9d174d;font-weight:700;font-size:0.8rem;padding:6px 12px">VARIANTE 2 — Classe CECB (non cumulable)</td></tr>`;
+    lettres.forEach(l => { (resultats[l].v2_detail||[]).forEach(d => { html+=`<tr><td>${d.label}</td>${lettres.map(ll => `<td>${(("resultats[ll].v2_detail||[]).find(x=>x.label===d.label)")?UI.chf(resultats[ll].v2_detail.find(x=>x.label===d.label)?.montant):'—'}</td>`).join('')}</tr>`; }); });
+    html+=`<tr class="sub-total"><td><strong>Total V2</strong></td>${lettres.map(l => `<td><strong>${UI.chf(resultats[l].v2_total)}</strong></td>`).join('')}</tr>`;
+    html+=`<tr><td colspan="${1+lettres.length}" style="background:#f0fdf4;color:#166534;font-weight:700;font-size:0.8rem">COMPLÉMENTAIRES</td></tr><tr><td>CECB Plus IM-07</td>${lettres.map(l => `<td>${UI.chf(resultats[l].comp_total)}</td>`).join('')}</tr>`;
+    html+=`<tr style="background:#f0fdf4"><td><strong>✓ TOTAL</strong></td>${lettres.map(l => `<td style="font-weight:700;color:${couleurs[l]}">${UI.chf(resultats[l].total_retenu)}</td>`).join('')}</tr></tbody></table>`;
+    container.innerHTML=html;
+  },
+
+  getResumeSaisie(lettre) {
+    const sub=STATE.dossier?.subventions?.par_variante?.[lettre];
+    if(!sub)return null;
+    return{estimation:UI.chf(sub.total_retenu),total:sub.total_retenu,recommande:sub.recommande};
+  },
+};
+
+window.SUBVENTIONS = SUBVENTIONS;
+</script>
+<script>/**
+ * ia.js â IntÃ©gration API Claude (Anthropic)
+ * GÃ©nÃ©ration des textes officiels CECB / CECB+
+ */
+
+const IA = {
+  apiKey: CONFIG.anthropic_key || '',
+
+  async genererTextesCECB() {
+    if (!this.apiKey) { this.showCleAPIModal(); return; }
+    const d = STATE.dossier;
+    if (!d) { UI.toast('Aucun dossier ouvert', 'error'); return; }
+
+    UI.showIAModal('GÃ©nÃ©ration des textes CECB en cours...');
+
+    const elements = d.elements || [];
+    const prompt = `Tu es un expert CECB certifiÃ© suisse. GenÃ¨re les textes officiels pour le portail CECB www.cecb-tool.ch.
+
+DONNÃES DU BÃTIMENT :
+AnnÃ©e construction : ${d."projet"."annee_construction"}
+Chauffage : ${d.technique.type_chauffage} | ${d.technique.agent_energetique}
+Ventilation : ${d.technique.type_ventilation}
+Composition : ${elements.map(el => el.abrev + ' (' + el.composition + ') ' + 'U=' + (el.u_mesure||'ï¿½')).join(', ')}
+
+GenÃ¨re un objet JSON avec ces clÃ©s exactes, textes style officiel CECB (150-300 car.) :
+{"toits":"...","murs":"...","fenetres":"...","sols":"...","ponts_thermiques":"...","chauffage":"...","ecs":"...","ventilation":"...","appareils":"..."}
+
+RÃ©pons uniquement avec le JSON, sans texte avant ou aprÃ¨s.`;
+
+    try {
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'x-api-key': this.apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-20050514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] }),
+      });
+      const data = await resp.json();
+      const text = data.content?.[0]?.text || '';
+      const clean = text.replace(/```json|```/g, '').trim();
+      const textes = JSON.parse(clean);
+      STATE.dossier.textes_cecb = textes;
+      BUREAU.afficherTextes();
+      UI.toast('Textes CECB gÃ©nÃ©rÃ©s â', 'success');
+    } catch(e) {
+      console.error('IA error:', e);
+      UI.toast('Erreur API Claude: ' + e.message, 'error');
+    } finally {
+      UI.hideIAModal();
+    }
+  },
+
+  async genererTextesVariante(lettre) {
+    if (!this.apiKey) { this.showCleAPIModal(); return; }
+    const variante = STATE.getVariante(lettre);
+    if (!variante) return;
+
+    UI.showIAModal(`GÃ©nÃ©ration textes Variante ${lettre}...`);
+
+    const mesures = STATE.getMesuresParVariante(lettre);
+    const d = STATE.dossier;
+    const prompt = `Tu es un expert CECB+ certifiiÃ© suisse (Daniel Gachoud, Frilow SÃ rl).
+GÃ©nÃ¨re les 15 textes officiels pour le portail cecb-tool.ch, style officiel CECB (MAX 4000 car. par texte).
+
+VARIANTE ${lettre} : ${variante.denomination}
+MESUREQ : ${mesures.map(m => m.abrev + ' ' + m.denomination + ' U:' + (m.u_cible||'')).join(', ')}
+CHAUFFAGE ACTUEL : ${d.technique.type_chauffage}
+ANNÃE CONSTRUCTION : ${d.projet.annee_construction}
+
+RÃ©pons JSON uniquement :
+{"enveloppe_general":"...","toits":"...","autres_plafonds":"...","fenetres":"...","murs_ext":"...","autres_murs":"...","sols_ext":"...","autres_sols":"...","ponts_thermiques":"...","technique_general":"...","chauffage":"...","distribution_ecs":"...","electricite":"...","ventilation":"..."}`;
+
+    try {
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'x-api-key': this.apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, messages: [{ role: 'user', content: prompt }] }),
+      });
+      const data = await resp.json();
+      const text = data.content?.[0]?.text || '';
+      const clean = text.replace(/```json|```/g, '').trim();
+      const textes = JSON.parse(clean);
+      STATE.updateVariante(lettre, { textes });
+      VARIANTES.rafraichirVariante(lettre);
+      UI.toast(`Textes Variante ${lettre} gÃ©nÃ©rÃ©s â ï¿½'success');
+    } catch(e) {
+      console.error('IA error:', e);
+      UI.toast('Erreur API Claude: ' + e.message, 'error');
+    } finally {
+      UI.hideIAModal();
+    }
+  },
+
+  async genererToutesVariantes() {
+    if (!this.apiKey) { this.showCleAPIModal(); return; }
+    const variantes = STATE.dossier?.variantes || [];
+    for (const v of variantes) {
+      await this.genererTextesVariante(v.id);
+      await new Promise(r => setTimeout(r, 1000));
+    }
+    UI.toast('Toutes les variantes gÃ©nÃ©rÃ©es â ï¿½'success');
+  },
+
+  async genererConseil() {
+    if (!this.apiKey) { this.showCleAPIModal(); return; }
+    const d = STATE.dossier;
+    if (!d) return;
+
+    UI.showIAModal('GÃ©nÃ©ration du conseil IA...');
+
+    const sub = d.subventions?.par_variante || {};
+    const summary = Object.entries(sub).map(([lettre, r]) =>
+      `Variante ${lettre} : subventions estimÃ©es ${r.total_retenu CHF (${r.recommande})`
+    ).join('\n');
+
+    const prompt = `POUR LE PROPRI%TTAIE :
+    SRE = ${d.projet.sre} m2, Affectation = ${d.projet.affectation}
+    Chauffage actuel : ${d.technique.type_chauffage} - ${d.technique.agent_energetique}
+    Subventions :\n${summary}
+    En quelques phrases, quelle variante recommandes-tu et pourquoi ? Style expert indÃ©pendant, Familiari, langue franÃ§aise.`;
+
+    try {
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'x-api-key': this.apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 500, messages: [{ role: 'user', content: prompt }] }),
+      });
+      const data = await resp.json();
+      const texte = data.content?.[0]?.text || '';
+      STATE.dossier.conseil_ia = { texte, genere_le: new Date().toISOString() };
+      const container = document.getElementById('ia-conseil-resultat');
+      if (container) container.innerText = texte;
+      UI.toast('Conseil IA gÃ©nÃ©rÃ© â', 'success');
+    } catch(e) {
+      UI.toast('Erreur API: ' + e.message, 'error');
+    } finally {
+      UI.hideIAModal();
+    }
+  },
+
+  showCleAPIModal() {
+    const cle = window.prompt('Entrez la clÃ© API Anthropic :');
+    if (cle) {
+      this.apiKey = cle;
+      CONFIG.anthropic_key = cle;
+      UI.toast('ClÃ© API sauvegardÃ©e â', 'success');
+    }
+  },
+};
+
+window.IA = IA;
+</script>
+<script>/**
+ * export.js - Generation XLS pour le portail CECB
+ */
+
+const EXPORT = {
+  phase1() {
+    const d = STATE.dossier;
+    if (!d) { UI.toast('Aucun dossier', 'error'); return; }
+    const rows = [];
+    rows.push(['PROJET', d.projet.nom||'']);
+    rows.push(['ADRESSE', d.projet.adresse||'']);
+    rows.push(['NPA-LOCALITE', (d.projet.npa||'') + ' ' + (d.projet.localite||'')]);
+    rows.push(['ANNEE CONSTRUCTION', d.projet.annee_construction||'']);
+    rows.push(['SRE [m2]', d.projet.sre||'']);
+    rows.push(['AFFECTATION', d.projet.affectation||'']);
+    rows.push(['', '']);
+    rows.push(['ELEMENTS ENVELOPPE', 'Type', 'Composition', 'Surface [m2]', 'U [W/m2K]', 'Orientation', 'Etat']);
+    (d.elements||[]).forEach(el => {
+      if(['toiture','murs','fenetres','sol','ponts'].includes(el.type)) {
+        rows.push([el.abrev||'', el.type, el.composition||'', el.surface||'', el.u_mesure||'', el.orientation||'', el.etat||'']);
+      }
+    });
+    rows.push(['', '']);
+    rows.push(['TECHNIQUE', '']);
+    const t = d.technique||{};
+    rows.push(['Chauffage', t.type_chauffage||'']);
+    rows.push(['Marque', t.marque_chauffage||'']);
+    rows.push(['Annee', t.annee_chauffage||'']);
+    rows.push(['Puissance [kW]', t.puissance_kw||'']);
+    rows.push(['Agent energetique', t.agent_energetique||'']);
+    rows.push(['ECS', t.type_ecs||'']);
+    rows.push(['Ventilation', t.type_ventilation||'']);
+    rows.push(['', '']);
+    rows.push(['TEXTES CECB', '']);
+    const textes = d.textes_cecb||{};
+    ['toits','murs','fenetres','sols','ponts_thermiques','chauffage','ecs','ventilation','appareils'].forEach(key => {
+      const tx = textes[key];
+      if(tx) {
+        rows.push([key.toUpperCase(),'']);
+        rows.push(['Etat:', tx.etat||'']);
+        rows.push(['Ameliorations:', tx.amelio||'']);
+        rows.push(['', '']);
+      }
+    });
+    this.downloadXLS(rows, 'CECB_P1_' + (d.projet.nom||'Export'));
+    UI.toast('Export Phase 1 genere', 'success');
+  },
+
+  phase2() {
+    const d = STATE.dossier;
+    if (!d) { UI.toast('Aucun dossier', 'error'); return; }
+    const variantes = d.variantes||[];
+    if(variantes.length===0){UI.toast('Definissez les variantes','error');return;}
+    variantes.forEach(v => {
+      const rows = [];
+      const mesures = STATE.getMesuresParVariante(v.id);
+      rows.push(['VARIANTE ' + v.id, v.denomination||'']);
+      rows.push(['Duree travaux', v.duree_travaux||'non defini']);
+      rows.push(['Description', v.description||'']);
+      rows.push(['', '']);
+      rows.push(['MESURES INCLUSES', 'Denomination', 'Surface', 'U initial', 'U cible', 'Invest. CHF/m2']);
+      mesures.forEach(m => rows.push([m.abrev||'', m.denomination||'', m.surface||'', m.u_initial||'', m.u_cible||'', m.investissement||'']));
+      rows.push(['', '']);
+      rows.push(['TEXTES PORTAIL CECB+', '']);
+      ['enveloppe_general','toits','autres_plafonds','fenetres','murs_ext','autres_murs','sols_ext','autres_sols','ponts_thermiques','technique_general','chauffage','distribution_ecs','electricite','ventilation'].forEach(key => {
+        const text = v.textes?.[key]||'Non compris.';
+        rows.push([key, text]);
+      });
+      const sub = SUBVENTIONS.getResumeSaisie(v.id);
+      if(sub){rows.push(['','']);rows.push(['SUBVENTIONS estimees [CHF]', sub.total||0]);rows.push(['Recommandation', sub.recommande||'']);}
+      this.downloadXLS(rows, 'CECBplus-Variante' + v.id + '_' + (d.projet.nom||'Export'));
+    });
+    UI.toast('Export Phase 2 genere (' + variantes.length + ' fichiers)', 'success');
+  },
+
+  resume() {
+    const d = STATE.dossier;
+    if (!d) { UI.toast('Aucun dossier', 'error'); return; }
+    const rows = [];
+    rows.push(['Resume Comparatif - ' + (d.projet.nom||''), '']);
+    rows.push(['SRE', d.projet.sre||'']);
+    rows.push(['', '']);
+    const variantes = d.variantes||[];
+    const subRes = d.subventions?.par_variante||{};
+    rows.push(['VARIANTE', 'DENOMINATION', 'MESURES', 'SUBV estimees [CHF]', 'RECOMMANDATION']);
+    variantes.forEach(v => {
+      const mesures = STATE.getMesuresParVariante(v.id);
+      const sub = subRes[v.id];
+      rows.push([v.id, v.denomination||'', mesures.map(m=>m.abrev).join(', '), sub?.total_retenu||0, sub?.recommande||'']);
+    });
+    if(d.conseil_ia?.texte){rows.push(['','']);rows.push(['CONSEIL IA', d.conseil_ia.texte]);}
+    this.downloadXLS(rows, 'CECB_Resume_' + (d.projet.nom||'Export'));
+    UI.toast('Resume comparatif genere', 'success');
+  },
+
+  downloadXLS(rows, filename) {
+    let html = '<table>';
+    rows.forEach(row => {
+      html += '<tr>' + (Array.isArray(row)?row:[row]).map(cell => '<td>' + (cell||'') + '</td>').join('') + '</tr>';
+    });
+    html += '</table>';
+    const blob = new Blob(
+      ['<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body>' + html + '</body></html>'],
+      { type: 'application/vnd.ms-excel' }
+    );
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename.replace(/[^a-zA-Z0-9_-]/g, '_') + '.xls';
+    a.click();
+    URL.revokeObjectURL(url);
+  },
+
+  imprimer() {
+    const d = STATE.dossier;
+    if (!d) { UI.toast('Aucun dossier', 'error'); return; }
+    const vtab = document.getElementById('subventions-tableau');
+    const html = '<!DOCTYPE html><html><head><meta charset="UTF8"><style>body{font-family:Arial;font-size:11pt;padding:20px}h1{font-size:14pt}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:4px 8px}th{background:#e8e8e8}</style></head><body><h1>CECB Plus - ' + (d.projet.nom||'') + ' - ' + (d.projet.localite||'') + '</h1><p>SRE : ' + (d.projet.sre||'') + ' m2</p>' + (vtab?.innerHTML||'') + '<p>Conseil IA : ' + (d.conseil_ia?.texte||'') + '</p></body></html>';
+    const win = window.open('', '_blank', 'width=800,height=600');
+    win.document.write(html);
+    win.document.close();
+  },
+};
+
+window.EXPORT = EXPORT;
+</script>
+<script>/**
+ * app.js - Frilow CECB App + GeoAdmin auto-fill
+ */
+
+const GEOADMIN = {
+  CHAUFFAGES:{7410:'Chaudiere mazout',7420:'Chaudiere gaz naturel',7430:'Pompe a chaleur',7440:'Chaudiere bois',7450:'Raccordement CAD',7460:'Chauffage electrique',7480:'Solaire thermique',7499:'Autre'},
+  AGENTS_TECH:{7510:'mazout',7511:'gaz',7520:'gaz',7530:'electricite',7560:'pac_air',7570:'pac_saumure',7540:'cad',7501:'bois',7542:'pellets'},
+  PERIODES:{8011:'1900',8012:'1932',8013:'1953',8014:'1965',8015:'1975',8016:'1983',8017:'1988',8018:'1993',8019:'1998',8009:'2005',8010:'2015',8021:'2021'},
+  CAT_AFF:{1010:'hab_ind',1020:'hab_coll',1021:'hab_coll',1022:'hab_coll',1030:'hab_coll',1040:'bureaux',1060:'bureaux'},
+  CHAUF_MAP:{7410:'mazout',7420:'gaz',7430:'pac_air',7440:'bois',7450:'cad',7460:'electrique',7480:'solaire',7499:'autre'},
+
+  async rechercherAdresse(adresse){
+    const q=encodeURIComponent(adresse);
+    const r1=await fetch('https://api3.geo.admin.ch/rest/services/api/SearchServer?searchText='+q+'&type=locations&origins=address&limit=1&lang=fr');
+    const geo=await r1.json();
+    const result=geo.results?.[0]?.attrs;
+    if(!result) return null;
+    const npa=result.label?.match(/\b(\d{4})\b/)?.[1]||'';
+    const regblLink=result.links?.find(l=>l.title==='ch.bfs.gebaeude_wohnungs_register');
+    if(!regblLink) return {adresse:result.detail?.split(' ').slice(0,-2).join(' ')||'',npa,localite:'',canton:'',affectation:'hab_coll',annee_construction:'',nb_etages:'',nb_logements:'',sre_estime:'',type_chauffage_code:null,agent_code:null,egid:'',egrid:''};
+    const r2=await fetch('https://api3.geo.admin.ch'+regblLink.href+'?lang=fr');
+    const regbl=await r2.json();
+    const a=regbl.feature?.attributes;
+    if(!a) return null;
+    return {
+      adresse:a.strname_deinr||'',npa,localite:a.ggdename||'',canton:a.gdekt||'',
+      egid:a.egid||'',egrid:a.egrid||'',
+      affectation:this.CAT_AFF[a.gkat]||'hab_coll',
+      annee_construction:a.gbauj||this.PERIODES[a.gbaup]||'',
+      nb_etages:a.gastw||'',nb_logements:a.ganzwhg||'',surface_sol_m2:a.garea||'',
+      sre_estime:a.garea?Math.round(a.garea*(a.gastw||2)*0.85):'',
+      type_chauffage_code:a.gwaerzh1,agent_code:a.genh1,
+      type_chauffage:this.CHAUFFAGES[a.gwaerzh1]||'',
+      agent_energetique:this.AGENTS_TECH[a.genh1]||'',
+    };
+  },
+
+  set(id,value){
+    const el=document.getElementById(id);
+    if(!el||value===undefined||value===null||value==='') return;
+    el.value=value;
+    el.dispatchEvent(new Event('input',{bubbles:true}));
+    el.dispatchEvent(new Event('change',{bubbles:true}));
+  },
+
+  async remplirFormulaire(adresse){
+    UI.toast('Recherche sur map.geo.admin.ch...','info');
+    try{
+      const d=await this.rechercherAdresse(adresse);
+      if(!d){UI.toast('Adresse non trouvee','error');return;}
+      this.set('proj-nom',(d.adresse||adresse.split(',')[0])+(d.localite?' - '+d.localite:''));
+      this.set('proj-adresse',d.adresse||adresse.split(',')[0]);
+      this.set('proj-npa',d.npa);
+      this.set('proj-localite',d.localite);
+      if(d.egid){this.set('proj-egid',d.egid);STATE.set('projet.egid',d.egid);}
+      if(d.egrid){this.set('proj-egrid',d.egrid);STATE.set('projet.egrid',d.egrid);}
+      const cantonEl=document.getElementById('proj-canton');
+      if(cantonEl&&d.canton){const opt=[...cantonEl.options].find(o=>o.value===d.canton||o.text.includes(d.canton));if(opt){cantonEl.value=opt.value;cantonEl.dispatchEvent(new Event('change',{bubbles:true}));}}
+      const affEl=document.getElementById('proj-affectation');
+      if(affEl&&d.affectation){const opt=[...affEl.options].find(o=>o.value===d.affectation);if(opt){affEl.value=opt.value;affEl.dispatchEvent(new Event('change',{bubbles:true}));}}
+      this.set('proj-annee',d.annee_construction);
+      this.set('proj-etages',d.nb_etages);
+      this.set('proj-apparts',d.nb_logements);
+      if(d.sre_estime) this.set('proj-sre',d.sre_estime);
+      if(d.type_chauffage_code){const ch=document.getElementById('tech-type-chauffage');const m=this.CHAUF_MAP[d.type_chauffage_code];if(ch&&m){ch.value=m;ch.dispatchEvent(new Event('change',{bubbles:true}));}}
+      if(d.agent_energetique){const ag=document.getElementById('tech-agent');if(ag){const opt=[...ag.options].find(o=>o.value.toLowerCase().includes(d.agent_energetique.toLowerCase())||d.agent_energetique.toLowerCase().includes(o.value.toLowerCase()));if(opt){ag.value=opt.value;ag.dispatchEvent(new Event('change',{bubbles:true}));}}}
+      UI.updateHeader();
+      const det=[d.affectation==='hab_ind'?'Hab. individuel':'Hab. collectif',d.nb_etages?d.nb_etages+' etages':'',d.nb_logements?d.nb_logements+' logements':'',d.annee_construction?'~'+d.annee_construction:'',d.type_chauffage?d.type_chauffage:'',d.egid?'EGID: '+d.egid:''].filter(Boolean).join(' - ');
+      UI.toast((d.adresse||adresse.split(',')[0])+' : '+det,'success');
+    }catch(e){console.error('GeoAdmin:',e);UI.toast('Erreur: '+e.message,'error');}
+  }
+};
+
+document.addEventListener('DOMContentLoaded',()=>{
+  STATE.nouveau();
+  UI.bindFields();
+  document.querySelectorAll('.nav-tab').forEach(tab=>{tab.addEventListener('click',()=>{UI.showSection(tab.dataset.section);if(tab.dataset.section==='terrain')TERRAIN.refresh();if(tab.dataset.section==='bureau')BUREAU.refresh();if(tab.dataset.section==='mesures')MESURES.afficher();if(tab.dataset.section==='variantes')VARIANTES.afficher();});});
+  document.querySelectorAll('.sub-tab').forEach(tab=>{tab.addEventListener('click',()=>{const s=tab.dataset.subsection;const p=tab.closest('.section,#app-main');p?.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));p?.querySelectorAll('.subsection').forEach(s2=>s2.classList.remove('active'));tab.classList.add('active');document.getElementById(s)?.classList.add('active');});});
+  document.getElementById('btn-save')?.addEventListener('click',()=>STATE.sauvegarder());
+  document.getElementById('btn-open')?.addEventListener('click',()=>document.getElementById('file-input')?.click());
+  document.getElementById('file-input')?.addEventListener('change',async(e)=>{const f=e.target.files[0];if(f){await STATE.charger(f);UI.syncFields();UI.updateHeader();TERRAIN.refresh();BUREAU.refresh();}e.target.value='';});
+  document.getElementById('btn-recherche-adresse')?.addEventListener('click',()=>{const a=document.getElementById('input-recherche-adresse')?.value?.trim();if(!a){UI.toast('Entrez une adresse','error');return;}GEOADMIN.remplirFormulaire(a);});
+  document.getElementById('input-recherche-adresse')?.addEventListener('keydown',(e)=>{if(e.key==='Enter'){const a=e.target.value?.trim();if(a)GEOADMIN.remplirFormulaire(a);}});
+  document.getElementById('btn-charger-subventions')?.addEventListener('click',()=>{const npa=document.getElementById('proj-npa')?.value;const loc=document.getElementById('proj-localite')?.value;if(!npa){UI.toast('Entrez un NPA','error');return;}window.open('https://www.francsenergie.ch/fr/'+npa+'-'+(loc||''),'_blank');UI.toast('francsenergie.ch ouvert','info');});
+  document.getElementById('btn-goto-terrain')?.addEventListener('click',()=>{UI.showSection('terrain');TERRAIN.refresh();});
+  document.getElementById('proj-nom')?.addEventListener('input',UI.updateHeader.bind(UI));
+  document.getElementById('proj-localite')?.addEventListener('input',UI.updateHeader.bind(UI));
+  document.querySelectorAll('[data-mandat]').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('[data-mandat]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');STATE.set('projet.type_mandat',btn.dataset.mandat);const isPlus=btn.dataset.mandat==='cecb_plus';document.querySelectorAll('.nav-tab.phase2').forEach(t=>{t.style.display=isPlus?'':'none';});});});
+  document.getElementById('tech-pv')?.addEventListener('change',(e)=>{document.getElementById('tech-pv-details').style.display=e.target.value==='oui'?'block':'none';});
+  document.getElementById('btn-generer-textes')?.addEventListener('click',()=>IA.genererTextesCECB());
+  document.getElementById('btn-copier-etat-initial')?.addEventListener('click',()=>MESURES.copierEtatInitial());
+  document.getElementById('btn-auto-mesures')?.addEventListener('click',()=>MESURES.suggererAutomatiquement());
+  document.getElementById('btn-generer-variantes')?.addEventListener('click',()=>IA.genererToutesVariantes());
+  document.getElementById('btn-calc-subventions')?.addEventListener('click',()=>SUBVENTIONS.calculerTout());
+  document.getElementById('btn-conseil-ia')?.addEventListener('click',()=>IA.genererConseil());
+  document.getElementById('btn-export-p1')?.addEventListener('click',()=>EXPORT.phase1());
+  document.getElementById('btn-export-p2')?.addEventListener('click',()=>EXPORT.phase2());
+  document.getElementById('btn-export-resume')?.addEventListener('click',()=>EXPORT.resume());
+  STATE.onChange((path)=>{if(path==='all'){UI.syncFields();UI.updateHeader();TERRAIN.refresh();BUREAU.refresh();}});
+  document.querySelectorAll('.modal-close,.modal-overlay').forEach(el=>{el.addEventListener('click',()=>{el.closest('.modal')?.style&&(el.closest('.modal').style.display='none');});});
+  window.addEventListener('beforeunload',(e)=>{if(STATE.isDirty()){e.preventDefault();e.returnValue='';}});
+  document.querySelectorAll('.photo-zone').forEach(zone=>UI.setupPhotoZone(zone));
+  UI.showSection('projet');
+  UI.updateHeader();
+  console.log('CECB App Frilow v'+CONFIG.version);
+});</script>
 </body></html>

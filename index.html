@@ -664,126 +664,223 @@ const UI = {
 };
 window.UI = UI;
 </script>
-<script>const TERRAIN = {
+<script>/**
+ * terrain.js - Mode visite terrain CECB conforme
+ * Version sans backticks pour compatibilite HTML inline
+ */
+
+const TERRAIN = {
+
   SECTIONS: {
-    toits: { label:'Toits et plafonds', icon:'[icon]',
-      generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit inclin'\u00E9'','Toit en terrasse','Toit mixte']}],
-      sousections:[
-        {key:'contre_ext',label:'Toits / plafonds contre ext'\u00E9'rieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
-         types:['Toit plat / terrasse','Toit inclin'\u00E9' N','Toit inclin'\u00E9' S','Toit inclin'\u00E9' E','Toit inclin'\u00E9' O','Plafond contre ext'\u00E9'rieur'],
-         orientations:['Horiz','N','S','E','O'],colonnes:['surface','u_value','nbre','annee','orientation']},
-        {key:'autres',label:'Autres plafonds',denom_defaut:'M1_PLAFOND_EXIST_C.N.C.',abrev_prefix:'Pl',
-         types:['Plafond contre non chauff'\u00E9'','Plafond sur terre-plein','Autre'],
-         orientations:['Horiz'],colonnes:['surface','u_value','b','nbre','annee']}
-      ]},
-    murs: { label:'Murs', icon:'\u00F0\u009F\u00A7\u00B1',
-      generalites:[
-        {key:'structure_facades',label:'Structure des fa'\u00E7'ades',type:'select',options:['fa'\u00E7'ades lisses et pleines','fa'\u00E7'ades avec d'\u00E9'crochements','fa'\u00E7'ades complexes']},
-        {key:'soustraction_auto',label:'Soustraire automatiquement surface de fen'\u00EA'tres',type:'checkbox'}
+    toits: {
+      label: 'Toits et plafonds', icon: '\u{1F3A0}',
+      generalites: [{key:'type_toiture', label:'Type de toiture', type:'select',
+        options:['Toiture plate','Toit incline','Toit en terrasse','Toit mixte']}],
+      sousections: [
+        {key:'contre_ext', label:'Toits / plafonds contre ext\u00E9rieur',
+         denom_defaut:'M1_TOITURE_EXIST_C.E.', abrev_prefix:'To',
+         types:['Toit plat / terrasse','Toit incline N','Toit incline S','Toit incline E','Toit incline O','Plafond contre ext\u00E9rieur'],
+         orientations:['Horiz','N','S','E','O'], colonnes:['surface','u_value','nbre','annee','orientation']},
+        {key:'autres', label:'Autres plafonds',
+         denom_defaut:'M1_PLAFOND_EXIST_C.N.C.', abrev_prefix:'Pl',
+         types:['Plafond contre non chauffe','Plafond sur terre-plein','Autre'],
+         orientations:['Horiz'], colonnes:['surface','u_value','b','nbre','annee']}
+      ]
+    },
+    murs: {
+      label: 'Murs', icon: '\u{1F9F1}',
+      generalites: [
+        {key:'structure_facades', label:'Structure des facades', type:'select',
+         options:['facades lisses et pleines','facades avec decrochements','facades complexes']},
+        {key:'soustraction_auto', label:'Soustraire surface fenetres auto', type:'checkbox'}
       ],
-      sousections:[
-        {key:'contre_ext',label:'Murs contre ext'\u00E9'rieur',denom_defaut:'M2_FACADE_EXIST_C.E.',abrev_prefix:'Mu',
-         types:['Mur ext'\u00E9'rieur'],orientations:['N','S','E','O','NE','NO','SE','SO'],
+      sousections: [
+        {key:'contre_ext', label:'Murs contre ext\u00E9rieur',
+         denom_defaut:'M2_FACADE_EXIST_C.E.', abrev_prefix:'Mu',
+         types:['Mur ext\u00E9rieur'],
+         orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','b','nbre','annee','orientation']},
-        {key:'autres',label:'Autres murs',denom_defaut:'M2_MUR_EXIST_C.N.C.',abrev_prefix:'Mu',
-         types:['Mur contre non chauff'\u00E9'','Mur contre sol','Autre'],
-         orientations:['N','S','E','O'],colonnes:['surface','u_value','b','nbre','annee','orientation']}
-      ]},
-    fenetres: { label:'Fen'\u00EA'tres et portes', icon:'\u00F0\u009F\u00AA\u009F',
-      generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fen'\u00EA'tres',type:'checkbox'}],
-      sousections:[
-        {key:'fenetres',label:'Fen'\u00EA'tres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
-         types:['Fen'\u00EA'tre','Porte-fen'\u00EA'tre','Porte ext'\u00E9'rieure','Fen'\u00EA'tre de toit','Porte de garage'],
+        {key:'autres', label:'Autres murs',
+         denom_defaut:'M2_MUR_EXIST_C.N.C.', abrev_prefix:'Mu',
+         types:['Mur contre non chauffe','Mur contre sol','Autre'],
+         orientations:['N','S','E','O'],
+         colonnes:['surface','u_value','b','nbre','annee','orientation']}
+      ]
+    },
+    fenetres: {
+      label: 'Fen\u00EAtres et portes', icon: '\u{1FAA9}',
+      generalites: [{key:'soustraction_auto', label:'Soustraire surface fenetres auto', type:'checkbox'}],
+      sousections: [
+        {key:'fenetres', label:'Fen\u00EAtres et portes',
+         denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3', abrev_prefix:'Fe',
+         types:['Fen\u00EAtre','Porte-fen\u00EAtre','Porte ext\u00E9rieure','Fen\u00EAtre de toit','Porte de garage'],
          orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','g','fs','b','nbre','annee','orientation','dans']}
-      ]},
-    sols: { label:'Sols', icon:'\u00E2\u00AC\u009B',
-      generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauff'\u00E9'e',type:'select',options:['','0%','25%','50%','75%','100%']}],
-      sousections:[
-        {key:'contre_ext',label:'Sols contre ext'\u00E9'rieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
-         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur ext'\u00E9'rieur'],
+      ]
+    },
+    sols: {
+      label: 'Sols', icon: '\u2B1B',
+      generalites: [{key:'part_sous_sol', label:'Part de sous-sol chauffee', type:'select',
+        options:['','0%','25%','50%','75%','100%']}],
+      sousections: [
+        {key:'contre_ext', label:'Sols contre ext\u00E9rieur',
+         denom_defaut:'M3_SOL_EXIST_C.E.', abrev_prefix:'So',
+         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur ext\u00E9rieur'],
          colonnes:['surface','u_value','b','nbre','annee']},
-        {key:'autres',label:'Autres sols',denom_defaut:'M3_SOL_EXIST_C.N.C.',abrev_prefix:'So',
-         types:['Sol contre non chauff'\u00E9'','Sol sur cave non chauff'\u00E9'e','Autre'],
+        {key:'autres', label:'Autres sols',
+         denom_defaut:'M3_SOL_EXIST_C.N.C.', abrev_prefix:'So',
+         types:['Sol contre non chauffe','Sol sur cave non chauffee','Autre'],
          colonnes:['surface','u_value','b','nbre','annee']}
-      ]},
-    ponts: { label:'Ponts thermiques', icon:'\u00E2\u009A\u00A0\u00EF\u00B8\u008F',
-      generalites:[],
-      sousections:[
-        {key:'ponts',label:'Ponts thermiques',denom_defaut:'PT_EXIST',abrev_prefix:'Pt',
-         types:['Lin'\u00E9'ique','Ponctuel'],colonnes:['longueur','psi','nbre','annee']}
-      ]}
+      ]
+    },
+    ponts: {
+      label: 'Ponts thermiques', icon: '\u26A0\uFE0F',
+      generalites: [],
+      sousections: [
+        {key:'ponts', label:'Ponts thermiques',
+         denom_defaut:'PT_EXIST', abrev_prefix:'Pt',
+         types:['Lin\u00E9ique','Ponctuel'],
+         colonnes:['longueur','psi','nbre','annee']}
+      ]
+    }
   },
-  ETATS:[
-    {value:'',label:'-- S'\u00E9'lectionner --'},{value:'neuf',label:"('\u00E0' l') '\u00E9'tat neuf"},
-    {value:'bon',label:'en bon '\u00E9'tat'},{value:'use',label:'us'\u00E9''},
-    {value:'mauvais',label:'en mauvais '\u00E9'tat'},{value:'tres_mauvais',label:'en tr'\u00E8's mauvais '\u00E9'tat'}
+
+  ETATS: [
+    {value:'', label:'-- S\u00E9lectionner --'},
+    {value:'neuf', label:"(\u00E0 l') \u00E9tat neuf"},
+    {value:'bon', label:'en bon \u00E9tat'},
+    {value:'use', label:'us\u00E9'},
+    {value:'mauvais', label:'en mauvais \u00E9tat'},
+    {value:'tres_mauvais', label:'en tr\u00E8s mauvais \u00E9tat'}
   ],
-  refresh(){ if(!STATE.dossier) STATE.nouveau(); this.afficherSections(); if(typeof UI!=='undefined')UI.syncFields(); },
-  getEnvData(){ if(!STATE.dossier)STATE.nouveau(); if(!STATE.dossier.terrain_enveloppe)STATE.dossier.terrain_enveloppe={}; return STATE.dossier.terrain_enveloppe; },
-  afficherSections(){
-    const c=document.getElementById('terrain-enveloppe-container'); if(!c)return;
-    const data=STATE.dossier?.terrain_enveloppe||{};
-    c.innerHTML=Object.entries(this.SECTIONS).map(([k,s])=>this.renderSection(k,s,data[k]||{})).join('');
+
+  refresh: function() {
+    if (!STATE.dossier) STATE.nouveau();
+    this.afficherSections();
+    if (typeof UI !== 'undefined') UI.syncFields();
+  },
+
+  getEnvData: function() {
+    if (!STATE.dossier) STATE.nouveau();
+    if (!STATE.dossier.terrain_enveloppe) STATE.dossier.terrain_enveloppe = {};
+    return STATE.dossier.terrain_enveloppe;
+  },
+
+  afficherSections: function() {
+    var c = document.getElementById('terrain-enveloppe-container');
+    if (!c) return;
+    if (!STATE.dossier) STATE.nouveau();
+    var data = STATE.dossier.terrain_enveloppe || {};
+    var html = '';
+    var sections = this.SECTIONS;
+    var self = this;
+    Object.keys(sections).forEach(function(k) {
+      html += self.renderSection(k, sections[k], data[k] || {});
+    });
+    c.innerHTML = html;
     this.attachListeners(c);
   },
-  renderSection(k,s,data){
-    const gH=s.generalites.map(g=>this.renderGen(k,g,data)).join('');
-    const ssH=s.sousections.map(ss=>this.renderSS(k,ss,data[ss.key]||{etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]})).join('');
-    return '<div class="cecb-section" id="terrain-section-'+k+'"><div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')"><span>'+s.icon+'</span><span class="cecb-section-title">'+s.label+'</span><span class="cecb-section-chevron">\u00E2\u0096\u00BC</span></div><div class="cecb-section-body">'+(gH?'<div class="cecb-generalites">'+gH+'</div>':'')+ssH+'</div></div>';
+
+  renderSection: function(k, s, data) {
+    var gH = '';
+    var self = this;
+    s.generalites.forEach(function(g) { gH += self.renderGen(k, g, data); });
+    var ssH = '';
+    s.sousections.forEach(function(ss) {
+      var ssData = data[ss.key] || {etat:'', priorite:'', texte:'', ameliorations:'', photo:null, elements:[]};
+      ssH += self.renderSS(k, ss, ssData);
+    });
+    return '<div class="cecb-section" id="terrain-section-' + k + '">' +
+      '<div class="cecb-section-header" onclick="this.parentElement.classList.toggle(\'collapsed\')">' +
+      '<span>' + s.icon + '</span> <span class="cecb-section-title">' + s.label + '</span>' +
+      '<span class="cecb-section-chevron">&#9660;</span></div>' +
+      '<div class="cecb-section-body">' +
+      (gH ? '<div class="cecb-generalites">' + gH + '</div>' : '') + ssH +
+      '</div></div>';
   },
-  renderGen(k,g,data){
-    if(g.type==='select'){const o=g.options.map(v=>'<option value="'+v+'"'+(data[g.key]===v?' selected':'')+'>'+v+'</option>').join('');return '<div class="form-group"><label>'+g.label+'</label><select class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'">'+o+'</select></div>';}
-    if(g.type==='checkbox'){return '<div class="form-group"><label><input type="checkbox" class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'"'+(data[g.key]?' checked':'')+'>'+g.label+'</label></div>';}
+
+  renderGen: function(k, g, data) {
+    if (g.type === 'select') {
+      var opts = g.options.map(function(v) {
+        return '<option value="' + v + '"' + (data[g.key] === v ? ' selected' : '') + '>' + v + '</option>';
+      }).join('');
+      return '<div class="form-group"><label>' + g.label + '</label>' +
+        '<select class="terrain-gen-field" data-section="' + k + '" data-key="' + g.key + '">' + opts + '</select></div>';
+    }
+    if (g.type === 'checkbox') {
+      return '<div class="form-group"><label><input type="checkbox" class="terrain-gen-field" data-section="' + k + '" data-key="' + g.key + '"' + (data[g.key] ? ' checked' : '') + '> ' + g.label + '</label></div>';
+    }
     return '';
   },
-  renderSS(k,ss,data){
-    const eO=this.ETATS.map(e=>'<option value="'+e.value+'"'+(data.etat===e.value?' selected':'')+'>'+e.label+'</option>').join('');
-    const tH=this.renderTableau(k,ss,data.elements||[]);
-    const pZ=this.renderPhoto(k,ss.key,data.photo);
-    return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>'\u00C9'tat g'\u00E9'n'\u00E9'ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>Priorit'\u00E9'</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - Planifi'\u00E9'</option></select></div><div class="form-group"><label>'\u00C9'tat <span style="color:#888;font-size:0.8em">'+((data.texte||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>Am'\u00E9'liorations possibles <span style="color:#888;font-size:0.8em">'+((data.ameliorations||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';
+
+  renderSS: function(k, ss, data) {
+    var self = this;
+    var eO = this.ETATS.map(function(e) {
+      return '<option value="' + e.value + '"' + (data.etat === e.value ? ' selected' : '') + '>' + e.label + '</option>';
+    }).join('');
+    var tH = this.renderTableau(k, ss, data.elements || []);
+    var pZ = this.renderPhoto(k, ss.key, data.photo);
+    return '<div class="cecb-sousection" id="terrain-ss-' + k + '-' + ss.key + '">' +
+      '<div class="cecb-sousection-header"><h4>' + ss.label + '</h4></div>' +
+      '<div class="cecb-sousection-body"><div class="cecb-row-3col">' +
+      '<div class="cecb-col-text">' +
+      '<div class="form-group"><label>Etat general</label><select class="terrain-ss-field" data-section="' + k + '" data-ss="' + ss.key + '" data-key="etat">' + eO + '</select></div>' +
+      '<div class="form-group"><label>Priorite</label><select class="terrain-ss-field" data-section="' + k + '" data-ss="' + ss.key + '" data-key="priorite"><option value="">--</option><option value="1"' + (data.priorite==='1'?' selected':'') + '>1 - Urgent</option><option value="2"' + (data.priorite==='2'?' selected':'') + '>2 - Important</option><option value="3"' + (data.priorite==='3'?' selected':'') + '>3 - Planifie</option></select></div>' +
+      '<div class="form-group"><label>Etat (' + (data.texte||'').length + '/1000)</label><textarea class="terrain-ss-field" data-section="' + k + '" data-ss="' + ss.key + '" data-key="texte" rows="3" maxlength="1000">' + (data.texte||'') + '</textarea></div>' +
+      '<div class="form-group"><label>Ameliorations (' + (data.ameliorations||'').length + '/1000)</label><textarea class="terrain-ss-field" data-section="' + k + '" data-ss="' + ss.key + '" data-key="ameliorations" rows="3" maxlength="1000">' + (data.ameliorations||'') + '</textarea></div>' +
+      '</div><div class="cecb-col-photo">' + pZ + '</div></div>' + tH + '</div></div>';
   },
-  renderPhoto(k,sk,photo){
-    if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">\u00E2\u009C\u0095</button></div>';
-    return '<div class="cecb-photo-zone cecb-photo-empty" data-section="'+k+'" data-ss="'+sk+'"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">\u00F0\u009F\u0093\u00B7</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto(''+k+'',''+sk+'')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="'+k+'" data-ss="'+sk+'"></div>';
+
+  renderPhoto: function(k, sk, photo) {
+    if (photo) return '<div class="cecb-photo-zone" data-section="' + k + '" data-ss="' + sk + '" style="position:relative"><img src="' + photo + '" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="' + k + '" data-ss="' + sk + '" style="position:absolute;top:4px;right:4px">X</button></div>';
+    return '<div class="cecb-photo-zone cecb-photo-empty" data-section="' + k + '" data-ss="' + sk + '" style="min-height:150px;display:flex;align-items:center;justify-content:center"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">&#128247;</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto('' + k + '\','' + sk + '\')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="' + k + '" data-ss="' + sk + '"></div>';
   },
-  renderTableau(k,ss,elements){
-    const hS=ss.colonnes.includes('surface'),hU=ss.colonnes.includes('u_value'),hG=ss.colonnes.includes('g');
-    const hFs=ss.colonnes.includes('fs'),hB=ss.colonnes.includes('b'),hD=ss.colonnes.includes('dans');
-    const hO=ss.colonnes.includes('orientation'),hL=ss.colonnes.includes('longueur'),hPsi=ss.colonnes.includes('psi');
-    const head='<tr><th>Abr'\u00E9'v.</th><th>D'\u00E9'nomination</th><th>Type</th><th>Ann'\u00E9'e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [m'\u00B2']</th>':'')+(hU?'<th>Valeur U [W/m'\u00B2'K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>'\u03A8' [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
-    const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donn'\u00E9'e pr'\u00E9'sente</td></tr>':elements.map((el,i)=>{
-      const yr=STATE.get('projet.annee_construction')||'';
-      return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+( ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">\u00F0\u009F\u0093\u008B</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">\u00E2\u009C\u0095</button></td></tr>';
+
+  renderTableau: function(k, ss, elements) {
+    var hS=ss.colonnes.indexOf('surface')>=0, hU=ss.colonnes.indexOf('u_value')>=0;
+    var hG=ss.colonnes.indexOf('g')>=0, hFs=ss.colonnes.indexOf('fs')>=0;
+    var hB=ss.colonnes.indexOf('b')>=0, hD=ss.colonnes.indexOf('dans')>=0;
+    var hO=ss.colonnes.indexOf('orientation')>=0, hL=ss.colonnes.indexOf('longueur')>=0;
+    var hPsi=ss.colonnes.indexOf('psi')>=0;
+    var head='<tr><th>Abrev.</th><th>Denomination</th><th>Type</th><th>Annee</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [m2]</th>':'')+(hU?'<th>Valeur U [W/m2K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>Psi [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
+    var yr=(STATE.get&&STATE.get('projet.annee_construction'))||'';
+    var rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donnee presente</td></tr>':elements.map(function(el,i){
+      var tO=ss.types.map(function(t){return '<option'+(el.type===t?' selected':'')+'>'+t+'</option>';}).join('');
+      var oO=(ss.orientations||[]).map(function(o){return '<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>';}).join('');
+      return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:140px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">'+tO+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+oO+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">&#128203;</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">&#10005;</button></td></tr>';
     }).join('');
     return '<div class="cecb-tableau-wrapper"><table class="cecb-tableau"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table><button class="btn-primary btn-sm cecb-add-el" data-section="'+k+'" data-ss="'+ss.key+'" style="margin-top:8px">+ Nouveau</button></div>';
   },
-  attachListeners(c){
-    c.querySelectorAll('.terrain-gen-field').forEach(el=>el.addEventListener('change',()=>this.saveGenField(el)));
-    c.querySelectorAll('.terrain-ss-field').forEach(el=>{const ev=el.tagName==='TEXTAREA'?'input':'change';el.addEventListener(ev,()=>this.saveSsField(el));});
-    c.querySelectorAll('[data-idx]').forEach(el=>{const ev=el.tagName==='SELECT'?'change':'input';el.addEventListener(ev,()=>this.saveElement(el));});
-    c.querySelectorAll('.cecb-add-el').forEach(btn=>btn.addEventListener('click',()=>this.ajouterElement(btn.dataset.section,btn.dataset.ss)));
-    c.querySelectorAll('.el-copy').forEach(btn=>btn.addEventListener('click',()=>this.dupliquerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));
-    c.querySelectorAll('.el-del').forEach(btn=>btn.addEventListener('click',()=>this.supprimerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx))));
-    c.querySelectorAll('.cecb-photo-zone').forEach(z=>{
-      z.addEventListener('click',e=>{if(e.target.classList.contains('cecb-photo-del'))this.supprimerPhoto(z.dataset.section,z.dataset.ss);else if(!e.target.classList.contains('cecb-photo-img'))this.ouvrirPhoto(z.dataset.section,z.dataset.ss);});
-      z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag-over');});
-      z.addEventListener('dragleave',()=>z.classList.remove('drag-over'));
-      z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag-over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))this.chargerPhoto(z.dataset.section,z.dataset.ss,f);});
+
+  attachListeners: function(c) {
+    var self=this;
+    c.querySelectorAll('.terrain-gen-field').forEach(function(el){el.addEventListener('change',function(){self.saveGenField(el);});});
+    c.querySelectorAll('.terrain-ss-field').forEach(function(el){var ev=el.tagName==='TEXTAREA'?'input':'change';el.addEventListener(ev,function(){self.saveSsField(el);});});
+    c.querySelectorAll('[data-idx]').forEach(function(el){var ev=el.tagName==='SELECT'?'change':'input';el.addEventListener(ev,function(){self.saveElement(el);});});
+    c.querySelectorAll('.cecb-add-el').forEach(function(btn){btn.addEventListener('click',function(){self.ajouterElement(btn.dataset.section,btn.dataset.ss);});});
+    c.querySelectorAll('.el-copy').forEach(function(btn){btn.addEventListener('click',function(){self.dupliquerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx));});});
+    c.querySelectorAll('.el-del').forEach(function(btn){btn.addEventListener('click',function(){self.supprimerElement(btn.dataset.section,btn.dataset.ss,parseInt(btn.dataset.idx));});});
+    c.querySelectorAll('.cecb-photo-zone').forEach(function(z){
+      z.addEventListener('click',function(e){if(e.target.classList.contains('cecb-photo-del'))self.supprimerPhoto(z.dataset.section,z.dataset.ss);else if(!e.target.classList.contains('cecb-photo-img'))self.ouvrirPhoto(z.dataset.section,z.dataset.ss);});
+      z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('drag-over');});
+      z.addEventListener('dragleave',function(){z.classList.remove('drag-over');});
+      z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('drag-over');var f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))self.chargerPhoto(z.dataset.section,z.dataset.ss,f);});
     });
-    c.querySelectorAll('.photo-input').forEach(inp=>inp.addEventListener('change',e=>{const f=e.target.files[0];if(f)this.chargerPhoto(inp.dataset.section,inp.dataset.ss,f);}));
+    c.querySelectorAll('.photo-input').forEach(function(inp){inp.addEventListener('change',function(e){var f=e.target.files[0];if(f)self.chargerPhoto(inp.dataset.section,inp.dataset.ss,f);});});
   },
-  saveGenField(el){const d=this.getEnvData();if(!d[el.dataset.section])d[el.dataset.section]={};d[el.dataset.section][el.dataset.key]=el.type==='checkbox'?el.checked:el.value;STATE._dirty=true;},
-  saveSsField(el){const d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss;if(!d[k])d[k]={};if(!d[k][ss])d[k][ss]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][ss][el.dataset.key]=el.value;STATE._dirty=true;},
-  saveElement(el){const d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss,i=parseInt(el.dataset.idx);if(!d[k]?.[ss]?.elements)return;const elem=d[k][ss].elements[i];if(!elem)return;const cls=[...el.classList].find(c=>c.startsWith('el-'));const fm={'el-abrev':'abrev','el-denom':'denom','el-type':'type','el-annee':'annee','el-orient':'orientation','el-surface':'surface','el-u':'u_value','el-g':'g','el-fs':'fs','el-b':'b','el-longueur':'longueur','el-psi':'psi','el-nbre':'nbre','el-dans':'dans'};if(fm[cls]){elem[fm[cls]]=el.type==='number'?parseFloat(el.value)||'':el.value;STATE._dirty=true;}},
-  ajouterElement(k,sk){const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};const elements=d[k][sk].elements;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const num=elements.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1;elements.push({abrev:ss.abrev_prefix+'-'+num,denom:ss.denom_defaut,type:ss.types[0],annee:STATE.get('projet.annee_construction')||'',surface:'',u_value:'',g:'',fs:'',b:'1.0',longueur:'',psi:'',nbre:1,orientation:ss.orientations?.[0]||'',dans:''});STATE._dirty=true;this.afficherSections();setTimeout(()=>document.getElementById('terrain-ss-'+k+'-'+sk)?.scrollIntoView({behavior:'smooth',block:'end'}),100);},
-  dupliquerElement(k,sk,idx){const d=this.getEnvData();const els=d[k]?.[sk]?.elements;if(!els||!els[idx])return;const ss=this.SECTIONS[k].sousections.find(s=>s.key===sk);const c={...els[idx]};c.abrev=ss.abrev_prefix+'-'+(els.filter(e=>e.abrev?.startsWith(ss.abrev_prefix)).length+1);els.splice(idx+1,0,c);STATE._dirty=true;this.afficherSections();},
-  supprimerElement(k,sk,idx){const d=this.getEnvData();const els=d[k]?.[sk]?.elements;if(!els)return;els.splice(idx,1);STATE._dirty=true;this.afficherSections();},
-  ouvrirPhoto(k,sk){document.querySelector('.photo-input[data-section="'+k+'"][data-ss="'+sk+'"]')?.click();},
-  chargerPhoto(k,sk,file){const r=new FileReader();r.onload=e=>{const d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][sk].photo=e.target.result;STATE._dirty=true;this.afficherSections();};r.readAsDataURL(file);},
-  supprimerPhoto(k,sk){const d=this.getEnvData();if(d[k]?.[sk]){d[k][sk].photo=null;STATE._dirty=true;this.afficherSections();}}
+
+  saveGenField:function(el){var d=this.getEnvData();if(!d[el.dataset.section])d[el.dataset.section]={};d[el.dataset.section][el.dataset.key]=el.type==='checkbox'?el.checked:el.value;STATE._dirty=true;},
+  saveSsField:function(el){var d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss;if(!d[k])d[k]={};if(!d[k][ss])d[k][ss]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][ss][el.dataset.key]=el.value;STATE._dirty=true;},
+  saveElement:function(el){var d=this.getEnvData(),k=el.dataset.section,ss=el.dataset.ss,i=parseInt(el.dataset.idx);if(!d[k]||!d[k][ss]||!d[k][ss].elements)return;var elem=d[k][ss].elements[i];if(!elem)return;var cls=Array.from(el.classList).find(function(c){return c.indexOf('el-')===0;});var fm={'el-abrev':'abrev','el-denom':'denom','el-type':'type','el-annee':'annee','el-orient':'orientation','el-surface':'surface','el-u':'u_value','el-g':'g','el-fs':'fs','el-b':'b','el-longueur':'longueur','el-psi':'psi','el-nbre':'nbre','el-dans':'dans'};if(fm[cls]){elem[fm[cls]]=el.type==='number'?(parseFloat(el.value)||''):el.value;STATE._dirty=true;}},
+  ajouterElement:function(k,sk){var d=this.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};var els=d[k][sk].elements;var ss=this.SECTIONS[k].sousections.find(function(s){return s.key===sk;});var prefix=ss.abrev_prefix;var num=els.filter(function(e){return e.abrev&&e.abrev.indexOf(prefix)===0;}).length+1;var yr=(STATE.get&&STATE.get('projet.annee_construction'))||'';els.push({abrev:prefix+'-'+num,denom:ss.denom_defaut,type:ss.types[0],annee:yr,surface:'',u_value:'',g:'',fs:'',b:'1.0',longueur:'',psi:'',nbre:1,orientation:(ss.orientations&&ss.orientations[0])||'',dans:''});STATE._dirty=true;this.afficherSections();var el=document.getElementById('terrain-ss-'+k+'-'+sk);if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'end'});},100);},
+  dupliquerElement:function(k,sk,idx){var d=this.getEnvData();if(!d[k]||!d[k][sk]||!d[k][sk].elements||!d[k][sk].elements[idx])return;var ss=this.SECTIONS[k].sousections.find(function(s){return s.key===sk;});var els=d[k][sk].elements;var copie=Object.assign({},els[idx]);var prefix=ss.abrev_prefix;copie.abrev=prefix+'-'+(els.filter(function(e){return e.abrev&&e.abrev.indexOf(prefix)===0;}).length+1);els.splice(idx+1,0,copie);STATE._dirty=true;this.afficherSections();},
+  supprimerElement:function(k,sk,idx){var d=this.getEnvData();if(!d[k]||!d[k][sk]||!d[k][sk].elements)return;d[k][sk].elements.splice(idx,1);STATE._dirty=true;this.afficherSections();},
+  ouvrirPhoto:function(k,sk){var inp=document.querySelector('.photo-input[data-section="'+k+'"][data-ss="'+sk+'"]');if(inp)inp.click();},
+  chargerPhoto:function(k,sk,file){var self=this;var reader=new FileReader();reader.onload=function(e){var d=self.getEnvData();if(!d[k])d[k]={};if(!d[k][sk])d[k][sk]={etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]};d[k][sk].photo=e.target.result;STATE._dirty=true;self.afficherSections();};reader.readAsDataURL(file);},
+  supprimerPhoto:function(k,sk){var d=this.getEnvData();if(d[k]&&d[k][sk]){d[k][sk].photo=null;STATE._dirty=true;this.afficherSections();}}
 };
-window.TERRAIN=TERRAIN;</script>
+
+window.TERRAIN = TERRAIN;</script>
 <script>/**
  * bureau.js \u2014 Mode bureau Phase 1 CECB
  */

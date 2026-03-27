@@ -666,58 +666,58 @@ window.UI = UI;
 </script>
 <script>const TERRAIN = {
   SECTIONS: {
-    toits: { label:'Toits et plafonds', icon:'ð ',
-      generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit inclinÃ©','Toit en terrasse','Toit mixte']}],
+    toits: { label:'Toits et plafonds', icon:'\u00F0\u009F\u008F\u00A0',
+      generalites:[{key:'type_toiture',label:'Type de toiture',type:'select',options:['Toiture plate','Toit inclin\u00C3\u00A9','Toit en terrasse','Toit mixte']}],
       sousections:[
-        {key:'contre_ext',label:'Toits / plafonds contre extÃ©rieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
-         types:['Toit plat / terrasse','Toit inclinÃ© N','Toit inclinÃ© S','Toit inclinÃ© E','Toit inclinÃ© O','Plafond contre extÃ©rieur'],
+        {key:'contre_ext',label:'Toits / plafonds contre ext\u00C3\u00A9rieur',denom_defaut:'M1_TOITURE_EXIST_C.E.',abrev_prefix:'To',
+         types:['Toit plat / terrasse','Toit inclin\u00C3\u00A9 N','Toit inclin\u00C3\u00A9 S','Toit inclin\u00C3\u00A9 E','Toit inclin\u00C3\u00A9 O','Plafond contre ext\u00C3\u00A9rieur'],
          orientations:['Horiz','N','S','E','O'],colonnes:['surface','u_value','nbre','annee','orientation']},
         {key:'autres',label:'Autres plafonds',denom_defaut:'M1_PLAFOND_EXIST_C.N.C.',abrev_prefix:'Pl',
-         types:['Plafond contre non chauffÃ©','Plafond sur terre-plein','Autre'],
+         types:['Plafond contre non chauff\u00C3\u00A9','Plafond sur terre-plein','Autre'],
          orientations:['Horiz'],colonnes:['surface','u_value','b','nbre','annee']}
       ]},
-    murs: { label:'Murs', icon:'ð§±',
+    murs: { label:'Murs', icon:'\u00F0\u009F\u00A7\u00B1',
       generalites:[
-        {key:'structure_facades',label:'Structure des faÃ§ades',type:'select',options:['faÃ§ades lisses et pleines','faÃ§ades avec dÃ©crochements','faÃ§ades complexes']},
-        {key:'soustraction_auto',label:'Soustraire automatiquement surface de fenÃªtres',type:'checkbox'}
+        {key:'structure_facades',label:'Structure des fa\u00C3\u00A7ades',type:'select',options:['fa\u00C3\u00A7ades lisses et pleines','fa\u00C3\u00A7ades avec d\u00C3\u00A9crochements','fa\u00C3\u00A7ades complexes']},
+        {key:'soustraction_auto',label:'Soustraire automatiquement surface de fen\u00C3\u00AAtres',type:'checkbox'}
       ],
       sousections:[
-        {key:'contre_ext',label:'Murs contre extÃ©rieur',denom_defaut:'M2_FACADE_EXIST_C.E.',abrev_prefix:'Mu',
-         types:['Mur extÃ©rieur'],orientations:['N','S','E','O','NE','NO','SE','SO'],
+        {key:'contre_ext',label:'Murs contre ext\u00C3\u00A9rieur',denom_defaut:'M2_FACADE_EXIST_C.E.',abrev_prefix:'Mu',
+         types:['Mur ext\u00C3\u00A9rieur'],orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','b','nbre','annee','orientation']},
         {key:'autres',label:'Autres murs',denom_defaut:'M2_MUR_EXIST_C.N.C.',abrev_prefix:'Mu',
-         types:['Mur contre non chauffÃ©','Mur contre sol','Autre'],
+         types:['Mur contre non chauff\u00C3\u00A9','Mur contre sol','Autre'],
          orientations:['N','S','E','O'],colonnes:['surface','u_value','b','nbre','annee','orientation']}
       ]},
-    fenetres: { label:'FenÃªtres et portes', icon:'ðª',
-      generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fenÃªtres',type:'checkbox'}],
+    fenetres: { label:'Fen\u00C3\u00AAtres et portes', icon:'\u00F0\u009F\u00AA\u009F',
+      generalites:[{key:'soustraction_auto',label:'Soustraire automatiquement surface de fen\u00C3\u00AAtres',type:'checkbox'}],
       sousections:[
-        {key:'fenetres',label:'FenÃªtres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
-         types:['FenÃªtre','Porte-fenÃªtre','Porte extÃ©rieure','FenÃªtre de toit','Porte de garage'],
+        {key:'fenetres',label:'Fen\u00C3\u00AAtres et portes',denom_defaut:'Fe PVC, > 90, 2-IV-IR, Ar, int. > 10 mm, Ug 1.3',abrev_prefix:'Fe',
+         types:['Fen\u00C3\u00AAtre','Porte-fen\u00C3\u00AAtre','Porte ext\u00C3\u00A9rieure','Fen\u00C3\u00AAtre de toit','Porte de garage'],
          orientations:['N','S','E','O','NE','NO','SE','SO'],
          colonnes:['surface','u_value','g','fs','b','nbre','annee','orientation','dans']}
       ]},
-    sols: { label:'Sols', icon:'â¬',
-      generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauffÃ©e',type:'select',options:['','0%','25%','50%','75%','100%']}],
+    sols: { label:'Sols', icon:'\u00E2\u00AC\u009B',
+      generalites:[{key:'part_sous_sol',label:'Part de sous-sol chauff\u00C3\u00A9e',type:'select',options:['','0%','25%','50%','75%','100%']}],
       sousections:[
-        {key:'contre_ext',label:'Sols contre extÃ©rieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
-         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur extÃ©rieur'],
+        {key:'contre_ext',label:'Sols contre ext\u00C3\u00A9rieur',denom_defaut:'M3_SOL_EXIST_C.E.',abrev_prefix:'So',
+         types:['Sol sur terre-plein','Sol sur vide sanitaire','Sol sur ext\u00C3\u00A9rieur'],
          colonnes:['surface','u_value','b','nbre','annee']},
         {key:'autres',label:'Autres sols',denom_defaut:'M3_SOL_EXIST_C.N.C.',abrev_prefix:'So',
-         types:['Sol contre non chauffÃ©','Sol sur cave non chauffÃ©e','Autre'],
+         types:['Sol contre non chauff\u00C3\u00A9','Sol sur cave non chauff\u00C3\u00A9e','Autre'],
          colonnes:['surface','u_value','b','nbre','annee']}
       ]},
-    ponts: { label:'Ponts thermiques', icon:'â ï¸',
+    ponts: { label:'Ponts thermiques', icon:'\u00E2\u009A\u00A0\u00EF\u00B8\u008F',
       generalites:[],
       sousections:[
         {key:'ponts',label:'Ponts thermiques',denom_defaut:'PT_EXIST',abrev_prefix:'Pt',
-         types:['LinÃ©ique','Ponctuel'],colonnes:['longueur','psi','nbre','annee']}
+         types:['Lin\u00C3\u00A9ique','Ponctuel'],colonnes:['longueur','psi','nbre','annee']}
       ]}
   },
   ETATS:[
-    {value:'',label:'-- SÃ©lectionner --'},{value:'neuf',label:"(Ã  l') Ã©tat neuf"},
-    {value:'bon',label:'en bon Ã©tat'},{value:'use',label:'usÃ©'},
-    {value:'mauvais',label:'en mauvais Ã©tat'},{value:'tres_mauvais',label:'en trÃ¨s mauvais Ã©tat'}
+    {value:'',label:'-- S\u00C3\u00A9lectionner --'},{value:'neuf',label:"(\u00C3\u00A0 l') \u00C3\u00A9tat neuf"},
+    {value:'bon',label:'en bon \u00C3\u00A9tat'},{value:'use',label:'us\u00C3\u00A9'},
+    {value:'mauvais',label:'en mauvais \u00C3\u00A9tat'},{value:'tres_mauvais',label:'en tr\u00C3\u00A8s mauvais \u00C3\u00A9tat'}
   ],
   refresh(){ if(!STATE.dossier) STATE.nouveau(); this.afficherSections(); if(typeof UI!=='undefined')UI.syncFields(); },
   getEnvData(){ if(!STATE.dossier)STATE.nouveau(); if(!STATE.dossier.terrain_enveloppe)STATE.dossier.terrain_enveloppe={}; return STATE.dossier.terrain_enveloppe; },
@@ -730,7 +730,7 @@ window.UI = UI;
   renderSection(k,s,data){
     const gH=s.generalites.map(g=>this.renderGen(k,g,data)).join('');
     const ssH=s.sousections.map(ss=>this.renderSS(k,ss,data[ss.key]||{etat:'',priorite:'',texte:'',ameliorations:'',photo:null,elements:[]})).join('');
-    return '<div class="cecb-section" id="terrain-section-'+k+'"><div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')"><span>'+s.icon+'</span><span class="cecb-section-title">'+s.label+'</span><span class="cecb-section-chevron">â¼</span></div><div class="cecb-section-body">'+(gH?'<div class="cecb-generalites">'+gH+'</div>':'')+ssH+'</div></div>';
+    return '<div class="cecb-section" id="terrain-section-'+k+'"><div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')"><span>'+s.icon+'</span><span class="cecb-section-title">'+s.label+'</span><span class="cecb-section-chevron">\u00E2\u0096\u00BC</span></div><div class="cecb-section-body">'+(gH?'<div class="cecb-generalites">'+gH+'</div>':'')+ssH+'</div></div>';
   },
   renderGen(k,g,data){
     if(g.type==='select'){const o=g.options.map(v=>'<option value="'+v+'"'+(data[g.key]===v?' selected':'')+'>'+v+'</option>').join('');return '<div class="form-group"><label>'+g.label+'</label><select class="terrain-gen-field" data-section="'+k+'" data-key="'+g.key+'">'+o+'</select></div>';}
@@ -741,20 +741,20 @@ window.UI = UI;
     const eO=this.ETATS.map(e=>'<option value="'+e.value+'"'+(data.etat===e.value?' selected':'')+'>'+e.label+'</option>').join('');
     const tH=this.renderTableau(k,ss,data.elements||[]);
     const pZ=this.renderPhoto(k,ss.key,data.photo);
-    return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>Ãtat gÃ©nÃ©ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>PrioritÃ©</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - PlanifiÃ©</option></select></div><div class="form-group"><label>Ãtat <span style="color:#888;font-size:0.8em">'+((data.texte||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>AmÃ©liorations possibles <span style="color:#888;font-size:0.8em">'+((data.ameliorations||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';
+    return '<div class="cecb-sousection" id="terrain-ss-'+k+'-'+ss.key+'"><div class="cecb-sousection-header"><h4>'+ss.label+'</h4></div><div class="cecb-sousection-body"><div class="cecb-row-3col"><div class="cecb-col-text"><div class="form-group"><label>\u00C3\u0089tat g\u00C3\u00A9n\u00C3\u00A9ral</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="etat">'+eO+'</select></div><div class="form-group"><label>Priorit\u00C3\u00A9</label><select class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="priorite"><option value="">--</option><option value="1"'+(data.priorite==='1'?' selected':'')+'>1 - Urgent</option><option value="2"'+(data.priorite==='2'?' selected':'')+'>2 - Important</option><option value="3"'+(data.priorite==='3'?' selected':'')+'>3 - Planifi\u00C3\u00A9</option></select></div><div class="form-group"><label>\u00C3\u0089tat <span style="color:#888;font-size:0.8em">'+((data.texte||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="texte" rows="3" maxlength="1000">'+( data.texte||'')+'</textarea></div><div class="form-group"><label>Am\u00C3\u00A9liorations possibles <span style="color:#888;font-size:0.8em">'+((data.ameliorations||'').length)+'/1000</span></label><textarea class="terrain-ss-field" data-section="'+k+'" data-ss="'+ss.key+'" data-key="ameliorations" rows="3" maxlength="1000">'+(data.ameliorations||'')+'</textarea></div></div><div class="cecb-col-photo">'+pZ+'</div></div>'+tH+'</div></div>';
   },
   renderPhoto(k,sk,photo){
-    if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">â</button></div>';
-    return '<div class="cecb-photo-zone cecb-photo-empty" data-section="'+k+'" data-ss="'+sk+'"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">ð·</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto(''+k+'',''+sk+'')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="'+k+'" data-ss="'+sk+'"></div>';
+    if(photo)return '<div class="cecb-photo-zone" data-section="'+k+'" data-ss="'+sk+'"><img src="'+photo+'" style="width:100%;border-radius:8px"><button class="btn-danger btn-sm cecb-photo-del" data-section="'+k+'" data-ss="'+sk+'" style="position:absolute;top:4px;right:4px">\u00E2\u009C\u0095</button></div>';
+    return '<div class="cecb-photo-zone cecb-photo-empty" data-section="'+k+'" data-ss="'+sk+'"><div style="text-align:center;color:#aaa;padding:20px"><div style="font-size:2rem">\u00F0\u009F\u0093\u00B7</div><button class="btn-secondary btn-sm" style="margin-top:10px" onclick="TERRAIN.ouvrirPhoto(''+k+'',''+sk+'')">Importer</button></div><input type="file" accept="image/*" capture="environment" style="display:none" class="photo-input" data-section="'+k+'" data-ss="'+sk+'"></div>';
   },
   renderTableau(k,ss,elements){
     const hS=ss.colonnes.includes('surface'),hU=ss.colonnes.includes('u_value'),hG=ss.colonnes.includes('g');
     const hFs=ss.colonnes.includes('fs'),hB=ss.colonnes.includes('b'),hD=ss.colonnes.includes('dans');
     const hO=ss.colonnes.includes('orientation'),hL=ss.colonnes.includes('longueur'),hPsi=ss.colonnes.includes('psi');
-    const head='<tr><th>AbrÃ©v.</th><th>DÃ©nomination</th><th>Type</th><th>AnnÃ©e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [mÂ²]</th>':'')+(hU?'<th>Valeur U [W/mÂ²K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>Î¨ [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
-    const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donnÃ©e prÃ©sente</td></tr>':elements.map((el,i)=>{
+    const head='<tr><th>Abr\u00C3\u00A9v.</th><th>D\u00C3\u00A9nomination</th><th>Type</th><th>Ann\u00C3\u00A9e</th>'+(hO?'<th>Orient.</th>':'')+(hS?'<th>Surface [m\u00C2\u00B2]</th>':'')+(hU?'<th>Valeur U [W/m\u00C2\u00B2K]</th>':'')+(hG?'<th>g</th>':'')+(hFs?'<th>Fs</th>':'')+(hB?'<th>b</th>':'')+(hL?'<th>Long. [m]</th>':'')+(hPsi?'<th>\u00CE\u00A8 [W/mK]</th>':'')+'<th>Nbre</th>'+(hD?'<th>Dans</th>':'')+'<th></th></tr>';
+    const rows=elements.length===0?'<tr><td colspan="15" style="text-align:center;color:#aaa;padding:12px">Aucune donn\u00C3\u00A9e pr\u00C3\u00A9sente</td></tr>':elements.map((el,i)=>{
       const yr=STATE.get('projet.annee_construction')||'';
-      return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+( ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">ð</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">â</button></td></tr>';
+      return '<tr><td><input type="text" value="'+(el.abrev||'')+'" class="el-abrev" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:55px"></td><td><input type="text" value="'+(el.denom||ss.denom_defaut)+'" class="el-denom" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="min-width:160px"></td><td><select class="el-type" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">'+ss.types.map(t=>'<option'+(el.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></td><td><input type="number" value="'+(el.annee||'')+'" class="el-annee" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="'+yr+'" style="width:55px"></td>'+(hO?'<td><select class="el-orient" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px">'+( ss.orientations||[]).map(o=>'<option'+(el.orientation===o?' selected':'')+'>'+o+'</option>').join('')+'</select></td>':'')+(hS?'<td><input type="number" step="0.1" value="'+(el.surface||'')+'" class="el-surface" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:60px"></td>':'')+(hU?'<td><input type="number" step="0.01" value="'+(el.u_value||'')+'" class="el-u" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hG?'<td><input type="number" step="0.01" value="'+(el.g||'')+'" class="el-g" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hFs?'<td><input type="number" step="0.01" value="'+(el.fs||'')+'" class="el-fs" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hB?'<td><input type="number" step="0.01" value="'+(el.b||1)+'" class="el-b" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:40px"></td>':'')+(hL?'<td><input type="number" step="0.1" value="'+(el.longueur||'')+'" class="el-longueur" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+(hPsi?'<td><input type="number" step="0.001" value="'+(el.psi||'')+'" class="el-psi" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:50px"></td>':'')+'<td><input type="number" min="1" value="'+(el.nbre||1)+'" class="el-nbre" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="width:35px"></td>'+(hD?'<td><input type="text" value="'+(el.dans||'')+'" class="el-dans" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" placeholder="Mu-1" style="width:45px"></td>':'')+'<td><button class="btn-icon el-copy" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'">\u00F0\u009F\u0093\u008B</button><button class="btn-icon el-del" data-idx="'+i+'" data-section="'+k+'" data-ss="'+ss.key+'" style="color:#e53e3e">\u00E2\u009C\u0095</button></td></tr>';
     }).join('');
     return '<div class="cecb-tableau-wrapper"><table class="cecb-tableau"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table><button class="btn-primary btn-sm cecb-add-el" data-section="'+k+'" data-ss="'+ss.key+'" style="margin-top:8px">+ Nouveau</button></div>';
   },

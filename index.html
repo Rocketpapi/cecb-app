@@ -664,7 +664,9 @@ const UI = {
 };
 window.UI = UI;
 </script>
-<script>
+<script>/* SYNTAX ERROR: Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: script-src github.githubassets.com".
+ */
+
 /* terrain.js - CECB conforme - ASCII pur */
 const TERRAIN = {
   SECTIONS: {
@@ -787,7 +789,7 @@ const TERRAIN = {
       ssH += self.renderSS(k, ss, ssData);
     });
     return '<div class="cecb-section" id="terrain-section-' + k + '">' +
-      '<div class="cecb-section-header" onclick="this.parentElement.classList.toggle('collapsed')">' +
+      '<div class="cecb-section-header" onclick="window._tcToggle(this)">' +
       '<span>' + s.icon + '</span> <span class="cecb-section-title">' + s.label + '</span>' +
       '<span class="cecb-section-chevron">&#9660;</span></div>' +
       '<div class="cecb-section-body">' + (gH ? '<div class="cecb-generalites">' + gH + '</div>' : '') + ssH + '</div></div>';
